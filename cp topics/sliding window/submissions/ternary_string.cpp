@@ -1,3 +1,6 @@
+//Problem link : https://codeforces.com/problemset/problem/1354/B
+// problem name: Ternary Strings
+//problme type : sliding window
 #include<bits/stdc++.h>
 using namespace std;
 int main()
