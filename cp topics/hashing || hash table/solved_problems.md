@@ -18,3 +18,10 @@ Fencing:
   Solution: 
   https://www.codechef.com/viewsolution/53467108
   
+Chef and Numbers:
+  https://www.codechef.com/problems/RECNDNOS
+  
+  Solution:
+  https://www.codechef.com/viewsolution/53467535
+  Optimum Solution without hashmap:
+  https://www.codechef.com/viewsolution/46605719
