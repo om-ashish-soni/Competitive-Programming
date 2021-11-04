@@ -25,3 +25,9 @@ Chef and Numbers:
   https://www.codechef.com/viewsolution/53467535
   Optimum Solution without hashmap:
   https://www.codechef.com/viewsolution/46605719
+  
+Joker and Batman:
+  https://www.codechef.com/problems/JOKRBTMN
+  
+  Solution: 
+  https://www.codechef.com/viewsolution/53467824
