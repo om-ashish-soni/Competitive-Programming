@@ -51,7 +51,7 @@ Hash Table :
 
 
 
-
+# MATHS PORTION :
 
 
 Number Theory : 
@@ -141,16 +141,45 @@ Inclustion – Exclusion applications:
 https://www.geeksforgeeks.org/inclusion-exclusion-various-applications/amp/#aoh=16327936316328&amp_ct=1632793636730&referrer=https%3A%2F%2Fwww.google.com&amp_tf=From%20%251%24s
 
 
-
+# SORTING: 
 
 Sorting: 
 https://www.geeksforgeeks.org/sorting-algorithms/
 
 https://www.codechef.com/tags/problems/sorting
 
+Merge Sort :
+https://www.geeksforgeeks.org/merge-sort/amp/
+
+https://www.hackerearth.com/practice/algorithms/sorting/merge-sort/practice-problems/
+
+https://www.geeksforgeeks.org/tag/merge-sort/
+
+https://practice.geeksforgeeks.org/problems/merge-sort/1
+
+https://leetcode.com/tag/merge-sort/
+
+
+Quick Sort:
+https://www.geeksforgeeks.org/quick-sort/
+# ALGORITHMS : 
+
 Constructive algorithms:
 https://www.geeksforgeeks.org/easy/constructive-algorithms/
+ # GREEDY :
+Greedy Algorithms:
 
+ https://www.geeksforgeeks.org/greedy-algorithms/
+ https://practice.geeksforgeeks.org/explore/?category%5B%5D=Greedy&page=1&category%5B%5D=Greedy
+
+ https://cp-algorithms.com/
+
+https://www.interviewbit.com/courses/programming/topics/greedy-algorithm/
+
+ https://leetcode.com/tag/greedy/
+
+ 
+# SOME METHODS TO SOLVE PROBLEMS:
 Two Pointers:
 https://leetcode.com/tag/two-pointers/
 
@@ -158,6 +187,7 @@ https://www.interviewbit.com/courses/programming/topics/two-pointers/
 
  https://www.geeksforgeeks.org/two-pointers-technique/
 
+# BIT MANIPULATION
 Bit manipulation:
  https://leetcode.com/tag/bit-manipulation/
  https://www.interviewbit.com/courses/programming/topics/bit-manipulation/
@@ -177,18 +207,7 @@ https://www.geeksforgeeks.org/tag/xor/
 
  https://codeforces.com/blog/entry/53782
 
-Greedy Algorithms:
-
- https://www.geeksforgeeks.org/greedy-algorithms/
- https://practice.geeksforgeeks.org/explore/?category%5B%5D=Greedy&page=1&category%5B%5D=Greedy
-
- https://cp-algorithms.com/
-
-https://www.interviewbit.com/courses/programming/topics/greedy-algorithm/
-
- https://leetcode.com/tag/greedy/
-
- 
+# ARRAY PORTION: 
 Maximum average segment:
 https://cp-algorithms.com/others/maximum_average_segment.html
 
@@ -207,7 +226,7 @@ Array and Subarray sum problems:
 
 
 
-
+# JOB SEQUNCING PROBLEM: 
 
  Job sequencing && Activity Selection Problems:
 https://www.geeksforgeeks.org/job-sequencing-problem/
@@ -216,6 +235,7 @@ https://www.geeksforgeeks.org/job-sequencing-problem/
 
  https://www.interviewbit.com/tutorial/activity-selection-problem/
 
+# RECURSION && BACKTRAKING: 
 Recursion:
  https://www.geeksforgeeks.org/recursion/
 
@@ -232,20 +252,7 @@ https://www.codechef.com/tags/problems/recursion
 https://www.geeksforgeeks.org/recursive-program-to-print-all-subsets-with-given-sum/
 
 
-Merge Sort :
-https://www.geeksforgeeks.org/merge-sort/amp/
 
-https://www.hackerearth.com/practice/algorithms/sorting/merge-sort/practice-problems/
-
-https://www.geeksforgeeks.org/tag/merge-sort/
-
-https://practice.geeksforgeeks.org/problems/merge-sort/1
-
-https://leetcode.com/tag/merge-sort/
-
-
-Quick Sort:
-https://www.geeksforgeeks.org/quick-sort/
 
 Backtraking:
 
@@ -255,12 +262,15 @@ https://www.geeksforgeeks.org/backtracking-algorithms/
 
 https://practice.geeksforgeeks.org/topics/backtracking/
 
+# MEET IN MIDDLE PROBLEM: 
 Meet in the middle Problems:
 https://www.geeksforgeeks.org/meet-in-the-middle/
 
 https://www.codechef.com/tags/problems/meet-in-middle
 
 https://codeforces.com/problemset?order=BY_RATING_ASC&tags=meet-in-the-middle
+
+# DIVIDE AND CONQUER : 
 
 Divide and Conquer Problems:
 https://www.geeksforgeeks.org/divide-and-conquer-algorithm-introduction/
@@ -271,11 +281,14 @@ https://leetcode.com/tag/divide-and-conquer/
 
 https://www.codechef.com/tags/problems/divide-and-conquer
 
+# NEXT GREATER AND NEXT SMALLER
+
 Next greater and smaller element:
 https://www.geeksforgeeks.org/next-greater-element/
 
 https://www.geeksforgeeks.org/next-smaller-element/
 
+# PARANTHESIS PROBLEMS: 
 Paranthesis Problems:
 https://www.geeksforgeeks.org/tag/parentheses-problems/
 Largest Rectangular Area in a histogram:
@@ -283,6 +296,7 @@ https://www.geeksforgeeks.org/largest-rectangular-area-in-a-histogram-set-1/
 
 https://www.geeksforgeeks.org/largest-rectangle-under-histogram/
 
+# HEAP AND PRIORITY QUEUE : 
 Heap Data Structure:
 https://www.geeksforgeeks.org/heap-data-structure/
 
@@ -296,7 +310,7 @@ https://www.geeksforgeeks.org/heap-using-stl-c/
 
 https://www.hackerearth.com/practice/data-structures/trees/heapspriority-queues/practice-problems/
 
-
+# STRING HASHSING: 
 
 String hashing:
 https://www.geeksforgeeks.org/string-hashing-using-polynomial-rolling-hash-function/
