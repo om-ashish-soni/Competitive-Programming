@@ -1,7 +1,7 @@
-The ultimate reference to competitive coding
+# The ultimate reference to competitive coding
 
-Topics :
-
+# Topics :
+# DATA STRUCTURE :
 Stack :
 https://www.geeksforgeeks.org/stack-data-structure/
 https://practice.geeksforgeeks.org/explore/?category%5B%5D=Stack&page=1&category%5B%5D=Stack
@@ -33,7 +33,7 @@ https://www.geeksforgeeks.org/graph-data-structure-and-algorithms/
 https://leetcode.com/tag/graph/
 
 
-
+# SOME OF MY FAVOURITE: 
 Pattern Printing :
 https://www.geeksforgeeks.org/tag/pattern-printing/
 
