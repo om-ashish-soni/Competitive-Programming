@@ -1,4 +1,4 @@
-// problem Link : https://leetcode.com/tag/sliding-window/
+// problem Link : https://leetcode.com/problems/substrings-of-size-three-with-distinct-characters/
 // Problem type: sliding window
 
 class Solution {
