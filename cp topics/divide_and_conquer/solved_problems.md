@@ -14,4 +14,5 @@ Problem link : https://leetcode.com/problems/maximum-subarray/submissions/
 Solution : (Divide and conquer (O(nlog(n))) https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/divide_and_conquer/submissions/maximum_subarray_divide_and_conquery.cpp
 
 
-Solution : (Linear (O(n)) Optimum) 
+Solution : (Linear (O(n)) Optimum) https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/divide_and_conquer/submissions/maximum_subarray_linear_approach.cpp
+
