@@ -1,4 +1,9 @@
-Search in Rotated array:
-  https://leetcode.com/problems/search-in-rotated-sorted-array/
+ # Search in Rotated array:
+  Problem link : https://leetcode.com/problems/search-in-rotated-sorted-array/
   
   Solution: https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/Search%20in%20rotated%20array.cpp
+
+# Find first of last position of elem in array
+  Problem link : https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
+  
+  Solution : 
