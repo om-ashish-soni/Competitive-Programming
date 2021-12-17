@@ -6,4 +6,4 @@
 # Find first of last position of elem in array
   Problem link : https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
   
-  Solution : 
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/find_first_and_last_position_in_array.cpp
