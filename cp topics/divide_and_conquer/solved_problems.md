@@ -8,3 +8,9 @@ Problem link : https://leetcode.com/problems/search-a-2d-matrix/
 
 Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/divide_and_conquer/submissions/search_in_2d_matrix.cpp
 
+# maximum subarray
+Problem link : https://leetcode.com/problems/maximum-subarray/submissions/
+
+Solution : (Divide and conquer (O(nlog(n))) 
+
+Solution : (Linear (O(n)) Optimum) 
