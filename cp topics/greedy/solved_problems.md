@@ -23,3 +23,7 @@
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/maximum_number_of_coins_you_get.cpp
 
+# minimum add to make paranthesis valid 
+  Problem link : https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/
+  
+  Solution : 
