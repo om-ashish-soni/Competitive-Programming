@@ -21,4 +21,5 @@
 # maximum number of coins you get : 
   Problem link : https://leetcode.com/problems/maximum-number-of-coins-you-can-get/
   
-  Solution : 
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/maximum_number_of_coins_you_get.cpp
+
