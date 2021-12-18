@@ -16,4 +16,5 @@
 # find valid matrix given row and column sums : 
   Problem link : https://leetcode.com/problems/find-valid-matrix-given-row-and-column-sums/submissions/
   
-  Solution : 
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/find_valid_matrix_given_row_and_column_sums.cpp
+  
