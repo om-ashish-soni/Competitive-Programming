@@ -18,3 +18,7 @@
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/find_valid_matrix_given_row_and_column_sums.cpp
   
+# maximum number of coins you get : 
+  Problem link : https://leetcode.com/problems/maximum-number-of-coins-you-can-get/
+  
+  Solution : 
