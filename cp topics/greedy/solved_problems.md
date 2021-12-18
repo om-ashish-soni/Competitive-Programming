@@ -26,4 +26,6 @@
 # minimum add to make paranthesis valid 
   Problem link : https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/
   
-  Solution : 
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/minimum_add_to_make_paranthesis_valid.cpp
+  
+ 
