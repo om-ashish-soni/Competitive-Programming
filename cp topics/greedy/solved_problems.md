@@ -28,4 +28,7 @@
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/minimum_add_to_make_paranthesis_valid.cpp
   
- 
+# score after flipping matrix 
+  Problem link : https://leetcode.com/problems/score-after-flipping-matrix/
+  
+  Solution : 
