@@ -41,7 +41,7 @@
 # Fair Elections 
   Problem link : https://www.codechef.com/problems/FAIRELCT
   
-  Solution : 
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/fair_elections.cpp
 
 # Maximum number of distinct elements
   Problem link : https://www.codechef.com/submit/MAXDISTKT
