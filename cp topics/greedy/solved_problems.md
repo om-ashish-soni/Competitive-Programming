@@ -32,4 +32,9 @@
   Problem link : https://leetcode.com/problems/score-after-flipping-matrix/
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/score_after_flipping_matrix.cpp
+
+# Interesting xor
+  Problem link : https://www.codechef.com/submit/IRSTXOR
+  
+  Solution : 
   
