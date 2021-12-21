@@ -36,5 +36,10 @@
 # Interesting xor
   Problem link : https://www.codechef.com/submit/IRSTXOR
   
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/interesting_xor.cpp
+  
+# Fair Elections 
+  Problem link : https://www.codechef.com/problems/FAIRELCT
+  
   Solution : 
   
