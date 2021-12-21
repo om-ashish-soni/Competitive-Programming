@@ -46,4 +46,4 @@
 # Maximum number of distinct elements
   Problem link : https://www.codechef.com/submit/MAXDISTKT
   
-  Solution : 
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/maximum_number_of_distinct_element.cpp
