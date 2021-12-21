@@ -42,4 +42,8 @@
   Problem link : https://www.codechef.com/problems/FAIRELCT
   
   Solution : 
+
+# Maximum number of distinct elements
+  Problem link : https://www.codechef.com/submit/MAXDISTKT
   
+  Solution : 
