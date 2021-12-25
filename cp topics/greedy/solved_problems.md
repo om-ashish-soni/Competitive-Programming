@@ -51,4 +51,9 @@
 # Mix the colors
   Problem link : https://www.codechef.com/problems/MIXCOLOR
   
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/mix_the_colors.cpp
+  
+# Close the gap
+  Problem link : https://codeforces.com/contest/1615/problem/A
+  
   Solution : 
