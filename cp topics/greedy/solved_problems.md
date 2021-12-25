@@ -56,4 +56,4 @@
 # Close the gap
   Problem link : https://codeforces.com/contest/1615/problem/A
   
-  Solution : 
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/close_the_gap.md
