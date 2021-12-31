@@ -45,7 +45,7 @@ class disjointSet{
     }
 };
 static bool comp(pair<int,int>& a,pair<int,int>&  b){
-    return a.first<b.second;
+    return a.first<b.first;
 }
 int main() {
 	// your code goes here
@@ -54,8 +54,11 @@ int main() {
 	cin>>no_of_vertices;
 	cout<<"No of Vertices : "<<no_of_vertices<<endl;
 	
-	vector<int> arr;
-	for(int i=0;i<no_of_vertices;i++) arr.push_back(i+1);
+	vector<int> arr(no_of_vertices);
+	// scanning vertices
+	for(int i=0;i<no_of_vertices;i++){
+	    cin>>arr[i];
+	}
 	disjointSet ds=*new disjointSet(arr);
 	
 	
@@ -76,6 +79,7 @@ int main() {
 	
 	//preparing mst
 	vector<pair<int,int>> mst;
+	
 	for(auto &pr:w){
 	    int index=pr.second;
 	    int firstVertex=u[index];
