@@ -2,7 +2,7 @@
 
   Problem link: https://practice.geeksforgeeks.org/problems/n-meetings-in-one-room-1587115620/1
   
-  Solution: 
+  Solution: https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/activitySelection.cpp
   
 # Ceil and Receipt: 
   Problem link : https://www.codechef.com/problems/CIELRCPT
