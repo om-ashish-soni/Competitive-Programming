@@ -1,3 +1,9 @@
+# activity selection problem: 
+
+  Problem link: https://practice.geeksforgeeks.org/problems/n-meetings-in-one-room-1587115620/1
+  
+  Solution: 
+  
 # Ceil and Receipt: 
   Problem link : https://www.codechef.com/problems/CIELRCPT
   
