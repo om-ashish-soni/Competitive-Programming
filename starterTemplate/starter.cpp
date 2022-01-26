@@ -220,6 +220,22 @@ bool isPrime(int n){
 	}
 	return false;
 }
+// sieve of erathosthens for prime
+const int N=1e7;
+bitset <N> nonPrimeSet;
+
+void seive(){
+	nonPrimeSet[0]=nonPrimeSet[1]=1;
+	
+	for(int num=2;num<=N;num++){
+		if(0==nonPrimeSet[num]){
+			for(int j=num+num;j<=N;j+=num){
+				nonPrimeSet[j]=1;
+			}
+		}
+	}
+	
+}
 // roundOf
 int roundOf(int n){
 	return (int)pow(2,floor(log2(n)));
@@ -230,10 +246,13 @@ void solve(){
 	// int arr[n];
 	// memset(arr,0,sizeof(arr));
 	// memset(arr,-1,sizeof(arr));
-	
+	int n;
+	cin>>n;
+	cout<<n<<" : "<<(1-nonPrimeSet[n])<<endl;
 }
 
 signed main(){
+	
 	ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 #ifndef ONLINE_JUDGE
@@ -241,6 +260,7 @@ signed main(){
     freopen("error.txt", "w", stderr);
     freopen("output.txt", "w", stdout);
 #endif
+	// seive();
 	int t=1;
 	cin>>t;
 	while(t--){
