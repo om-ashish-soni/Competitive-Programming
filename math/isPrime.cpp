@@ -73,6 +73,7 @@ bool isPrimeBig(int n){
 const int N=1e6;
 vector<int32_t> highestPrime(1e6,0);
 vector<int32_t> lowestPrime(1e6,0);
+// vector<vector<int>> factorsOf(N);
 bitset <N> nonPrimeSet;
 void seive(){
 	nonPrimeSet[0]=nonPrimeSet[1]=1;
@@ -100,6 +101,27 @@ void seiveWithHPLP(){
 		}
 	}
 }
+// void seiveWithAllFactors(){
+// 	nonPrimeSet[0]=nonPrimeSet[1]=1;
+	
+// 	for(int num=2;num<=N;num++){
+// 		factorsOf[num].push_back(1);
+// 		if(0==nonPrimeSet[num]){
+// 			for(int j=num+num;j<=N;j+=num){
+// 				factorsOf[j].push_back(num);
+// 				nonPrimeSet[j]=1;
+// 				if(lowestPrime[j]==0) lowestPrime[j]=num;
+// 				highestPrime[j]=num;
+// 			}
+// 			highestPrime[num]=lowestPrime[num]=num;
+// 		}else{
+// 			for(int j=num+num;j<=N;j+=num){
+// 				factorsOf[j].push_back(num);
+// 			}
+// 		}
+// 		factorsOf[num].push_back(num);
+// 	}
+// }
 bool isPrime(int n){
 	if(n>1e6) return isPrimeBig(n);
 	return 0==nonPrimeSet[n];
