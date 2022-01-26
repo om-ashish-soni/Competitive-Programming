@@ -166,7 +166,7 @@ void scan(vector<int>& v,int n,unordered_map<int,int>& hash){
 	for(int i=0;i<n;i++) {cin>>v[i];hash[v[i]]=i;}
 }
 // primeDivisors return type number
-int primeDivisors(int n){
+int primeFactorsBig(int n){
 	unordered_set<int> uns;
 	int p=2;
 	while(true){
@@ -183,7 +183,23 @@ int primeDivisors(int n){
 	return uns.size();
 }
 // primeDivisors with return type vector
-void primeDivisors(int n,vector<int>& v){
+
+void primeFactorsBig(int n,map<int,int>& mp){
+	int p=2;
+	while(true){
+		if(n>=p*p){
+			if(n%p==0){
+				mp[p]++;
+				n/=p;
+			}else p++;
+		}else{
+			mp[n]++;
+			break;
+		}
+	}
+	return;
+}
+void primeFactorsBig(int n,vector<int>& v){
 	unordered_set<int> uns;
 	int p=2;
 	while(true){
@@ -204,7 +220,7 @@ void primeDivisors(int n,vector<int>& v){
 	return;
 }
 // isPrime
-bool isPrime(int n){
+bool isPrimeBig(int n){
 	if(n==1) return false;
 	int p=2;
 	while(true){
@@ -221,13 +237,15 @@ bool isPrime(int n){
 	return false;
 }
 // sieve of erathosthens for prime
-const int N=1e7;
+const int N=1e6;
+vector<int32_t> highestPrime(1e6,0);
+vector<int32_t> lowestPrime(1e6,0);
+// vector<vector<int>> factorsOf(N);
 bitset <N> nonPrimeSet;
-
 void seive(){
 	nonPrimeSet[0]=nonPrimeSet[1]=1;
 	
-	for(int num=2;num<=N;num++){
+	for(int num=2;num*num<=N;num++){
 		if(0==nonPrimeSet[num]){
 			for(int j=num+num;j<=N;j+=num){
 				nonPrimeSet[j]=1;
@@ -235,6 +253,82 @@ void seive(){
 		}
 	}
 	
+}
+void seiveWithHPLP(){
+	nonPrimeSet[0]=nonPrimeSet[1]=1;
+	
+	for(int num=2;num*num<=N;num++){
+		if(0==nonPrimeSet[num]){
+			for(int j=num+num;j<=N;j+=num){
+				nonPrimeSet[j]=1;
+				if(lowestPrime[j]==0) lowestPrime[j]=num;
+				highestPrime[j]=num;
+			}
+			highestPrime[num]=lowestPrime[num]=num;
+		}
+	}
+}
+// void seiveWithAllFactors(){
+// 	nonPrimeSet[0]=nonPrimeSet[1]=1;
+	
+// 	for(int num=2;num<=N;num++){
+// 		factorsOf[num].push_back(1);
+// 		if(0==nonPrimeSet[num]){
+// 			for(int j=num+num;j<=N;j+=num){
+// 				factorsOf[j].push_back(num);
+// 				nonPrimeSet[j]=1;
+// 				if(lowestPrime[j]==0) lowestPrime[j]=num;
+// 				highestPrime[j]=num;
+// 			}
+// 			highestPrime[num]=lowestPrime[num]=num;
+// 		}else{
+// 			for(int j=num+num;j<=N;j+=num){
+// 				factorsOf[j].push_back(num);
+// 			}
+// 		}
+// 		factorsOf[num].push_back(num);
+// 	}
+// }
+bool isPrime(int n){
+	if(n>1e6) return isPrimeBig(n);
+	return 0==nonPrimeSet[n];
+}
+void primeFactors(int n,vector<int>&v){
+	if(n<2) return;
+	if(n>1e6) return primeFactorsBig(n,v);
+	while(n>1){
+		int prime_factor=highestPrime[n];
+		while(n%prime_factor==0){
+			n/=prime_factor;
+			
+		}
+		v.push_back(prime_factor);
+	}
+}
+void primeFactors(int n,map<int,int>& mp){
+	if(n<2) return;
+	if(n>1e6) return primeFactorsBig(n,mp);
+	while(n>1){
+		int prime_factor=highestPrime[n];
+		while(n%prime_factor==0){
+			n/=prime_factor;
+			mp[prime_factor]++;
+		}
+	}
+}
+
+int primeFactors(int n){
+	if(n<2) return 0;
+	if(n>1e6) return primeFactorsBig(n);
+	int noOfPrimeFactors=0;
+	while(n>1){
+		int prime_factor=highestPrime[n];
+		while(n%prime_factor==0){
+			n/=prime_factor;
+			noOfPrimeFactors++;
+		}
+	}
+	return noOfPrimeFactors;
 }
 // roundOf
 int roundOf(int n){
@@ -248,7 +342,12 @@ void solve(){
 	// memset(arr,-1,sizeof(arr));
 	int n;
 	cin>>n;
-	cout<<n<<" : "<<(1-nonPrimeSet[n])<<endl;
+	cout<<n<<" : "<<isPrime(n)<<" lp : "<<lowestPrime[n]<<" , "<<"hp : "<<highestPrime[n]<<endl;
+	// print(factorsOf[n]);
+	// map<int,int> pf;
+	// primeFactors(n,pf);
+	// for(auto &pr:pf) { cout<<pr.first<<" : "<<pr.second<<endl;}
+	// cout<<(pow(2,4)*pow(3,2)*pow(5,2))<<endl;
 }
 
 signed main(){
@@ -261,6 +360,8 @@ signed main(){
     freopen("output.txt", "w", stdout);
 #endif
 	// seive();
+	seiveWithHPLP();
+	// seiveWithAllFactors();
 	int t=1;
 	cin>>t;
 	while(t--){
