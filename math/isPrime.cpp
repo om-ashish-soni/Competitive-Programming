@@ -16,6 +16,22 @@ int primeFactorsBig(int n){
 	return uns.size();
 }
 // primeDivisors with return type vector
+
+void primeFactorsBig(int n,map<int,int>& mp){
+	int p=2;
+	while(true){
+		if(n>=p*p){
+			if(n%p==0){
+				mp[p]++;
+				n/=p;
+			}else p++;
+		}else{
+			mp[n]++;
+			break;
+		}
+	}
+	return;
+}
 void primeFactorsBig(int n,vector<int>& v){
 	unordered_set<int> uns;
 	int p=2;
@@ -98,6 +114,17 @@ void primeFactors(int n,vector<int>&v){
 			
 		}
 		v.push_back(prime_factor);
+	}
+}
+void primeFactors(int n,map<int,int>& mp){
+	if(n<2) return;
+	if(n>1e6) return primeFactorsBig(n,mp);
+	while(n>1){
+		int prime_factor=highestPrime[n];
+		while(n%prime_factor==0){
+			n/=prime_factor;
+			mp[prime_factor]++;
+		}
 	}
 }
 
