@@ -1,6 +1,6 @@
 const int N=1e7;
 bitset <N> nonPrimeSet;
-
+// TIME COMPLEXITY : N*LOG(N)
 void seive(){
 	nonPrimeSet[0]=nonPrimeSet[1]=1;
 	
