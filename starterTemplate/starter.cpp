@@ -238,8 +238,9 @@ bool isPrimeBig(int n){
 }
 // sieve of erathosthens for prime
 const int N=1e6;
-vector<int32_t> highestPrime(1e6,0);
-vector<int32_t> lowestPrime(1e6,0);
+vector<int> highestPrime(1e6,0);
+vector<int> lowestPrime(1e6,0);
+vector<int> primes;
 // vector<vector<int>> factorsOf(N);
 bitset <N> nonPrimeSet;
 void seive(){
@@ -247,19 +248,32 @@ void seive(){
 	
 	for(int num=2;num*num<=N;num++){
 		if(0==nonPrimeSet[num]){
-			for(int j=num+num;j<=N;j+=num){
+			for(int j=num*num;j<=N;j+=num){
 				nonPrimeSet[j]=1;
 			}
 		}
 	}
 	
 }
-void seiveWithHPLP(){
+void seiveWithAllPrimes(){
 	nonPrimeSet[0]=nonPrimeSet[1]=1;
 	
 	for(int num=2;num*num<=N;num++){
 		if(0==nonPrimeSet[num]){
-			for(int j=num+num;j<=N;j+=num){
+			for(int j=num*num;j<=N;j+=num){
+				nonPrimeSet[j]=1;
+			}
+		}
+	}
+	for(int num=2;num<=N;num++){
+		if(0==nonPrimeSet[num]) primes.push_back(num);
+	}
+}
+void seiveWithHPLP(){
+	nonPrimeSet[0]=nonPrimeSet[1]=1;
+	for(int num=2;num*num<=N;num++){
+		if(0==nonPrimeSet[num]){
+			for(int j=num*num;j<=N;j+=num){
 				nonPrimeSet[j]=1;
 				if(lowestPrime[j]==0) lowestPrime[j]=num;
 				highestPrime[j]=num;
@@ -267,6 +281,7 @@ void seiveWithHPLP(){
 			highestPrime[num]=lowestPrime[num]=num;
 		}
 	}
+	
 }
 // void seiveWithAllFactors(){
 // 	nonPrimeSet[0]=nonPrimeSet[1]=1;
@@ -274,12 +289,12 @@ void seiveWithHPLP(){
 // 	for(int num=2;num<=N;num++){
 // 		factorsOf[num].push_back(1);
 // 		if(0==nonPrimeSet[num]){
-// 			for(int j=num+num;j<=N;j+=num){
+// 			for(int j=num*num;j<=N;j+=num){
 // 				factorsOf[j].push_back(num);
 // 				nonPrimeSet[j]=1;
 // 				if(lowestPrime[j]==0) lowestPrime[j]=num;
 // 				highestPrime[j]=num;
-// 			}
+// 			}primes.push_back(num);
 // 			highestPrime[num]=lowestPrime[num]=num;
 // 		}else{
 // 			for(int j=num+num;j<=N;j+=num){
@@ -289,6 +304,46 @@ void seiveWithHPLP(){
 // 		factorsOf[num].push_back(num);
 // 	}
 // }
+
+void segmentedSeive(int l,int r,vector<int>& segPrimes){
+	int limit=ceil(sqrt(r));
+	int sz=r-l+1;
+	vector<bool> bs(sz,0);
+	for(auto primeNum:primes){
+		if(primeNum<=limit){
+			int firstMultiple=(l/primeNum)*primeNum;
+			if(firstMultiple<l) firstMultiple+=l;
+			for(int num=max(firstMultiple,primeNum*primeNum);num<=r;num+=primeNum){
+				bs[num-l]=1;
+			}
+		}
+	}
+	for(int i=0;i<sz;i++){
+		if(bs[i]==0) segPrimes.push_back(i+l);
+	}
+}
+int rangePrimes(int l,int r){
+	if(r<=1e6){
+		int ctr=0;
+		for(int i=l;i<=r;i++){
+			if(nonPrimeSet[i]==0) ctr++;
+		}
+		return ctr;
+	}else{
+		vector<int> segPrimes;
+		segmentedSeive(l,r,segPrimes);
+		return segPrimes.size();
+	}
+}
+void rangePrimes(int l,int r,vector<int>& segPrimes){
+	if(r<=1e6){
+		for(int i=l;i<=r;i++){
+			if(nonPrimeSet[i]==0) segPrimes.push_back(i);
+		}
+		return; 
+	}
+	return segmentedSeive(l,r,segPrimes);
+}
 bool isPrime(int n){
 	if(n>1e6) return isPrimeBig(n);
 	return 0==nonPrimeSet[n];
@@ -335,19 +390,17 @@ int roundOf(int n){
 	return (int)pow(2,floor(log2(n)));
 }
 void solve(){
-	// int n;
-	// cin>>n;
+	int l,r;
+	cin>>l>>r;
+	vector<int> segPrimes;
+	// segmentedSeive(l,r,segPrimes);
+	// cout<<rangePrimes(l,r)<<endl;
+	rangePrimes(l,r,segPrimes);
+	cout<<segPrimes.size()<<endl;
+	for(auto prm:segPrimes) cout<<prm<<" ";cout<<endl;
 	// int arr[n];
 	// memset(arr,0,sizeof(arr));
 	// memset(arr,-1,sizeof(arr));
-	int n;
-	cin>>n;
-	cout<<n<<" : "<<isPrime(n)<<" lp : "<<lowestPrime[n]<<" , "<<"hp : "<<highestPrime[n]<<endl;
-	// print(factorsOf[n]);
-	// map<int,int> pf;
-	// primeFactors(n,pf);
-	// for(auto &pr:pf) { cout<<pr.first<<" : "<<pr.second<<endl;}
-	// cout<<(pow(2,4)*pow(3,2)*pow(5,2))<<endl;
 }
 
 signed main(){
@@ -360,8 +413,9 @@ signed main(){
     freopen("output.txt", "w", stdout);
 #endif
 	// seive();
-	seiveWithHPLP();
+	// seiveWithHPLP();
 	// seiveWithAllFactors();
+	seiveWithAllPrimes();
 	int t=1;
 	cin>>t;
 	while(t--){
