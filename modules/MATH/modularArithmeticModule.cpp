@@ -12,8 +12,29 @@ int power(long long x, unsigned int y, int p)
     return res; 
 } 
 int modMul(int a,int b,int mod){
-	return ((a%mod)*(b%mod))%mod;
+    return ((a%mod)*(b%mod))%mod;
 }
 int modAdd(int a,int b,int mod){
-	return ((a%mod)+(b%mod))%mod;
+    return ((a%mod)+(b%mod))%mod;
+}
+int modInv(int a,int mod){
+    int x,y;
+    pair<int,int> pr=extended_gcd(a,mod);
+    x=pr.first;
+    y=pr.second;
+    int g=(a*x + mod*y);
+    if(g!=1){
+        cerr<<"modular inverse does not exist , gcd != 1"<<endl;
+        exit(0);
+    }
+    // adding m to avoid negative value of x 
+    int res=(x%mod + mod)%mod;
+    return res;
+}
+int modDiv(int a,int b,int mod){
+    
+    a=a%mod;
+    int inv=modInv(b,mod);
+    int res=(inv*a)%mod;
+    return res;
 }
