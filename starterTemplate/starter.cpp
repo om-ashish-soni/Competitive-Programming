@@ -26,6 +26,16 @@ void findAllFactors(int n,std::vector<int>& factors){
 	sort(factors.begin(),factors.end());
 }
 //lcm and gcd
+pair<int,int> extended_gcd(int a,int b){
+	if(b==0) return{1,1};
+	pair<int,int> pr=extended_gcd(b,a%b);
+	return {pr.second,pr.first-(a/b)*pr.second};
+}
+int hcf(int a,int b){
+	if(a==0 || b==0) return max(a,b);
+	pair<int,int> pr=extended_gcd(a,b);
+	return (a*pr.first + b*pr.second);
+}
 int lcm(int a,int b){
 	return (a*b)/(__gcd(a,b));
 }
@@ -90,6 +100,27 @@ int modMul(int a,int b,int mod){
 }
 int modAdd(int a,int b,int mod){
 	return ((a%mod)+(b%mod))%mod;
+}
+int modInv(int a,int mod){
+	int x,y;
+	pair<int,int> pr=extended_gcd(a,mod);
+	x=pr.first;
+	y=pr.second;
+	int g=(a*x + mod*y);
+	if(g!=1){
+		cerr<<"modular inverse does not exist , gcd != 1"<<endl;
+		exit(0);
+	}
+	// adding m to avoid negative value of x 
+	int res=(x%mod + mod)%mod;
+	return res;
+}
+int modDiv(int a,int b,int mod){
+	
+	a=a%mod;
+	int inv=modInv(b,mod);
+	int res=(inv*a)%mod;
+	return res;
 }
 // fenwick tree
 void update(int *BIT,int n,int x, int delta)
@@ -390,17 +421,8 @@ int roundOf(int n){
 	return (int)pow(2,floor(log2(n)));
 }
 void solve(){
-	int l,r;
-	cin>>l>>r;
-	vector<int> segPrimes;
-	// segmentedSeive(l,r,segPrimes);
-	// cout<<rangePrimes(l,r)<<endl;
-	rangePrimes(l,r,segPrimes);
-	cout<<segPrimes.size()<<endl;
-	for(auto prm:segPrimes) cout<<prm<<" ";cout<<endl;
-	// int arr[n];
-	// memset(arr,0,sizeof(arr));
-	// memset(arr,-1,sizeof(arr));
+	int a=3,m=11;
+	cout<<modDiv(8,3,5)<<endl;
 }
 
 signed main(){
@@ -415,7 +437,7 @@ signed main(){
 	// seive();
 	// seiveWithHPLP();
 	// seiveWithAllFactors();
-	seiveWithAllPrimes();
+	// seiveWithAllPrimes();
 	int t=1;
 	cin>>t;
 	while(t--){
