@@ -122,6 +122,15 @@ int modDiv(int a,int b,int mod){
 	int res=(inv*a)%mod;
 	return res;
 }
+int chineseRem(int arr[],int rem[],int n){
+	int prod=1,res=0;
+	for(int i=0;i<n;i++) prod*=arr[i];
+	for(int i=0;i<n;i++){
+		int restProd=prod/arr[i];
+		res+=(rem[i]*modInv(restProd,arr[i])*(restProd));
+	}
+	return (res%prod);
+}
 // fenwick tree
 void update(int *BIT,int n,int x, int delta)
 {
@@ -421,8 +430,10 @@ int roundOf(int n){
 	return (int)pow(2,floor(log2(n)));
 }
 void solve(){
-	int a=3,m=11;
-	cout<<modDiv(8,3,5)<<endl;
+	int num[] = { 3, 4, 5 };
+    int rem[] = { 2, 3, 1 };
+    int k = sizeof(num) / sizeof(num[0]);
+    cout << "x is " << chineseRem(num, rem, k);
 }
 
 signed main(){
