@@ -1,5 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
 class disjointSet{
     unordered_map<int,int> ump;
     public:
@@ -8,8 +6,9 @@ class disjointSet{
         for(auto num:arr) ump[num]=-1;
     }
     int findSet(int u){
+        // cout<<"in findSet "<<u<<endl;
         int r=u;
-        while(ump[r]!=-1){
+        while(ump[r]>=0){
             r=ump[r];
         }
         while(u!=r){
@@ -19,10 +18,11 @@ class disjointSet{
         }
         return r;
     }
-    void setUnion(int u,int v){
+    bool setUnion(int u,int v){
+        // cout<<"in setUnion "<<u<<" "<<v<<endl;
         int uroot=findSet(u);
         int vroot=findSet(v);
-        if(uroot == vroot) return ;
+        if(uroot == vroot) return false;
         int uchild=ump[uroot];
         int vchild=ump[vroot];
         int totalChild=uchild+vchild;
@@ -34,7 +34,7 @@ class disjointSet{
             ump[vroot]=uroot;
             ump[uroot]=totalChild;
         }
-        return;
+        return true;
     }
     void print(){
         for(auto &pr:ump){
@@ -42,15 +42,3 @@ class disjointSet{
         }
     }
 };
-int main() {
-	// your code goes here
-	vector<int> arr;
-	arr.push_back(1);
-	arr.push_back(2);
-	arr.push_back(3);
-	arr.push_back(4);
-	disjointSet ds=*new disjointSet(arr);
-	
-	ds.print();
-	return 0;
-}
