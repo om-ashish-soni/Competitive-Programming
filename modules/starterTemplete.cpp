@@ -26,6 +26,16 @@ void findAllFactors(int n,std::vector<int>& factors){
 	sort(factors.begin(),factors.end());
 }
 //lcm and gcd
+pair<int,int> extended_gcd(int a,int b){
+	if(b==0) return{1,1};
+	pair<int,int> pr=extended_gcd(b,a%b);
+	return {pr.second,pr.first-(a/b)*pr.second};
+}
+int hcf(int a,int b){
+	if(a==0 || b==0) return max(a,b);
+	pair<int,int> pr=extended_gcd(a,b);
+	return (a*pr.first + b*pr.second);
+}
 int lcm(int a,int b){
 	return (a*b)/(__gcd(a,b));
 }
@@ -91,20 +101,184 @@ int modMul(int a,int b,int mod){
 int modAdd(int a,int b,int mod){
 	return ((a%mod)+(b%mod))%mod;
 }
+int modInv(int a,int mod){
+	int x,y;
+	pair<int,int> pr=extended_gcd(a,mod);
+	x=pr.first;
+	y=pr.second;
+	int g=(a*x + mod*y);
+	if(g!=1){
+		cerr<<"modular inverse does not exist , gcd != 1"<<endl;
+		exit(0);
+	}
+	// adding m to avoid negative value of x 
+	int res=(x%mod + mod)%mod;
+	return res;
+}
+int modDiv(int a,int b,int mod){
+	
+	a=a%mod;
+	int inv=modInv(b,mod);
+	int res=(inv*a)%mod;
+	return res;
+}
+int chineseRem(int arr[],int rem[],int n){
+	int prod=1,res=0;
+	for(int i=0;i<n;i++) prod*=arr[i];
+	for(int i=0;i<n;i++){
+		int restProd=prod/arr[i];
+		res+=(rem[i]*modInv(restProd,arr[i])*(restProd));
+	}
+	return (res%prod);
+}
 // fenwick tree
-void update(int *BIT,int n,int x, int delta)
-{
-      for(; x <= n; x += x&-x)
-        BIT[x] += delta;
-}
-int query(int *BIT,int x)
-{
-     int sum = 0;
-     for(; x > 0; x -= x&-x)
-        sum += BIT[x];
-     return sum;
-}
+class fenwickTree{
+	vector<int> BIT;
+	int n;
+	public : 
+	fenwickTree(int *arr,int n){
+		
+		this->n=n;
+		BIT=*new vector<int>(n,0);
+		BIT[0]=arr[0];
+		for(int i=1;i<n;i++){
+			this->update(i,arr[i]);
+		}
+	}
+	fenwickTree(vector<int>&v){
+		this->n=n;
+		BIT=*new vector<int>(n,0);
+		BIT[0]=v[0];
+		for(int i=1;i<n;i++){
+			this->update(i,v[i]);
+		}
+	}
+	void update(int index, int delta)
+	{
+	      for(; index < n; index += index&-index)
+	        BIT[index] += delta;
+	}
+	int get(int index)
+	{
+	     int sum = BIT[0];
+	     for(; index > 0; index -= index&-index)
+	        sum += BIT[index];
+	     return sum;
+	}
+};
+	
+//segment tree
+class segmentTree{
+	vector<int> segTree;
+	int *arr;int n;
+	bool isVectorContainer=false;
+	public: 
+	segmentTree(int *arr,int n){
+		this->arr=arr;
+		this->n=n;
+		int size=pow(2,ceil(log2(2*n-1)));
+		segTree.resize(size);
+		createSegTree(0,0,n-1);
+	}
+	segmentTree(vector<int> &v){
+		isVectorContainer=true;
+		n=v.size();
+		this->arr=(int *)malloc(n*sizeof(int));
+		for(int i=0;i<n;i++){
+			arr[i]=v[i];
+		}
+		int size=pow(2,ceil(log2(2*n-1)));
+		segTree.resize(size);
+		createSegTree(0,0,n-1);
+	}
+	int createSegTree(int si,int l,int r){
+		if(l==r){	
+			segTree[si]=arr[l];
+			return arr[l];
+		}
+		int mid=(l+r)/2;
+		segTree[si]=createSegTree(2*si + 1,l,mid)+createSegTree(2*si + 2,mid+1,r);
+		return segTree[si];
+	}
+	int getRangeSum(int sl,int sr,int l,int r,int si){
+		// cout<<sl<<" "<<sr<<endl;
+		if(sl>=l && sr<=r){
+			return segTree[si];
+		}
+		if(sl>r || sr<l){
+			return 0;
+		}
+		int mid=(sl+sr)/2;
+		return getRangeSum(sl,mid,l,r,2*si+1)+getRangeSum(mid+1,sr,l,r,2*si+2);
+	}
+	int getRangeSum(int l,int r){
+		return this->getRangeSum(0,n-1,l,r,0);
+	}
 
+	void updateSegTree(int si,int sl,int sr,int pos,int diff){
+		if(sl>pos || sr<pos) return;
+		segTree[si]+=diff;
+		if(sl != sr){
+			int mid((sl+sr)/2);
+			updateSegTree(2*si+1,sl,mid,pos,diff);
+			updateSegTree(2*si+2,mid+1,sr,pos,diff);
+		}
+	}
+	void update(int pos,int x){
+		int diff=x-arr[pos];
+		return updateSegTree(0,0,n-1,pos,diff);
+	}
+	~segmentTree(){
+		if(isVectorContainer){
+			free(arr);
+		}
+	}
+};
+// disjointSet
+class disjointSet{
+    unordered_map<int,int> ump;
+    public:
+    disjointSet(){}
+    disjointSet(vector<int>& arr){
+        for(auto num:arr) ump[num]=-1;
+    }
+    int findSet(int u){
+        // cout<<"in findSet "<<u<<endl;
+        int r=u;
+        while(ump[r]>=0){
+            r=ump[r];
+        }
+        while(u!=r){
+            int par=ump[u];
+            ump[u]=r;
+            u=par;
+        }
+        return r;
+    }
+    bool setUnion(int u,int v){
+        // cout<<"in setUnion "<<u<<" "<<v<<endl;
+        int uroot=findSet(u);
+        int vroot=findSet(v);
+        if(uroot == vroot) return false;
+        int uchild=ump[uroot];
+        int vchild=ump[vroot];
+        int totalChild=uchild+vchild;
+        
+        if(uchild>vchild){
+            ump[uroot]=vroot;
+            ump[vroot]=totalChild;
+        }else{
+            ump[vroot]=uroot;
+            ump[uroot]=totalChild;
+        }
+        return true;
+    }
+    void print(){
+        for(auto &pr:ump){
+            cout<<"{"<<pr.first<<"<="<<pr.second<<"}"<<endl;
+        }
+    }
+};
 //lis
 int lis(int *v,int n){
 	vector<int> seq;
@@ -389,18 +563,128 @@ int primeFactors(int n){
 int roundOf(int n){
 	return (int)pow(2,floor(log2(n)));
 }
+// string and pattern mathcing
+// string -- // z algorithm
+void createZ(string s,int z[]){
+	int n=s.size();
+	int l,r,k;
+	l=r=0;
+	z[0]=0;
+	for(int i=1;i<n;i++){
+		if(i>r){
+			l=r=i;
+			while(r<n && s[r]==s[r-l]){
+				r++;
+			}
+			z[i]=r-l;
+			r--;
+		}else{
+			k=i-l;
+			if(z[k]<r-i+1){
+				z[i]=z[k];
+			}else{
+				l=i;
+				while(r<n && s[r-l]==s[r]){
+					r++;
+				}
+				z[i]=r-l;
+				r--;
+			}
+		}
+	}
+}
+void zSearch(string text,string pattern,vector<int>& match){
+	string concat=pattern+"$"+text;
+	int sz=concat.length();
+	int psize=pattern.size();
+	int z[sz];
+	createZ(concat,z);
+	for(int i=0;i<sz;i++){
+		if(z[i]==psize){
+			match.push_back(i-psize-1);
+		}
+	}
+	return;
+}
+
+bool stringCompare(string &s,int ss,string &r,int rs,int len){
+	if(ss+len>s.size() || rs+len>r.size()) return false;
+	for(int i=0;i<len;i++,ss++,rs++){
+		if(s[ss]!=r[rs]) return false;
+	}
+	return true;
+}
+void rabin(string s,string pattern,vector<int>&match){
+	int sz=s.size();
+	int pz=pattern.size();
+	if(pz>sz) return;
+	int primeNum=3;
+	int hashVal=0;
+	int patternHash=0;
+	for(int i=0;i<pz;i++){
+		patternHash+=((int)(pattern[i]-97 + 1))*pow(primeNum,i);
+	}
+	
+	// cout<<"patternHash :"<<patternHash<<endl;
+	for(int i=0;i<pz;i++){
+		hashVal+=((int)(s[i]-97 + 1))*pow(primeNum,i);
+	}
+	if(hashVal==patternHash) match.push_back(0);
+	for(int i=pz;i<sz;i++){
+		
+		int k=i-pz;
+		hashVal-=(int)(s[k]-97+1);
+		hashVal/=3;
+		hashVal+=((int)(s[i]-97+1))*pow(primeNum,pz-1);
+		if(hashVal==patternHash && (stringCompare(s,k+1,pattern,0,pz))) match.push_back(k+1);
+	}
+}
+void prefix_function(string s,vector<int>& pf){
+	int n=s.size();
+	pf.resize(n);
+	pf[0]=0;
+	for(int i=1;i<n;i++){
+		int j=pf[i-1];
+		while(j>0 && s[i]!=s[j]){
+			j=pf[j-1];
+		}
+		if(s[i]==s[j]){
+			j++;
+		}
+		pf[i]=j;
+	}
+	// Time complexity : O(n)
+}
+void kmp(string s,string pattern,vector<int>&match){
+	int pz=pattern.size();
+	int pos(-1),i(0),j(0);
+	vector<int> pf;
+	prefix_function(pattern,pf);
+	for(auto num:pf) cout<<num<<" ";cout<<endl;
+	while(i<s.size()){
+		if(s[i]==pattern[j]){
+			j++;
+			i++;
+		}else{
+			if(j!=0){
+				j=pf[j-1];
+			}else i++;
+		}
+		if(j==pattern.size()){
+			match.push_back(i-pz);
+		}
+	}
+}
 void solve(){
-	int l,r;
-	cin>>l>>r;
-	vector<int> segPrimes;
-	// segmentedSeive(l,r,segPrimes);
-	// cout<<rangePrimes(l,r)<<endl;
-	rangePrimes(l,r,segPrimes);
-	cout<<segPrimes.size()<<endl;
-	for(auto prm:segPrimes) cout<<prm<<" ";cout<<endl;
-	// int arr[n];
-	// memset(arr,0,sizeof(arr));
-	// memset(arr,-1,sizeof(arr));
+	int arr[] = {1, 3, 5, 7, 9, 12};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    vector<int> v(n);
+    for(int i=0;i<n;i++){
+    	v[i]=arr[i];
+    }
+    fenwickTree& fenTree=*new fenwickTree(arr,n);
+    cout<<fenTree.get(5)<<endl;
+    
 }
 
 signed main(){
@@ -415,7 +699,7 @@ signed main(){
 	// seive();
 	// seiveWithHPLP();
 	// seiveWithAllFactors();
-	seiveWithAllPrimes();
+	// seiveWithAllPrimes();
 	int t=1;
 	cin>>t;
 	while(t--){
