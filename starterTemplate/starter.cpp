@@ -500,6 +500,75 @@ void zSearch(string text,string pattern,vector<int>& match){
 	}
 	return;
 }
+
+bool stringCompare(string &s,int ss,string &r,int rs,int len){
+	if(ss+len>s.size() || rs+len>r.size()) return false;
+	for(int i=0;i<len;i++,ss++,rs++){
+		if(s[ss]!=r[rs]) return false;
+	}
+	return true;
+}
+void rabin(string s,string pattern,vector<int>&match){
+	int sz=s.size();
+	int pz=pattern.size();
+	if(pz>sz) return;
+	int primeNum=3;
+	int hashVal=0;
+	int patternHash=0;
+	for(int i=0;i<pz;i++){
+		patternHash+=((int)(pattern[i]-97 + 1))*pow(primeNum,i);
+	}
+	
+	// cout<<"patternHash :"<<patternHash<<endl;
+	for(int i=0;i<pz;i++){
+		hashVal+=((int)(s[i]-97 + 1))*pow(primeNum,i);
+	}
+	if(hashVal==patternHash) match.push_back(0);
+	for(int i=pz;i<sz;i++){
+		
+		int k=i-pz;
+		hashVal-=(int)(s[k]-97+1);
+		hashVal/=3;
+		hashVal+=((int)(s[i]-97+1))*pow(primeNum,pz-1);
+		if(hashVal==patternHash && (stringCompare(s,k+1,pattern,0,pz))) match.push_back(k+1);
+	}
+}
+void prefix_function(string s,vector<int>& pf){
+	int n=s.size();
+	pf.resize(n);
+	pf[0]=0;
+	for(int i=1;i<n;i++){
+		int j=pf[i-1];
+		while(j>0 && s[i]!=s[j]){
+			j=pf[j-1];
+		}
+		if(s[i]==s[j]){
+			j++;
+		}
+		pf[i]=j;
+	}
+	// Time complexity : O(n)
+}
+void kmp(string s,string pattern,vector<int>&match){
+	int pz=pattern.size();
+	int pos(-1),i(0),j(0);
+	vector<int> pf;
+	prefix_function(pattern,pf);
+	for(auto num:pf) cout<<num<<" ";cout<<endl;
+	while(i<s.size()){
+		if(s[i]==pattern[j]){
+			j++;
+			i++;
+		}else{
+			if(j!=0){
+				j=pf[j-1];
+			}else i++;
+		}
+		if(j==pattern.size()){
+			match.push_back(i-pz);
+		}
+	}
+}
 void solve(){
 	vector<int> match;
 	string text = "GEEKS FOR GEEKS";
