@@ -144,7 +144,35 @@ int query(int *BIT,int x)
         sum += BIT[x];
      return sum;
 }
-
+//segment tree
+int createSegTree(vector<int>&segTree,int si,int *arr,int l,int r){
+	if(l==r){	
+		segTree[si]=arr[l];
+		return arr[l];
+	}
+	int mid=(l+r)/2;
+	segTree[si]=createSegTree(segTree,2*si + 1,arr,l,mid)+createSegTree(segTree,2*si + 2,arr,mid+1,r);
+	return segTree[si];
+}
+void createSegTree(int *arr,int n,vector<int>& segTree){
+	int size=pow(2,ceil(log2(2*n-1)));
+	segTree.resize(size);
+	createSegTree(segTree,0,arr,0,n-1);
+}
+int getRangeSumSegTree(vector<int>& segTree,int sl,int sr,int l,int r,int si){
+	// cout<<sl<<" "<<sr<<endl;
+	if(sl>=l && sr<=r){
+		return segTree[si];
+	}
+	if(sl>r || sr<l){
+		return 0;
+	}
+	int mid=(sl+sr)/2;
+	return getRangeSumSegTree(segTree,sl,mid,l,r,2*si+1)+getRangeSumSegTree(segTree,mid+1,sr,l,r,2*si+2);
+}
+int getRangeSumSegTree(vector<int>& segTree,int n,int l,int r){
+	return getRangeSumSegTree(segTree,0,n-1,l,r,0);
+}
 //lis
 int lis(int *v,int n){
 	vector<int> seq;
@@ -429,11 +457,59 @@ int primeFactors(int n){
 int roundOf(int n){
 	return (int)pow(2,floor(log2(n)));
 }
+// string and pattern mathcing
+// string -- // z algorithm
+void createZ(string s,int z[]){
+	int n=s.size();
+	int l,r,k;
+	l=r=0;
+	z[0]=0;
+	for(int i=1;i<n;i++){
+		if(i>r){
+			l=r=i;
+			while(r<n && s[r]==s[r-l]){
+				r++;
+			}
+			z[i]=r-l;
+			r--;
+		}else{
+			k=i-l;
+			if(z[k]<r-i+1){
+				z[i]=z[k];
+			}else{
+				l=i;
+				while(r<n && s[r-l]==s[r]){
+					r++;
+				}
+				z[i]=r-l;
+				r--;
+			}
+		}
+	}
+}
+void zSearch(string text,string pattern,vector<int>& match){
+	string concat=pattern+"$"+text;
+	int sz=concat.length();
+	int psize=pattern.size();
+	int z[sz];
+	createZ(concat,z);
+	for(int i=0;i<sz;i++){
+		if(z[i]==psize){
+			// cout<<"match found at i : "<<i<<endl;
+			match.push_back(i);
+		}
+	}
+	return;
+}
 void solve(){
-	int num[] = { 3, 4, 5 };
-    int rem[] = { 2, 3, 1 };
-    int k = sizeof(num) / sizeof(num[0]);
-    cout << "x is " << chineseRem(num, rem, k);
+	vector<int> match;
+	string text = "GEEKS FOR GEEKS";
+    string pattern = "GEEK";
+    zSearch(text, pattern,match);
+    cout<<"printing match before "<<endl;
+    print(match);
+    cout<<"printing match after "<<endl;
+
 }
 
 signed main(){
