@@ -132,47 +132,109 @@ int chineseRem(int arr[],int rem[],int n){
 	return (res%prod);
 }
 // fenwick tree
-void update(int *BIT,int n,int x, int delta)
-{
-      for(; x <= n; x += x&-x)
-        BIT[x] += delta;
-}
-int query(int *BIT,int x)
-{
-     int sum = 0;
-     for(; x > 0; x -= x&-x)
-        sum += BIT[x];
-     return sum;
-}
-//segment tree
-int createSegTree(vector<int>&segTree,int si,int *arr,int l,int r){
-	if(l==r){	
-		segTree[si]=arr[l];
-		return arr[l];
+class fenwickTree{
+	vector<int> BIT;
+	int n;
+	public : 
+	fenwickTree(int *arr,int n){
+		
+		this->n=n;
+		BIT=*new vector<int>(n,0);
+		BIT[0]=arr[0];
+		for(int i=1;i<n;i++){
+			this->update(i,arr[i]);
+		}
 	}
-	int mid=(l+r)/2;
-	segTree[si]=createSegTree(segTree,2*si + 1,arr,l,mid)+createSegTree(segTree,2*si + 2,arr,mid+1,r);
-	return segTree[si];
-}
-void createSegTree(int *arr,int n,vector<int>& segTree){
-	int size=pow(2,ceil(log2(2*n-1)));
-	segTree.resize(size);
-	createSegTree(segTree,0,arr,0,n-1);
-}
-int getRangeSumSegTree(vector<int>& segTree,int sl,int sr,int l,int r,int si){
-	// cout<<sl<<" "<<sr<<endl;
-	if(sl>=l && sr<=r){
+	fenwickTree(vector<int>&v){
+		this->n=n;
+		BIT=*new vector<int>(n,0);
+		BIT[0]=v[0];
+		for(int i=1;i<n;i++){
+			this->update(i,v[i]);
+		}
+	}
+	void update(int index, int delta)
+	{
+	      for(; index < n; index += index&-index)
+	        BIT[index] += delta;
+	}
+	int get(int index)
+	{
+	     int sum = BIT[0];
+	     for(; index > 0; index -= index&-index)
+	        sum += BIT[index];
+	     return sum;
+	}
+};
+	
+//segment tree
+class segmentTree{
+	vector<int> segTree;
+	int *arr;int n;
+	bool isVectorContainer=false;
+	public: 
+	segmentTree(int *arr,int n){
+		this->arr=arr;
+		this->n=n;
+		int size=pow(2,ceil(log2(2*n-1)));
+		segTree.resize(size);
+		createSegTree(0,0,n-1);
+	}
+	segmentTree(vector<int> &v){
+		isVectorContainer=true;
+		n=v.size();
+		this->arr=(int *)malloc(n*sizeof(int));
+		for(int i=0;i<n;i++){
+			arr[i]=v[i];
+		}
+		int size=pow(2,ceil(log2(2*n-1)));
+		segTree.resize(size);
+		createSegTree(0,0,n-1);
+	}
+	int createSegTree(int si,int l,int r){
+		if(l==r){	
+			segTree[si]=arr[l];
+			return arr[l];
+		}
+		int mid=(l+r)/2;
+		segTree[si]=createSegTree(2*si + 1,l,mid)+createSegTree(2*si + 2,mid+1,r);
 		return segTree[si];
 	}
-	if(sl>r || sr<l){
-		return 0;
+	int getRangeSum(int sl,int sr,int l,int r,int si){
+		// cout<<sl<<" "<<sr<<endl;
+		if(sl>=l && sr<=r){
+			return segTree[si];
+		}
+		if(sl>r || sr<l){
+			return 0;
+		}
+		int mid=(sl+sr)/2;
+		return getRangeSum(sl,mid,l,r,2*si+1)+getRangeSum(mid+1,sr,l,r,2*si+2);
 	}
-	int mid=(sl+sr)/2;
-	return getRangeSumSegTree(segTree,sl,mid,l,r,2*si+1)+getRangeSumSegTree(segTree,mid+1,sr,l,r,2*si+2);
-}
-int getRangeSumSegTree(vector<int>& segTree,int n,int l,int r){
-	return getRangeSumSegTree(segTree,0,n-1,l,r,0);
-}
+	int getRangeSum(int l,int r){
+		return this->getRangeSum(0,n-1,l,r,0);
+	}
+
+	void updateSegTree(int si,int sl,int sr,int pos,int diff){
+		if(sl>pos || sr<pos) return;
+		segTree[si]+=diff;
+		if(sl != sr){
+			int mid((sl+sr)/2);
+			updateSegTree(2*si+1,sl,mid,pos,diff);
+			updateSegTree(2*si+2,mid+1,sr,pos,diff);
+		}
+	}
+	void update(int pos,int x){
+		int diff=x-arr[pos];
+		return updateSegTree(0,0,n-1,pos,diff);
+	}
+	~segmentTree(){
+		if(isVectorContainer){
+			free(arr);
+		}
+	}
+};
+
 //lis
 int lis(int *v,int n){
 	vector<int> seq;
@@ -570,14 +632,15 @@ void kmp(string s,string pattern,vector<int>&match){
 	}
 }
 void solve(){
-	vector<int> match;
-	string text = "GEEKS FOR GEEKS";
-    string pattern = "GEEK";
-    zSearch(text, pattern,match);
-    cout<<"printing match before "<<endl;
-    print(match);
-    cout<<"printing match after "<<endl;
-
+	int arr[] = {1, 3, 5, 7, 9, 12};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    vector<int> v(n);
+    for(int i=0;i<n;i++){
+    	v[i]=arr[i];
+    }
+    fenwickTree& fenTree=*new fenwickTree(arr,n);
+    cout<<fenTree.get(5)<<endl;
+    
 }
 
 signed main(){
