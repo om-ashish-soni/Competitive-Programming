@@ -57,8 +57,7 @@ void zSearch(string text,string pattern,vector<int>& match){
 	createZ(concat,z);
 	for(int i=0;i<sz;i++){
 		if(z[i]==psize){
-			// cout<<"match found at i : "<<i<<endl;
-			match.push_back(i);
+			match.push_back(i-psize-1);
 		}
 	}
 	return;
