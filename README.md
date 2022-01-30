@@ -14,6 +14,7 @@ For N <= 10^6 : O(N)
 For N <= 10^9 then O(logN)
 
 # nice youtube channels : 
+Tushar Roy : https://www.youtube.com/channel/UCZLJf_R2sWyUtXSKiKlyvAw
 
 Striver	https://www.youtube.com/channel/UCJskGeByzRRSvmOyZOz61ig
 
