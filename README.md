@@ -24,6 +24,8 @@ Tech-Dose https://www.youtube.com/channel/UCnxhETjJtTPs37hOZ7vQ88g
 
 Luv https://www.youtube.com/channel/UCDzhFuVYou1D8w1ABZo3b9A
 
+Apna college Placement course : https://www.youtube.com/playlist?list=PLfqMhTWNBTe0b2nM6JHVCnAkhQRGiZMSJ
+
 Errichto	https://www.youtube.com/channel/UCBr_Fu6q9iHYQCh13jmpbrg
 
 
