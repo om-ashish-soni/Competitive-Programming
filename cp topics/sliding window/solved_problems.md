@@ -19,5 +19,8 @@
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/sliding%20window/submissions/Substring%20of%20Size%20Three%20with%20Distinct%20Characters.cpp
 
 # Longest subarray with atmost k evens
+  https://practice.geeksforgeeks.org/problems/longest-subarray-with-atmost-k-even-elements/0/
   
-  Solution : 
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/sliding%20window/submissions/longestSubarrayWithAtmost_K_evens.cpp
+  
+  
