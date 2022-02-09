@@ -17,3 +17,7 @@
   https://leetcode.com/problems/substrings-of-size-three-with-distinct-characters/
 
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/sliding%20window/submissions/Substring%20of%20Size%20Three%20with%20Distinct%20Characters.cpp
+
+# Longest subarray with atmost k evens
+  
+  Solution : 
