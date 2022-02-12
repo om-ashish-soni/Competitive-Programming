@@ -4,7 +4,6 @@ Some basic constraints and the safe time complexity :
 | N | Big Oh |
 |-----|------|
 |For N <= 10 | O(2^N) and O(N!)|
-
 |For N <= 100 | O(N^3) |
 
 |For N <= 10^3 | O(N^2) |
