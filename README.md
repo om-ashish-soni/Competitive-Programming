@@ -12,7 +12,7 @@ Some basic constraints and the safe time complexity :
 
 ---
 # nice youtube channels : 
-Tushar Roy : https://www.youtube.com/channel/UCZLJf_R2sWyUtXSKiKlyvAw
+[Tushar Roy](https://www.youtube.com/channel/UCZLJf_R2sWyUtXSKiKlyvAw)
 
 Striver	https://www.youtube.com/channel/UCJskGeByzRRSvmOyZOz61ig
 
