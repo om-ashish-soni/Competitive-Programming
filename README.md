@@ -12,19 +12,15 @@ Some basic constraints and the safe time complexity :
 
 ---
 # nice youtube channels : 
-[Tushar Roy](https://www.youtube.com/channel/UCZLJf_R2sWyUtXSKiKlyvAw)
-
-Striver	https://www.youtube.com/channel/UCJskGeByzRRSvmOyZOz61ig
-
-CodeNCode	https://www.youtube.com/channel/UC0zvY3yIBQTrSutsV-4yscQ
-
-Tech-Dose https://www.youtube.com/channel/UCnxhETjJtTPs37hOZ7vQ88g
-
-Luv https://www.youtube.com/channel/UCDzhFuVYou1D8w1ABZo3b9A
-
-Apna college Placement course : https://www.youtube.com/playlist?list=PLfqMhTWNBTe0b2nM6JHVCnAkhQRGiZMSJ
-
-Errichto	https://www.youtube.com/channel/UCBr_Fu6q9iHYQCh13jmpbrg
+|channel|
+|-------|
+|[Tushar Roy](https://www.youtube.com/channel/UCZLJf_R2sWyUtXSKiKlyvAw)|
+|[Striver](https://www.youtube.com/channel/UCJskGeByzRRSvmOyZOz61ig)|
+|[CodeNCode](https://www.youtube.com/channel/UC0zvY3yIBQTrSutsV-4yscQ)|
+|[Tech-Dose](https://www.youtube.com/channel/UCnxhETjJtTPs37hOZ7vQ88g)|
+|[Luv](https://www.youtube.com/channel/UCDzhFuVYou1D8w1ABZo3b9A)|
+|[Apna college Placement course](https://www.youtube.com/playlist?list=PLfqMhTWNBTe0b2nM6JHVCnAkhQRGiZMSJ)|
+|[Errichto](https://www.youtube.com/channel/UCBr_Fu6q9iHYQCh13jmpbrg)|
 
 
 # Other nice repos : 
