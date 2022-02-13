@@ -16,6 +16,9 @@ int power(long long x, unsigned int y, int p)
     } 
     return res; 
 } 
+int modSub(int a,int b,int mod){
+	return ((a%mod - b%mod + mod)%mod);
+}
 int modMul(int a,int b,int mod){
     return ((a%mod)*(b%mod))%mod;
 }
