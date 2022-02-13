@@ -1,4 +1,9 @@
 // modulo arithmetic 
+pair<int,int> extended_gcd(int a,int b){
+	if(b==0) return{1,1};
+	pair<int,int> pr=extended_gcd(b,a%b);
+	return {pr.second,pr.first-(a/b)*pr.second};
+}
 int power(long long x, unsigned int y, int p) 
 { 
     int res = 1; 
