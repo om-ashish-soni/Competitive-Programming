@@ -36,7 +36,7 @@ Some basic constraints and the safe time complexity :
 |[Ashish Gupta](https://github.com/Ashishgup1/Competitive-Coding)|
 
 # Dynamic Programming :
-[Best Resource](https://youtu.be/oBt53YbR9Kk)
+[Best Resource for dp](https://youtu.be/oBt53YbR9Kk)
 # ROAD MAP : 
 https://www.geeksforgeeks.org/competitive-programming-a-complete-guide/
 
