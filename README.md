@@ -45,13 +45,10 @@ Some basic constraints and the safe time complexity :
 |[Maths for dsa & cp](https://www.youtube.com/watch?v=tDM6lT-qjys)|
 
 ---
-# ROAD MAP : 
-https://www.geeksforgeeks.org/competitive-programming-a-complete-guide/
-
----
 # nice articles 
 |article ref link|
 |----------------|
+|[Roadmap for cp](https://www.geeksforgeeks.org/competitive-programming-a-complete-guide/)|
 |[modulo multiplicative inverse](https://www.geeksforgeeks.org/modular-multiplicative-inverse-1-n/)|
 ---
 # Important links : 
