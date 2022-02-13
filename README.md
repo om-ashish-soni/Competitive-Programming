@@ -26,14 +26,14 @@ Some basic constraints and the safe time complexity :
 # Other nice repos : 
 | repo |
 |------|
-|[dhiraj-01 CP](https://github.com/dhiraj-01/CP)|
-|[Leetcode questions](https://github.com/fterh/leetcode-curation-topical)|
-|[Alexandru Valeanu](https://github.com/AlexandruValeanu/Competitive-Programming)|
 |[Tourist](https://github.com/the-tourist/algo)|
+|[dhiraj-01 CP](https://github.com/dhiraj-01/CP)|
+|[Ashish Gupta](https://github.com/Ashishgup1/Competitive-Coding)|
+|[Leetcode questions](https://github.com/fterh/leetcode-curation-topical)|
 |[Algo-lib](https://github.com/saketh-are/algo-lib)|
 |[Coding notes](https://github.com/ankitpriyarup/Coding_Notes)|
 |[Atcoder library](https://github.com/atcoder/ac-library)|
-|[Ashish Gupta](https://github.com/Ashishgup1/Competitive-Coding)|
+|[Alexandru Valeanu](https://github.com/AlexandruValeanu/Competitive-Programming)|
 
 ---
 
