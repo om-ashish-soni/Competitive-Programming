@@ -35,7 +35,8 @@ Some basic constraints and the safe time complexity :
 |[Atcoder library](https://github.com/atcoder/ac-library)|
 |[Ashish Gupta](https://github.com/Ashishgup1/Competitive-Coding)|
 
-
+# Dynamic Programming :
+[Best Resource](https://youtu.be/oBt53YbR9Kk)
 # ROAD MAP : 
 https://www.geeksforgeeks.org/competitive-programming-a-complete-guide/
 
