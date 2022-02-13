@@ -1007,10 +1007,47 @@ class Fibonacci{
 		return fibMatrix[0][0];
 	}
 };
+
+class NCR{
+	public : 
+	int mod=-1;
+	int n,r,res=1;
+	void computeNcr(){
+		if(r>n){
+			res=0;
+			return;
+		}
+		for(int i=0;i<r;i++){
+			res*=(n-i);
+			res/=(i+1);
+		}
+	}
+	void computeNcrMod(){
+		if(r>n){
+			res=0;
+			return;
+		}
+		for(int i=0;i<r;i++){
+			res=modMul(res,n-i,mod);
+			res=modDiv(res,i+1,mod);
+		}
+	}
+	NCR(int n,int r):n(n),r(r){
+		if(r>n-r) r=n-r;
+		this->computeNcr();
+	}
+	NCR(int n,int r,int mod):n(n),r(r),mod(mod){
+		if(r>n-r) r=n-r;
+		this->computeNcrMod();
+	}
+	int get(){
+		return res;
+	}
+};
 void solve(){
-	int n=10;
-	Fibonacci fb=*new Fibonacci(6);
-	cout<<fb.get();
+	int n(6),r(5),mod(1e9+7);
+	NCR ncr=*new NCR(n,r,mod);
+	cout<<ncr.get();
 	cout<<endl;
 }
 signed main(){
