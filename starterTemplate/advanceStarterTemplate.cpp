@@ -95,6 +95,10 @@ int power(long long x, unsigned int y, int p)
     } 
     return res; 
 } 
+
+int modSub(int a,int b,int mod){
+	return ((a%mod - b%mod + mod)%mod);
+}
 int modMul(int a,int b,int mod){
 	return ((a%mod)*(b%mod))%mod;
 }
@@ -1044,12 +1048,52 @@ class NCR{
 		return res;
 	}
 };
+
+class NCRefficient{
+	public : 
+	int n,mod,r;
+	vector<int> fact,invFact,invNum;
+	void calculateFactorial(){
+		fact[0]=fact[1]=1;
+		for(int i=2;i<=n;i++){
+			fact[i]=(fact[i-1]*i)%mod;
+		}
+		return;
+	}
+	void calculateInverseNum(){
+		invNum[0]=invNum[1]=1;
+		for(int i=2;i<=n;i++){
+			invNum[i]=invNum[mod % i]*(mod - mod/i)%mod;
+		}
+	}
+	void calculateInverseFactorial(){
+		invFact[0]=invFact[1]=1;
+		for(int i=2;i<=n;i++){
+			invFact[i]=(invNum[i]*invFact[i-1])%mod;
+		}		
+	}
+	NCRefficient(int n,int mod):n(n),mod(mod){
+		fact.resize(n+1);
+		invFact.resize(n+1);
+		invNum.resize(n+1);
+		this->calculateFactorial();
+		this->calculateInverseNum();
+		this->calculateInverseFactorial();
+	}
+	int get(int N,int r){
+		if(N>n) return 0;
+		if(r<0 || r>N) return 0;
+		int ans=(fact[N]*invFact[r])%mod *(invFact[N-r])%mod;
+		return ans;
+	}
+};
 void solve(){
-	int n(6),r(5),mod(1e9+7);
-	NCR ncr=*new NCR(n,r,mod);
-	cout<<ncr.get();
+	int n(15),r(4),mod(1e9+7);
+	NCRefficient ncr=*new NCRefficient(n,mod);
+	cout<<ncr.get(n,r);
 	cout<<endl;
 }
+
 signed main(){
 	
 	ios_base::sync_with_stdio(false);
