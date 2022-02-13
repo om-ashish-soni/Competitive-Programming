@@ -1179,29 +1179,56 @@ public:
 		}
 	}
 };
-void solve(){
-	int n(16);
-	centroidDecomp cd=*new centroidDecomp(n);
-	cd.addEdge(1, 4);
-    cd.addEdge(2, 4);
-    cd.addEdge(3, 4);
-    cd.addEdge(4, 5);
-    cd.addEdge(5, 6);
-    cd.addEdge(6, 7);
-    cd.addEdge(7, 8);
-    cd.addEdge(7, 9);
-    cd.addEdge(6, 10);
-    cd.addEdge(10, 11);
-    cd.addEdge(11, 12);
-    cd.addEdge(11, 13);
-    cd.addEdge(12, 14);
-    cd.addEdge(13, 15);
-    cd.addEdge(13, 16);
-    cd.decompose(1);
-	cd.print();
-	cout<<endl;
-}
+class Trie{
+public:
 
+	class TrieNode{
+	public:
+		bool end=false;
+		vector<TrieNode*> nextNodeOf{*new vector<TrieNode*>(26,NULL)};
+	};
+	TrieNode* trieRoot=NULL;
+	Trie(){
+		trieRoot=new TrieNode();
+	}
+	void insert(const string& word){
+		TrieNode* currNode=trieRoot;
+		for(auto ch:word){
+			if(NULL == (currNode->nextNodeOf[ch-'a'])){
+				currNode->nextNodeOf[ch-'a'] = new TrieNode();
+			}
+			currNode=currNode->nextNodeOf[ch-'a'];
+		}
+		currNode->end=true;
+	}
+	bool search(const string& key){
+		TrieNode* currNode=trieRoot;
+		for(auto ch:key){
+			if(NULL == (currNode->nextNodeOf[ch-'a'])){
+				return false;
+			}
+			currNode=currNode->nextNodeOf[ch-'a'];
+		}
+		return currNode->end;
+	}
+	bool searchPrefix(const string& key){
+		TrieNode* currNode=trieRoot;
+		for(auto ch:key){
+			if(NULL == (currNode->nextNodeOf[ch-'a'])){
+				return false;
+			}
+			currNode=currNode->nextNodeOf[ch-'a'];
+		}
+		return true;
+	}
+};
+void solve(){
+	Trie &tr=*new Trie();
+	tr.insert("ssv");
+	tr.insert("datt");
+	tr.insert("nrs");
+	cout<<"ssv : "<<boolalpha<<tr.searchPrefix("ssv")<<endl;
+}
 signed main(){
 	
 	ios_base::sync_with_stdio(false);
