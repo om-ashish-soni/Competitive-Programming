@@ -877,13 +877,46 @@ public:
 	string getPal(){
 		return longestPalindrome;
 	}
+
 };
+bool isPalindrome(string s){
+	string rev=s;
+	reverse(s.begin(), s.end());
+	return s==rev;
+}
+
+class EulerTotient{
+	public : 
+	int n;
+	vector<int> totient;
+	EulerTotient(int N){
+		this->n=N+1;
+		totient.resize(n);
+		for(int i=0;i<n;i++){
+			totient[i]=i;
+		}
+		for(int i=2;i<n;i++){
+			if(totient[i]==i){
+				for(int j=2*i;j<n;j+=i){
+					totient[j]*=(i-1);
+					totient[j]/=i;
+				}
+				totient[i]=i-1;
+			}
+		}
+	}
+	void print(){
+		for(auto num:totient) cout<<num<<" ";cout<<endl;
+	}
+	inline int get(int index){
+		return totient.at(index);
+	}
+};
+
 void solve(){
-	string s="cabbacc";
-	cout<<s.size()<<endl;
-	Manacher mnc=*new Manacher(s);
-	cout<<mnc.getLen()<<endl;
-	cout<<mnc.getPal()<<endl;
+	int n=10;
+	EulerTotient et=*new EulerTotient(n);
+	et.print();
 }
 signed main(){
 	
