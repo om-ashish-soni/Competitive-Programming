@@ -1,7 +1,7 @@
 # note to me:
-number theory , bit manip and dp are most popular, 
-in 98% of the contest atleast one of them is always there,
-please practise more and more
+* number theory , bit manip and dp are most popular, 
+* in 98% of the contest atleast one of them is always there,
+* please practise more and more
 
 # Competitive-Programming
 Some basic constraints and the safe time complexity :
