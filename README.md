@@ -35,8 +35,16 @@ Some basic constraints and the safe time complexity :
 |[Atcoder library](https://github.com/atcoder/ac-library)|
 |[Ashish Gupta](https://github.com/Ashishgup1/Competitive-Coding)|
 
-# Dynamic Programming :
-[Best Resource for dp](https://youtu.be/oBt53YbR9Kk)
+---
+
+# important topic reference 
+
+|topic ref link|
+|--------------|
+|[Dynamic programming](https://youtu.be/oBt53YbR9Kk)|
+|[Maths for dsa & cp](https://www.youtube.com/watch?v=tDM6lT-qjys)|
+
+---
 # ROAD MAP : 
 https://www.geeksforgeeks.org/competitive-programming-a-complete-guide/
 
