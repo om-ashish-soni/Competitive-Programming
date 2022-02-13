@@ -48,6 +48,12 @@ Some basic constraints and the safe time complexity :
 # ROAD MAP : 
 https://www.geeksforgeeks.org/competitive-programming-a-complete-guide/
 
+---
+# nice articles 
+|article ref link|
+|----------------|
+|[modulo multiplicative inverse](https://www.geeksforgeeks.org/modular-multiplicative-inverse-1-n/)|
+---
 # Important links : 
 https://leetcode-questions.herokuapp.com/
 
