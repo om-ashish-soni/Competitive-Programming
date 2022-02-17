@@ -1,6 +1,16 @@
 
 # Competitive-Programming
+## C++ tricks : 
+https://codeforces.com/blog/entry/15643
+
+## roadmap : 
+https://blog.shahjalalshohag.com/topic-list/
+
+## cf blogs : 
+https://codeforces.com/catalog
+
 ## note to me:
+
 * number theory , bit manip and dp are most popular, 
 * in 98% of the contest atleast one of them is always there,
 * please practise more and more
