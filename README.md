@@ -1,5 +1,7 @@
 
 # Competitive-Programming
+## how to avoid recursion depth problem in python : 
+sys.setrecursionlimit(10 ** 6)
 ## C++ tricks : 
 https://codeforces.com/blog/entry/15643
 
