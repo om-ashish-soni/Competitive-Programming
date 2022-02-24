@@ -1,5 +1,8 @@
 
 # Competitive-Programming
+## You might not know this 
+https://www.geeksforgeeks.org/heap-using-stl-c/
+
 ## how to avoid recursion depth problem in python : 
 sys.setrecursionlimit(10 ** 6)
 ## C++ tricks : 
