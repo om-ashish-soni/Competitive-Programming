@@ -20,3 +20,11 @@ def setUnion(ump,u,v):
 		ump[u]=v
 		ump[v]=totalChilds
 	return True
+def preferedUnion(ump,u,v):
+    u=findSet(ump,u)
+    v=findSet(ump,v)
+    if(u==v): return False
+    totalChilds=ump[u]+ump[v]
+    ump[v]=u
+    ump[u]=totalChilds
+    return True
