@@ -1,6 +1,6 @@
 
 # Competitive-Programming
-(codexhef roadmap)[Roadmap/16471439270966898721512438247614.jpg]
+[codexhef roadmap](Roadmap/16471439270966898721512438247614.jpg)
 ## python jump by 2
 ```python:
 for i in range(0,10,2):
