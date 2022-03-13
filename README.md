@@ -1,6 +1,16 @@
 
 # Competitive-Programming
-![codechef roadmap](Roadmap/16471439270966898721512438247614.jpg)
+## tips:
+### 1. stuck in contest :
+       take 1 or 2 min break, wash face and start again with freshness
+### 2. can't improve :
+       try to upsolve, no idea comming see editorial and if un-none topic learn it, repeat this
+## codechef Roadmap
+  1. start with array -> practice -> 2 🌟
+  2. learn c++ stl or any language similar library, dp -> 3 🌟
+  3. disjoint set union , graph, little dsa -> 4 🌟
+  4. segment tree -> 5 🌟
+
 ## python jump by 2
 ```python:
 for i in range(0,10,2):
