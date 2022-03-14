@@ -1,8 +1,11 @@
-// fenwick tree
 class fenwickTree{
 	vector<int> BIT;
 	int n;
 	public : 
+	fenwickTree(int n){
+		this->n=n;
+		BIT=*new vector<int>(n,0);
+	}
 	fenwickTree(int *arr,int n){
 		
 		this->n=n;
@@ -22,7 +25,9 @@ class fenwickTree{
 	}
 	void update(int index, int delta)
 	{
+		  if(index==0) {BIT[index]+=delta;return;}
 	      for(; index < n; index += index&-index)
+
 	        BIT[index] += delta;
 	}
 	int get(int index)
