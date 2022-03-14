@@ -5,6 +5,15 @@
        take 1 or 2 min break, wash face and start again with freshness
 ### 2. can't improve :
        try to upsolve, no idea comming see editorial and if un-none topic learn it, repeat this
+### 3. how to boost performance:
+       always and almost long challanges on codechef helps to boost performance and learn various tips and techniques
+### 4. how to combine different approach and solve problem : 
+       let's say there is a problem and you performed below steps
+       1. the problem is of graph , dfs -> not enought to solve a problem ?
+       2. using disjoint set -> yes -> but tle
+       3. using path compression -> yes -> but wrong answer on some edge case
+       4. oh , look at the constraints , can we use fenwick tree? yes -> Solved -> AC
+       these are the steps that how to combine different approaches
 ## codechef Roadmap
   1. start with array -> practice -> 2 🌟
   2. learn c++ stl or any language similar library, dp -> 3 🌟
