@@ -23,3 +23,8 @@
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/interesting_drink.py
   
+# kth_not_divisible_by_n
+  Problem link : https://codeforces.com/problemset/problem/1352/C
+  
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/kth_not_divisible_by_n.py
+  
