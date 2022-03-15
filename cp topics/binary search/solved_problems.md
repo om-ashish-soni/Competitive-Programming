@@ -12,3 +12,9 @@
   Problem link : https://codeforces.com/problemset/problem/492/B
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/vanya_and_lanterns.py
+
+# new year and hurry
+  Problem link : https://codeforces.com/problemset/problem/750/A
+  
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/new_year_and_hurry.py
+  
