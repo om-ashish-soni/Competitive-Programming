@@ -14,6 +14,10 @@
        3. using path compression -> yes -> but wrong answer on some edge case
        4. oh , look at the constraints , can we use fenwick tree? yes -> Solved -> AC
        these are the steps that how to combine different approaches
+### 5. Can not solve last 3 to 4 problem of contest :
+       If your basics are clear , then you need to practise a lot of problems of tree,graph,dp, segment trees,
+       until you feel satisfied enough
+
 ## codechef Roadmap
   1. start with array -> practice -> 2 🌟
   2. learn c++ stl or any language similar library, dp -> 3 🌟
