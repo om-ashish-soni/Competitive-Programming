@@ -17,7 +17,15 @@
 ### 5. Can not solve last 3 to 4 problem of contest :
        If your basics are clear , then you need to practise a lot of problems of tree,graph,dp, segment trees,
        until you feel satisfied enough
-
+### 6. Where and how to practise :
+       1.always hackerrank is good to learn a language for beginners
+       2. after having little grip on 1 language, go to codeforces problem set
+       3. on codeforces problem set solve problem of rating < 1000
+       4. solve topic wise problem on codeforces problem set
+       5. give contest on codeforces and codechef
+       6. upsolve problems , if can not solve in 30 mins , see editorial, if unnone topic , learn it, and repeat this
+       7. after rating growth, repeat step-6 and step-4 simultaneously
+       8. keep learning new algo and practice them
 ## codechef Roadmap
   1. start with array -> practice -> 2 🌟
   2. learn c++ stl or any language similar library, dp -> 3 🌟
