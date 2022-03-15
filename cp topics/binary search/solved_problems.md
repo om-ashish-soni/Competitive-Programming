@@ -18,3 +18,8 @@
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/new_year_and_hurry.py
   
+# interesting drink 
+  Problem link : https://codeforces.com/problemset/problem/706/B
+  
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/interesting_drink.py
+  
