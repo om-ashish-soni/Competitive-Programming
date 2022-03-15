@@ -7,3 +7,8 @@
   Problem link : https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/find_first_and_last_position_in_array.cpp
+
+# vanya and lanterns
+  Problem link : https://codeforces.com/problemset/problem/492/B
+  
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/vanya_and_lanterns.py
