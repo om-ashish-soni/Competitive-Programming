@@ -26,6 +26,9 @@
        6. upsolve problems , if can not solve in 30 mins , see editorial, if unnone topic , learn it, and repeat this
        7. after rating growth, repeat  step-4 and solve problems of rating range [your rating -100 , your rating + 100]
        8. keep learning new algo and practice them
+### 7. How problem setters every time finds and puts new problem in contest : 
+       see , its not that every problem was built from scratch , most of the problems in contests are mixture of more than one problem of [cses sheet](https://cses.fi/problemset/)
+       
 ## codechef Roadmap
   1. start with array -> practice -> 2 🌟
   2. learn c++ stl or any language similar library, dp -> 3 🌟
