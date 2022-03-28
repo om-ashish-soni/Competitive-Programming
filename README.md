@@ -28,7 +28,8 @@
        8. keep learning new algo and practice them
 ### 7. How problem setters every time finds and puts new problem in contest : 
        see , its not that every problem was built from scratch , most of the problems in contests are mixture of more than one problem of below cses sheet.
-       [cses sheet](https://cses.fi/problemset/)
+
+[cses sheet](https://cses.fi/problemset/)
        
 ## codechef Roadmap
   1. start with array -> practice -> 2 🌟
