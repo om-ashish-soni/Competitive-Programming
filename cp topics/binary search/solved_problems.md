@@ -28,3 +28,7 @@
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/kth_not_divisible_by_n.py
   
+# books
+ Problem link : https://codeforces.com/problemset/problem/279/B
+ 
+ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/books.cpp
