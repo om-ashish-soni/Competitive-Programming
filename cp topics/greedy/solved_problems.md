@@ -69,3 +69,7 @@ Problem link : https://codeforces.com/contest/1615/problem/B
 
 Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/and_it_is_no_zero.md
 
+# Phoenix and beauty 
+  Problem link : https://codeforces.com/problemset/problem/1348/B
+  
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/phonix_and_beauty.cpp
