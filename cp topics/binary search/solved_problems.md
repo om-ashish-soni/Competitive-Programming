@@ -32,3 +32,8 @@
  Problem link : https://codeforces.com/problemset/problem/279/B
  
  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/books.cpp
+
+# distict dilemma
+ Problem link : https://www.codechef.com/START33B/problems/DISTDILEM
+ 
+ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/distinct_dilemma.py
