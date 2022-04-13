@@ -24,3 +24,6 @@
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/sliding%20window/submissions/longestSubarrayWithAtmost_K_evens.cpp
   
   
+# binary mismatch
+  problem link : https://www.codechef.com/START34A/problems/BINMIS
+  solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/sliding%20window/submissions/binary_mismatch.py
