@@ -73,3 +73,8 @@ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/c
   Problem link : https://codeforces.com/problemset/problem/1348/B
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/phonix_and_beauty.cpp
+  
+# Array Balancing
+  Problem link : https://codeforces.com/contest/1661/problem/A
+  
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/array_balancing.cpp
