@@ -37,3 +37,8 @@
  Problem link : https://www.codechef.com/START33B/problems/DISTDILEM
  
  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/distinct_dilemma.py
+
+# Bear and House
+ Problem link : https://www.codechef.com/problems/QHOUSE
+ 
+ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/bear_and_house.py
