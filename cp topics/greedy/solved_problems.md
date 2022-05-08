@@ -87,7 +87,7 @@ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/c
 # Subturtle Substring Subtraction 
   Problem link : https://codeforces.com/contest/1673/problem/A
   
-  Solution: https://github.com/om-ashish-soni/Competitive-Programming/tree/main/cp%20topics/greedy/submissions
+  Solution: https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/Subturtle_substring_subtraction.cpp
 
 # A perfectly balanced string ?
   Problem link : https://codeforces.com/contest/1673/problem/B
