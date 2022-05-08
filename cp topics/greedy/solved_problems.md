@@ -82,4 +82,6 @@ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/c
 # A-B-C Sort : 
   Problem link : https://codeforces.com/problemset/problem/1674/D
   
-  Solution: 
+  Solution: https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/A-B-C_sort.cpp
+  
+  
