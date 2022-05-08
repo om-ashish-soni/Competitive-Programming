@@ -78,3 +78,8 @@ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/c
   Problem link : https://codeforces.com/contest/1661/problem/A
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/array_balancing.cpp
+
+# A-B-C Sort : 
+  Problem link : https://codeforces.com/problemset/problem/1674/D
+  
+  Solution: 
