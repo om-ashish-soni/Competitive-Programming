@@ -88,3 +88,8 @@ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/c
   Problem link : https://codeforces.com/contest/1673/problem/A
   
   Solution: https://github.com/om-ashish-soni/Competitive-Programming/tree/main/cp%20topics/greedy/submissions
+
+# A perfectly balanced string ?
+  Problem link : https://codeforces.com/contest/1673/problem/B
+  
+  Solution: 
