@@ -92,4 +92,4 @@ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/c
 # A perfectly balanced string ?
   Problem link : https://codeforces.com/contest/1673/problem/B
   
-  Solution: 
+  Solution: https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/a_perfectly_balanced_string.cpp
