@@ -50,9 +50,17 @@ int gcd(int a,int b){
 	return __gcd(a,b);
 }
 // appendVectors
-void appendVector(vector<int>& v,vector<int>& w){
+template <typename T>
+void appendVector(vector<T>& v,vector<T>& w){
     v.insert(v.end(),w.begin(),w.end());
 }
+// subVector
+template <typename T>
+vector<T> getSubvector(vector<T>& v,int first,int last){
+    vector<T> vector(v.begin()+first,v.begin()+last+1);
+    return vector;
+}
+
 //printing modules
 void print(int num){
 	cout<<num<<endl;
