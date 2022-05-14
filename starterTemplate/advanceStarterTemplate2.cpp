@@ -49,6 +49,10 @@ int lcm(int a,int b){
 int gcd(int a,int b){
 	return __gcd(a,b);
 }
+// appendVectors
+void appendVector(vector<int>& v,vector<int>& w){
+    v.insert(v.end(),w.begin(),w.end());
+}
 //printing modules
 void print(int num){
 	cout<<num<<endl;
