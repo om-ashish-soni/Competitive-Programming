@@ -94,7 +94,8 @@ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/c
   
   Solution: https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/a_perfectly_balanced_string.cpp
   
-# Busy Robot 
+# Find The Array 
   Problem link : https://codeforces.com/contest/1463/problem/B
   
-  Solution : 
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/find_the_array.cpp
+  
