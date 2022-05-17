@@ -93,3 +93,8 @@ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/c
   Problem link : https://codeforces.com/contest/1673/problem/B
   
   Solution: https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/a_perfectly_balanced_string.cpp
+  
+# Busy Robot 
+  Problem link : https://codeforces.com/contest/1463/problem/B
+  
+  Solution : 
