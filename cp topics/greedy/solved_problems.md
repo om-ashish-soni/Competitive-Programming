@@ -102,4 +102,6 @@ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/c
 # Insert a progression
   Problem link : https://codeforces.com/problemset/problem/1671/D
   
-  Solution : 
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/insert_a_progression.cpp
+  
+  
