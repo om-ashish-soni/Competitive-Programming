@@ -59,7 +59,7 @@
 ### 9. Which template should i use in cp?
        Oops , there are two much templates, look below reference.
        
-###[templates useful for cp](https://iq.opengenus.org/cpp-template-for-competitive-coding/)
+### [templates useful for cp](https://iq.opengenus.org/cpp-template-for-competitive-coding/)
        
 ## codechef Roadmap
   1. start with array -> practice -> 2 🌟
