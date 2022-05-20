@@ -41,6 +41,7 @@ using namespace std;
 template<typename T>void read(T &a){cin>>a;}
 template<typename T>void read(T &a,T &b){cin>>a>>b;}
 template<typename T>void read(T &a,T &b,T &c){cin>>a>>b>>c;}
+template<typename T>void read(T a[],int n){F(i,0,n) cin>>a[i];}
 void print(){cout<<" "<<endl;}
 template<typename T>void print(T &a){cout<<a<<" ";}
 template<typename T>void print(T &a,T &b){cout<<a<<" "<<b<<" ";}
@@ -49,18 +50,21 @@ void println(){cout<<endl;}
 template<typename T>void println(T &a){cout<<a<<endl;}
 template<typename T>void println(T &a,T &b){cout<<a<<" "<<b<<endl;}
 template<typename T>void println(T &a,T &b,T &c){cout<<a<<" "<<b<<" "<<c<<endl;}
+template<typename T>void println(T a[],int n){F(i,0,n) cout<<a[i]<<" ";cout<<endl;}
 void solve(){
 	int n;
 	read(n);
-	string s;
-	read(s);
-	REVERSE(s);
-	int cost=0;
+	int a[n],b[n];
+	read(a,n);
+	read(b,n);
+	int index=0;
 	F(i,0,n){
-		if(i>0 && s[i]!='0') cost++;
-		cost+=TONUM(s[i]);
+		if(a[i]<b[0]){
+			index=i;
+			break;
+		}
 	}
-	println(cost);
+	println(index);
 }
 inline bool isTakeTestCase(){
 	return true;
