@@ -29,8 +29,43 @@
 ### 7. How problem setters every time finds and puts new problem in contest : 
        see , its not that every problem was built from scratch , 
        most of the problems in contests are mixture of more than one problem of below cses sheet.
+       
 ### CSES SHEET : [cses sheet](https://cses.fi/problemset/)
        
+### 8. Which ide should i use ?
+       Don't use ide in competitive programming , make a habit of using vim editor.
+       
+# vim-configuration
+
+    set number
+
+    set relativenumber
+
+    set tabstop=4
+
+    set shiftwidth=4
+
+    set autoindent
+
+    set mouse=a
+
+    colorscheme default
+
+    autocmd vimEnter *.cpp map <F8> :w <CR> :!clear ; g++ --std=c++17 %;if[-f] a.out];time ./a.out; rm a.out; <CR>
+
+  
+# Note : 
+  ## just paste above code to .vimrc file.
+  ## do below commands : 
+  
+      vi ~/.vimrc
+
+      //then write above code of vim-configuration
+
+      press f8 to compile and run the code
+  
+## vim is the one of the best suitable editor for competitive programming
+  
 
        
 ## codechef Roadmap
