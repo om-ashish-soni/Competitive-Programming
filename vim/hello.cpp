@@ -32,6 +32,8 @@
 #define SORTA(arr,sz) sort(ALLA(arr,sz))
 #define REVERSEA(arr,sz) reverse(ALLA(arr,sz))
 #define PERMUTE next_permutation
+#define INF1 (1e10+10)
+#define INF2 (1e18+10)
 #define PI 3.1415926535897932
 #define FEACH(a,b) for(auto &(a):(b))
 #define TONUM(c) (c-'0')
@@ -54,17 +56,27 @@ template<typename T>void println(T a[],int n){F(i,0,n) cout<<a[i]<<" ";cout<<end
 void solve(){
 	int n;
 	read(n);
-	int a[n],b[n];
-	read(a,n);
-	read(b,n);
-	int index=0;
+	vpii a(n),b(n);
 	F(i,0,n){
-		if(a[i]<b[0]){
-			index=i;
-			break;
-		}
+		read(a[i].first);
+		a[i].second=i;
 	}
-	println(index);
+	F(i,0,n){
+		read(b[i].first);
+		b[i].second=i;
+	}
+	SORT(a);
+	SORT(b);
+	vi suff(n);
+	suff[n-1]=b[n-1].second;
+	FND(i,n-2,0){
+		suff[i]=min(suff[i+1],b[i].second);
+	}
+	int mn=INF1;
+	F(i,0,n){
+		mn=min(mn,suff[i]+a[i].second);
+	}
+	println(mn);
 }
 inline bool isTakeTestCase(){
 	return true;
