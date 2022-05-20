@@ -35,7 +35,7 @@
 ### 8. Which ide should i use ?
        Don't use ide in competitive programming , make a habit of using vim editor.
        
-# vim-configuration
+### vim-configuration
 
     set number
 
@@ -54,9 +54,9 @@
     autocmd vimEnter *.cpp map <F8> :w <CR> :!clear ; g++ --std=c++17 %;if[-f] a.out];time ./a.out; rm a.out; <CR>
 
   
-# Note : 
-  ## just paste above code to .vimrc file.
-  ## do below commands : 
+### Note : 
+
+  ### do below commands : 
   
       vi ~/.vimrc
 
@@ -64,7 +64,7 @@
 
       press f8 to compile and run the code
   
-## vim is the one of the best suitable editor for competitive programming
+### vim is the one of the best suitable editor for competitive programming in the world.
   
 
        
