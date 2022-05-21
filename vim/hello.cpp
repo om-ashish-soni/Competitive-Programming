@@ -38,7 +38,9 @@
 #define MAXN2 (1e5+10)
 #define MAXN1 (1e6+10)
 #define INF1 (1e10+10)
-#define INF2 (1e18+10)
+#define INF2 (1e12+10)
+#define INF3 (1e15+10)
+#define INF4 (1e18+10)
 #define PI 3.1415926535897932
 #define FEACH(a,b) for(auto &(a):(b))
 #define TONUM(c) (c-'0')
@@ -72,8 +74,11 @@ template<typename T>void println(T a[],int n){F(i,0,n) cout<<a[i]<<" ";cout<<end
 string tostr(int a){ostringstream ostr;ostr<<a;return ostr.str();}
 int tonum(string &s){stringstream str(s);int num;str>>num;return num;}
 template<typename T> void printv(vt & v){ FEACH(a,v) print(a); println();}
+inline int getseginf(){return INF4;}
 template<typename T>T PERFORM(T a,T b,char op){
 	if(op=='+') return a+b;
+	else if(op=='m') return max(a,b);
+	else if(op=='n') return min(a,b);
 	else if(op=='|') return a|b;
 	else if(op=='&') return a&b;
 	else if(op=='^') return a^b;
@@ -84,6 +89,8 @@ template<typename T>T PERFORM(T a,T b,char op){
 }
 int IDENTITY(char op){
 	if(op=='+' || op=='|' || op=='^' || op=='-' ) return 0;
+	else if(op=='m') return 0LL-getseginf();
+	else if(op=='n') return getseginf();
 	return 1;
 }
 template<typename T>void buildseg(vt & t, vt & a,int v,int tl,int tr,char op){
@@ -107,23 +114,15 @@ template<typename T>T getseg(vt & t,int v,int tl,int tr,int l,int r,char op){
 	return PERFORM(left,right,op);
 }
 void solve(){
-	int n;
-	read(n);
-	vi v(n);
-	F(i,0,n) read(v[i]);
-	vi seg(4*n,0);
-	buildseg(seg,v,0,0,n-1,'+');
-	int q;
-	read(q);
-	F(i,0,q){
-		int l,r;
-		read(l,r);
-		int ans=getseg(seg,0,0,n-1,l-1,r-1,'+');
-		println(ans);
-	}
+	vi v={1,2,3,4,5};
+	vi t(4*SIZE(v),0);
+	buildseg(t,v,0,0,SIZE(v)-1,'n');
+	int ans;
+	ans=getseg(t,0,0,SIZE(v)-1,0,0,'n');
+	println(ans);
 }
 inline bool isTakeTestCase(){
-	return true;
+	return false;
 }
 signed main(){
 	FASTIO
