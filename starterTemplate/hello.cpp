@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 #define int long long
+#define double long double
 #define space " "
 #define endl "\n"
 #define pb push_back
@@ -8,11 +9,13 @@
 #define vb vector<bool>
 #define vc vector<char>
 #define vs vector<string>
+#define vt vector<T>
 #define vpii vector<pii>
 #define vvi vector<vi>
 #define vvb vector<vb>
 #define vvc vector<vc>
 #define vvs vector<vs>
+#define vvt vector<vt>
 #define vvpii vector<vpii>
 #define MOD1 1000000007
 #define F(a,b,c) for(int (a)=(b);(a)<(c);++(a))
@@ -32,13 +35,26 @@
 #define SORTA(arr,sz) sort(ALLA(arr,sz))
 #define REVERSEA(arr,sz) reverse(ALLA(arr,sz))
 #define PERMUTE next_permutation
+#define MAXN2 (1e5+10)
+#define MAXN1 (1e6+10)
 #define INF1 (1e10+10)
 #define INF2 (1e18+10)
 #define PI 3.1415926535897932
 #define FEACH(a,b) for(auto &(a):(b))
 #define TONUM(c) (c-'0')
 #define TOCHAR(c) (c+'0')
-
+#define GCD(a,b) (__gcd((a),(b)))
+#define LCM(a,b) ((a)*((b)/GCD((a),(b))))
+#define ADDM(a,b,mod) (((a)%(mod) + (b)%(mod))%mod)
+#define SUBM(a,b,mod) ((((a)%(mod) - (b)%(mod))%mod + mod)%mod)
+#define MULM(a,b,mod) (((a)*(b))%mod)
+#define YESNO1(b) ((b)?(println("YES")):(println("NO")))
+#define YESNO2(b) ((b)?(println("Yes")):(println("No")))
+#define YESNO3(b)  ((b)?(println("yes")):(println("no")))
+#define MID(a,b) (((a)+(b))/2)
+#define LSHIFT(a,b) (((int)(a))<<(b))
+#define RSHIFT(a,b) (((int)(a))>>(b))
+#define FASTIO ios_base::sync_with_stdio(false);cin.tie(NULL);
 using namespace std;
 template<typename T>void read(T &a){cin>>a;}
 template<typename T>void read(T &a,T &b){cin>>a>>b;}
@@ -53,37 +69,68 @@ template<typename T>void println(T &a){cout<<a<<endl;}
 template<typename T>void println(T &a,T &b){cout<<a<<" "<<b<<endl;}
 template<typename T>void println(T &a,T &b,T &c){cout<<a<<" "<<b<<" "<<c<<endl;}
 template<typename T>void println(T a[],int n){F(i,0,n) cout<<a[i]<<" ";cout<<endl;}
+string tostr(int a){ostringstream ostr;ostr<<a;return ostr.str();}
+int tonum(string &s){stringstream str(s);int num;str>>num;return num;}
+template<typename T> void printv(vt & v){ FEACH(a,v) print(a); println();}
+template<typename T>T PERFORM(T a,T b,char op){
+	if(op=='+') return a+b;
+	else if(op=='|') return a|b;
+	else if(op=='&') return a&b;
+	else if(op=='^') return a^b;
+	else if(op=='-') return a-b;
+	else if(op=='*') return a*b;
+	else if(op=='/') return a/b;
+	return -1;
+}
+int IDENTITY(char op){
+	if(op=='+' || op=='|' || op=='^' || op=='-' ) return 0;
+	return 1;
+}
+template<typename T>void buildseg(vt & t, vt & a,int v,int tl,int tr,char op){
+	if(tl==tr){
+		t[v]=a[tl];
+	}else if(tl<tr){
+		int tm=MID(tl,tr);
+		buildseg(t,a,2*v+1,tl,tm,op);
+		buildseg(t,a,2*v+2,tm+1,tr,op);
+		t[v]=PERFORM(t[2*v+1],t[2*v+2],op);
+	}
+}
+template<typename T>T getseg(vt & t,int v,int tl,int tr,int l,int r,char op){
+	if(l>r) return IDENTITY(op);
+	else if(tl==l && r==tr){
+		return t[v];
+	}
+	int tm=MID(tl,tr);
+	T left=getseg(t,2*v+1,tl,tm,l,min(r,tm),op);
+	T right=getseg(t,2*v+2,tm+1,tr,max(l,tm+1),r,op);
+	return PERFORM(left,right,op);
+}
 void solve(){
 	int n;
 	read(n);
-	vpii a(n),b(n);
-	F(i,0,n){
-		read(a[i].first);
-		a[i].second=i;
+	vi v(n);
+	F(i,0,n) read(v[i]);
+	vi seg(4*n,0);
+	buildseg(seg,v,0,0,n-1,'+');
+	int q;
+	read(q);
+	F(i,0,q){
+		int l,r;
+		read(l,r);
+		int ans=getseg(seg,0,0,n-1,l-1,r-1,'+');
+		println(ans);
 	}
-	F(i,0,n){
-		read(b[i].first);
-		b[i].second=i;
-	}
-	SORT(a);
-	SORT(b);
-	vi suff(n);
-	suff[n-1]=b[n-1].second;
-	FND(i,n-2,0){
-		suff[i]=min(suff[i+1],b[i].second);
-	}
-	int mn=INF1;
-	F(i,0,n){
-		mn=min(mn,suff[i]+a[i].second);
-	}
-	println(mn);
 }
 inline bool isTakeTestCase(){
 	return true;
 }
 signed main(){
+	FASTIO
 	int t=1;
 	if(isTakeTestCase()) read(t);
 	while(t--) solve();
 	return 0;
 }	
+
+
