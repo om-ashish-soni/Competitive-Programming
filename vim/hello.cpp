@@ -113,12 +113,26 @@ template<typename T>T getseg(vt & t,int v,int tl,int tr,int l,int r,char op){
 	T right=getseg(t,2*v+2,tm+1,tr,max(l,tm+1),r,op);
 	return PERFORM(left,right,op);
 }
+template<typename T>void updateseg(vt & t,int v,int tl,int tr,int pos,int new_val,char op){
+	if(tl==tr){
+		t[v]=new_val;
+	}else{
+		int tm=MID(tl,tr);
+		if(pos<=tm){
+			updateseg(t,2*v+1,tl,tm,pos,new_val,op);
+		}else{
+			updateseg(t,2*v+2,tm+1,tr,pos,new_val,op);
+		}
+		t[v]=PERFORM(t[2*v+1],t[2*v+2],op);
+	}
+}
 void solve(){
 	vi v={1,2,3,4,5};
 	vi t(4*SIZE(v),0);
-	buildseg(t,v,0,0,SIZE(v)-1,'n');
+	buildseg(t,v,0,0,SIZE(v)-1,'+');
 	int ans;
-	ans=getseg(t,0,0,SIZE(v)-1,0,0,'n');
+	updateseg(t,0,0,SIZE(v)-1,4,10,'+');
+	ans=getseg(t,0,0,SIZE(v)-1,3,4,'+');
 	println(ans);
 }
 inline bool isTakeTestCase(){
