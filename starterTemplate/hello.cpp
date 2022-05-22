@@ -218,6 +218,13 @@ int kth_getseg(vi &t,int v,int tl,int tr,int l,int r){
 	int right=kth_getseg(t,2*v+2,tm+1,tr,max(l,tm+1),r);
 	return left+right;
 }
+int kth_pos_findseg(vi & t,int v,int tl,int tr,int k){
+	if(k>t[v]) return -1;
+	else if(tl==tr) return tl;
+	int tm=MID(tl,tr);
+	if(t[v*2+1]>=k) return kth_pos_findseg(t,2*v+1,tl,tm,k);
+	return kth_pos_findseg(t,2*v+2,tm+1,tr,k-t[v*2+1]);
+}
 void solve(){
 	vi v={0,1,2,0,1,0,0,2,0};
 	int n=SIZE(v);
@@ -226,7 +233,8 @@ void solve(){
 	kth_updateseg(t,0,0,n-1,6,1);
 	v[6]=1;
 	int ans=kth_getseg(t,0,0,n-1,2,8);
-	println(ans);
+	int pos=kth_pos_findseg(t,0,0,n-1,5);
+	println(pos);
 }
 inline bool isTakeTestCase(){
 	//return true;
