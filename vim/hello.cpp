@@ -5,12 +5,14 @@
 #define endl "\n"
 #define pb push_back
 #define pii pair<int,int>
+#define ptt pair<T,T>
 #define vi vector<int>
 #define vb vector<bool>
 #define vc vector<char>
 #define vs vector<string>
 #define vt vector<T>
 #define vpii vector<pii>
+#define vptt vector<ptt>
 #define vvi vector<vi>
 #define vvb vector<vb>
 #define vvc vector<vc>
@@ -57,11 +59,13 @@
 #define LSHIFT(a,b) (((int)(a))<<(b))
 #define RSHIFT(a,b) (((int)(a))>>(b))
 #define FASTIO ios_base::sync_with_stdio(false);cin.tie(NULL);
+#define BOOLALPHA cout<<boolalpha;
 using namespace std;
 template<typename T>void read(T &a){cin>>a;}
 template<typename T>void read(T &a,T &b){cin>>a>>b;}
 template<typename T>void read(T &a,T &b,T &c){cin>>a>>b>>c;}
 template<typename T>void read(T a[],int n){F(i,0,n) cin>>a[i];}
+template<typename T>void readv(vt & v){FEACH(a,v) read(a);}
 void print(){cout<<" "<<endl;}
 template<typename T>void print(T &a){cout<<a<<" ";}
 template<typename T>void print(T &a,T &b){cout<<a<<" "<<b<<" ";}
@@ -74,6 +78,10 @@ template<typename T>void println(T a[],int n){F(i,0,n) cout<<a[i]<<" ";cout<<end
 string tostr(int a){ostringstream ostr;ostr<<a;return ostr.str();}
 int tonum(string &s){stringstream str(s);int num;str>>num;return num;}
 template<typename T> void printv(vt & v){ FEACH(a,v) print(a); println();}
+void printb(bool b){cout<<b<<" ";}
+void printb(bool b1,bool b2){printb(b1);printb(b2);}
+void printlnb(bool b){printb(b);println();}
+void printlnb(bool b1,bool b2){printb(b1);printb(b2);println();}
 inline int getseginf(){return INF4;}
 template<typename T>T PERFORM(T a,T b,char op){
 	if(op=='+') return a+b;
@@ -82,6 +90,8 @@ template<typename T>T PERFORM(T a,T b,char op){
 	else if(op=='|') return a|b;
 	else if(op=='&') return a&b;
 	else if(op=='^') return a^b;
+	else if(op=='g') return GCD(a,b);
+	else if(op=='l') return LCM(a,b);
 	else if(op=='-') return a-b;
 	else if(op=='*') return a*b;
 	else if(op=='/') return a/b;
@@ -91,6 +101,8 @@ int IDENTITY(char op){
 	if(op=='+' || op=='|' || op=='^' || op=='-' ) return 0;
 	else if(op=='m') return 0LL-getseginf();
 	else if(op=='n') return getseginf();
+	else if(op=='g') return 0LL;
+	else if(op=='l') return 1LL;
 	return 1;
 }
 template<typename T>void buildseg(vt & t, vt & a,int v,int tl,int tr,char op){
@@ -126,20 +138,68 @@ template<typename T>void updateseg(vt & t,int v,int tl,int tr,int pos,int new_va
 		t[v]=PERFORM(t[2*v+1],t[2*v+2],op);
 	}
 }
+template<typename T>bool COMPARE(T & a,T & b,char op){
+	if(op=='m') return a>b;
+	else if(op=='n') return a<b;
+	return a==b;
+}
+template<typename T>ptt COMBINE(ptt & a,ptt & b,char op){
+	bool resm=COMPARE(a.first,b.first,'m');
+	bool resn=COMPARE(a.first,b.first,'n');
+	if(op=='m'){
+		if(resm) return a;
+		else if(resn) return b;
+		return mp(a.first,a.second+b.second);
+	}else if(op=='n'){
+		if(resn) return a;
+		else if(resm) return b;
+		return mp(a.first,a.second+b.second);
+	}
+	return mp(a.first,a.second+b.second);
+}
+template<typename T>void hbuild(vptt & t,vt & a,int v,int tl,int tr,char op){
+	if(tl==tr){
+		t[v]=mp(a[tl],1);
+	}else{
+		int tm=MID(tl,tr);
+		hbuild(t,a,2*v+1,tl,tm,op);
+		hbuild(t,a,2*v+2,tm+1,tr,op);
+		t[v]=COMBINE(t[2*v+1],t[2*v+2],op);
+	}
+}
+template<typename T>ptt hgetseg(vptt & t,int v,int tl,int tr,int l,int r,char op){
+	if(l>r) return mp(IDENTITY(op),(int)0);
+	else if(tl==l && r==tr) return t[v];
+	int tm=MID(tl,tr);
+	ptt left=hgetseg(t,2*v+1,tl,tm,l,min(r,tm),op);
+	ptt right=hgetseg(t,2*v+2,tm+1,tr,max(l,tm+1),r,op);
+	return COMBINE(left,right,op);
+}
+template<typename T>void hupdateseg(vptt & t,int v,int tl,int tr,int pos,int new_val,char op){
+	if(tl==tr){
+		t[v]=mp(new_val,1);
+	}else{
+		int tm=MID(tl,tr);
+		if(pos<=tm) hupdateseg(t,2*v+1,tl,tm,pos,new_val,op);
+		else hupdateseg(t,2*v+2,tm+1,tr,pos,new_val,op);
+		t[v]=COMBINE(t[2*v+1],t[2*v+2],op);
+	}
+}
 void solve(){
-	vi v={1,2,3,4,5};
-	vi t(4*SIZE(v),0);
-	buildseg(t,v,0,0,SIZE(v)-1,'+');
-	int ans;
-	updateseg(t,0,0,SIZE(v)-1,4,10,'+');
-	ans=getseg(t,0,0,SIZE(v)-1,3,4,'+');
+	vi v={1,4,2,3,4,1};
+	int n=SIZE(v);
+	vi t(4*n,0);
+	char op='g';
+	buildseg(t,v,0,0,n-1,op);
+	int ans=getseg(t,0,0,n-1,1,2,op);
 	println(ans);
 }
 inline bool isTakeTestCase(){
 	return false;
 }
 signed main(){
-	FASTIO
+	FASTIO;
+	BOOLALPHA;
 	int t=1;
 	if(isTakeTestCase()) read(t);
 	while(t--) solve();
