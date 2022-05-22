@@ -185,16 +185,51 @@ template<typename T>void hupdateseg(vptt & t,int v,int tl,int tr,int pos,int new
 		t[v]=COMBINE(t[2*v+1],t[2*v+2],op);
 	}
 }
+void kth_buildseg(vi & t,vi & a,int v,int tl,int tr){
+	if(tl==tr){
+		if(a[tl]==0) t[v]=1;
+	}else{
+		int tm=MID(tl,tr);
+		kth_buildseg(t,a,2*v+1,tl,tm);
+		kth_buildseg(t,a,2*v+2,tm+1,tr);
+		t[v]=t[2*v+1]+t[2*v+2];
+	}
+}
+void kth_updateseg(vi & t,int v,int tl,int tr,int pos,int new_val){
+	//call this function only if the old_val was 0 and new_val is non_zero ......
+	// or old_val was non_zero and new_val is 0
+	if(tl==tr){
+		if(new_val==0) t[v]++;
+		else t[v]--;
+	}else{
+		int tm=MID(tl,tr);
+		if(pos<=tm) kth_updateseg(t,2*v+1,tl,tm,pos,new_val);
+		else kth_updateseg(t,2*v+2,tm+1,tr,pos,new_val);
+		t[v]=t[2*v+1]+t[2*v+2];
+	}
+}
+int kth_getseg(vi &t,int v,int tl,int tr,int l,int r){
+	if(l>r) return 0;
+	else if(tl==l && tr==r){
+		return t[v];
+	}
+	int tm=MID(tl,tr);
+	int left=kth_getseg(t,2*v+1,tl,tm,l,min(r,tm));
+	int right=kth_getseg(t,2*v+2,tm+1,tr,max(l,tm+1),r);
+	return left+right;
+}
 void solve(){
-	vi v={1,4,2,3,4,1};
+	vi v={0,1,2,0,1,0,0,2,0};
 	int n=SIZE(v);
 	vi t(4*n,0);
-	char op='g';
-	buildseg(t,v,0,0,n-1,op);
-	int ans=getseg(t,0,0,n-1,1,2,op);
+	kth_buildseg(t,v,0,0,n-1);
+	kth_updateseg(t,0,0,n-1,6,1);
+	v[6]=1;
+	int ans=kth_getseg(t,0,0,n-1,2,8);
 	println(ans);
 }
 inline bool isTakeTestCase(){
+	//return true;
 	return false;
 }
 signed main(){
