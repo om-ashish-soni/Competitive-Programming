@@ -50,3 +50,10 @@
   problem link :  https://codeforces.com/problemset/problem/1374/D
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/hashing%20%7C%7C%20hash%20table/submisstions/zero_remainder_array.cpp
+  
+# Nobel Prize : 
+  
+  problem link : https://www.codechef.com/START2B/problems/NOBEL
+  
+  Solution : 
+
