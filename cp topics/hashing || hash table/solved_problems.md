@@ -55,5 +55,5 @@
   
   problem link : https://www.codechef.com/START2B/problems/NOBEL
   
-  Solution : 
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/hashing%20%7C%7C%20hash%20table/submisstions/nobel_prize.py
 
