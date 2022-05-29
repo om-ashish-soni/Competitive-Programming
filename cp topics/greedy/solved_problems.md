@@ -107,4 +107,5 @@ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/c
 # College life 5
   Problem link : https://www.codechef.com/START2B/problems/COLGLF5
   
-  Solution : 
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/college_life_5.py
+  
