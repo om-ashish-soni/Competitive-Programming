@@ -143,6 +143,7 @@ Some basic constraints and the safe time complexity :
 |----------------|
 |[Roadmap for cp](https://www.geeksforgeeks.org/competitive-programming-a-complete-guide/)|
 |[modulo multiplicative inverse](https://www.geeksforgeeks.org/modular-multiplicative-inverse-1-n/)|
+|[random suffle](http://www.cplusplus.com/reference/algorithm/random_shuffle/)|
 ---
 # Important links : 
 https://leetcode-questions.herokuapp.com/
