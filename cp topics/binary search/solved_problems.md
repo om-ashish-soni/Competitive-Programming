@@ -42,3 +42,9 @@
  Problem link : https://www.codechef.com/problems/QHOUSE
  
  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/bear_and_house.py
+
+# Worms 
+ Problem link : https://codeforces.com/problemset/problem/474/B
+ 
+ Solution : 
+ 
