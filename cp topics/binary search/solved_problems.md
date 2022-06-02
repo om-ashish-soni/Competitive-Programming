@@ -46,5 +46,5 @@
 # Worms 
  Problem link : https://codeforces.com/problemset/problem/474/B
  
- Solution : 
+ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/worms.cpp
  
