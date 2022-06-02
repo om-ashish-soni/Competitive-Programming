@@ -109,3 +109,7 @@ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/c
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/college_life_5.py
   
+# Alternating subsequence
+  Problem link : https://codeforces.com/problemset/problem/1343/C
+  
+  Solution : 
