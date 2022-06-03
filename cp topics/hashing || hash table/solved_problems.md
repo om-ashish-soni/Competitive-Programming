@@ -66,4 +66,4 @@
 # Boats Competitions 
   Problem link : https://codeforces.com/problemset/problem/1399/C
   
-  Solution : 
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/hashing%20%7C%7C%20hash%20table/submisstions/boats_competition.cpp
