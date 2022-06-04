@@ -1,4 +1,4 @@
-// problem link : https://codeforces.com/problemset/problem/445/A
+// problem link : https://codeforces.com/problemset/problem/1527/B1
 // solution : below code
   
 void solve(int t){
