@@ -67,6 +67,14 @@
   3. disjoint set union , graph, little dsa -> 4 🌟
   4. segment tree -> 5 🌟
 
+## Codeforces Suggestion 
+  1. Codeforces requires speed of solving problems.
+  2. Even if you solve only 2-3 problems , but very quickly then , you will get fruitful ratings.
+  3. Upsolving is required since the problem pattern might be repeated in future problems.
+  4. First two questions are mostly greedy in div -2,3,4 contests. No prior knowledge except programming language is required.
+  5. Below is example how upsolving looks like 
+  ![cf upsolving](https://github.com/om-ashish-soni/Competitive-Programming/blob/main/upsolved_all/cf_790.PNG)
+  
 ## python jump by 2
 ```python:
 for i in range(0,10,2):
