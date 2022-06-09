@@ -66,6 +66,7 @@
   2. learn c++ stl or any language similar library, dp -> 3 🌟
   3. disjoint set union , graph, little dsa -> 4 🌟
   4. segment tree -> 5 🌟
+  Note : Codechef has very nice problems on Bit manipulation So , making good grip over bit manip can help in contest.
 
 ## Codeforces Suggestion 
   1. Codeforces requires speed of solving problems.
