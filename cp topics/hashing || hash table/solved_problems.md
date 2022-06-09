@@ -74,6 +74,6 @@
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/hashing%20%7C%7C%20hash%20table/submisstions/drazil_and_factorial.cpp
 
 # Rotation Matching 
-  Problem link : 
+  Problem link : https://codeforces.com/problemset/problem/1365/C
   
-  Solution : 
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/hashing%20%7C%7C%20hash%20table/submisstions/rotation_matching.cpp
