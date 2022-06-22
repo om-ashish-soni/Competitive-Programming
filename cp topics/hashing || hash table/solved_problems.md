@@ -82,3 +82,9 @@
   Problem link : https://codeforces.com/problemset/problem/1675/E
   
   Solution : 
+  
+# Hilberts hotel
+  Problem link : https://codeforces.com/problemset/problem/1344/A
+  
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/hashing%20%7C%7C%20hash%20table/submisstions/hilberts_hotel.cpp
+  
