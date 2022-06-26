@@ -1,5 +1,10 @@
 
 # Competitive-Programming
+## note to me : 
+       1.https://kenkoooo.com/atcoder#/table//
+       2.https://not-522.appspot.com/list
+       3.https://vjudge.net/
+       
 ## Common Advice : 
        1. Practise a lot problems on code forces of just above your rating range.
        2. Codeforces is only the site that will improve competitive programming , so give priority and spend a lot of times on it
@@ -8,6 +13,7 @@
        5. Use Codechef for maths and bit manipulation question.
        6. You can give codechef starters contests are good.
        7. Leetcode weekly and biweekly can also be given in order to practise as well as warm up, since 3/4 questions are easy and medium , so it will improve your motivation.
+       
        
 ## tips:
 ### 1. stuck in contest :
