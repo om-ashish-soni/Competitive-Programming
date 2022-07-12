@@ -55,14 +55,21 @@ class MaxFlowDFS{
     
 signed main() {
     cout<<"ford Fulkerson : "<<endl;
-    vector<map<int,int>> graph(N);
-    vector<bool> isDone(N,false);
-    MaxFlowDFS *mxd=new MaxFlowDFS(4,0,3);
-    mxd->addEdge(0,1,1e5);
-    mxd->addEdge(0,2,1e5);
-    mxd->addEdge(1,3,1e5);
-    mxd->addEdge(2,3,1e5);
-    mxd->addEdge(1,2,1);
+    int n;
+    cin>>n;
+    int source;
+    cin>>source;
+    int sink;
+    cin>>sink;
+    int edges;
+    cin>>edges;
+    MaxFlowDFS *mxd=new MaxFlowDFS(n,source,sink);
+    for(int i=0;i<edges;i++){
+        int u,v,w;
+        cin>>u>>v>>w;
+        mxd->addEdge(u,v,w);
+    }
+    
     
     int flow=mxd->get_max_flow();
     cout<<"flow : "<<flow<<endl;
