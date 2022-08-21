@@ -2,7 +2,16 @@
 ## GOLDEN MATERIAL : 
        1. https://ekzlib.netlify.app/view/graham_scan.cpp
        2. https://codeforces.com/blog/entry/57282
-       
+
+## Codeforces tools : 
+       1. https://chrome.google.com/webstore/detail/cf-predictor/ocfloejijfhhkkdmheodbaanephbnfhn
+       2. https://codeforces.com/blog/entry/18850
+       3. https://chrome.google.com/webstore/detail/carrot/gakohpplicjdhhfllilcjpfildodfnnn
+       4. https://www.stopstalk.com/
+       5. https://recommender.codedrills.io/
+       6. http://cfviz.netlify.com/compare.html
+       7. https://codeforces.com/blog/entry/66552
+       8. https://codeforces.com/blog/entry/72952
        
 ## note to me : 
        1. https://kenkoooo.com/atcoder#/table//
