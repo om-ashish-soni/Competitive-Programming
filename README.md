@@ -39,6 +39,10 @@
 ## Other Resources : 
        1. https://visualgo.net/en
        2. http://www.topcoder.com/community/data-science/data-science-tutorials/
+ 
+## Practise Websites : 
+       1. http://codeforces.com/problemset
+       2. https://atcoder.jp/contests/archive
        
 ## Common Advice : 
        1. Practise a lot problems on code forces of just above your rating range.
