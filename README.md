@@ -6,8 +6,6 @@
        
 ## Contest Tools : 
        1. https://csacademy.com/app/graph_editor/
-       2. https://www.desmos.com/calculator
-       3. https://www.diffchecker.com/
 
 ## Codeforces tools : 
        1. https://chrome.google.com/webstore/detail/cf-predictor/ocfloejijfhhkkdmheodbaanephbnfhn
@@ -69,6 +67,11 @@
 ## Tag wise practise : 
        1. https://csacademy.com/contest/archive
        2. https://saraswati-online-judge.vercel.app/
+
+## Other Tools : 
+       1. https://www.desmos.com/calculator
+       2. https://www.diffchecker.com/
+       3. https://github.com/lukakalinovcic/geodeb
        
 ## Common Advice : 
        1. Practise a lot problems on code forces of just above your rating range.
