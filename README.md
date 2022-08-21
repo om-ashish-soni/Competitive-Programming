@@ -2,7 +2,7 @@
 # Competitive-Programming
 ## GOLDEN MATERIAL : 
        1. https://ekzlib.netlify.app/view/graham_scan.cpp
-       2. https://www.youtube.com/channel/UCSQmpb_K_I37JN-QLArZbFw
+       
        
 ## note to me : 
        1. https://kenkoooo.com/atcoder#/table//
@@ -174,6 +174,7 @@ Some basic constraints and the safe time complexity :
 |[Apna college Placement course](https://www.youtube.com/playlist?list=PLfqMhTWNBTe0b2nM6JHVCnAkhQRGiZMSJ)|
 |[Errichto](https://www.youtube.com/channel/UCBr_Fu6q9iHYQCh13jmpbrg)|
 |[Algorithms live](https://www.youtube.com/channel/UCBLr7ISa_YDy5qeATupf26w)|
+|[benritmicocode](https://www.youtube.com/channel/UCSQmpb_K_I37JN-QLArZbFw)|
 
 
 # Other nice repos : 
