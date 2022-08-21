@@ -8,7 +8,7 @@
        5. https://usaco.guide/general/contests?lang=cpp
        6. https://recommender.codedrills.io/
        
-## TRICKS AND GUIDES
+## C++ Tricks
        
        1. https://codeforces.com/blog/entry/16262 
        2. https://codeforces.com/blog/entry/57729
