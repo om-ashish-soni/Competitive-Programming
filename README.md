@@ -5,9 +5,8 @@
        
        
 ## Contest Tools : 
-   
-   
-   |[Graph Visualizer](https://csacademy.com/app/graph_editor/)|
+       1. https://csacademy.com/app/graph_editor/
+       2. https://www.desmos.com/calculator
 
 ## Codeforces tools : 
        1. https://chrome.google.com/webstore/detail/cf-predictor/ocfloejijfhhkkdmheodbaanephbnfhn
