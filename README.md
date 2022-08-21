@@ -69,6 +69,11 @@
        1. https://csacademy.com/contest/archive
        2. https://saraswati-online-judge.vercel.app/
 
+## Practise Guides : 
+       1. https://usaco.guide/general/practicing?lang=cpp
+       2. https://codeforces.com/blog/entry/53341
+       3. https://aryansh.gitbook.io/informatics-notes/usaco-specific/preparing-for-contests
+       
 ## Other Tools : 
        1. https://www.desmos.com/calculator
        2. https://www.diffchecker.com/
