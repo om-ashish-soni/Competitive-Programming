@@ -28,6 +28,8 @@
        6. You can give codechef starters contests are good.
        7. Leetcode weekly and biweekly can also be given in order to practise as well as warm up, since 3/4 questions are easy and medium , so it will improve your motivation.
        
+## Awesome Resources : 
+       1. https://codeforces.com/blog/entry/23054
        
 ## tips:
 ### 1. stuck in contest :
