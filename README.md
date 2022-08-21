@@ -173,8 +173,12 @@ Some basic constraints and the safe time complexity :
 |[Luv](https://www.youtube.com/channel/UCDzhFuVYou1D8w1ABZo3b9A)|
 |[Apna college Placement course](https://www.youtube.com/playlist?list=PLfqMhTWNBTe0b2nM6JHVCnAkhQRGiZMSJ)|
 |[Errichto](https://www.youtube.com/channel/UCBr_Fu6q9iHYQCh13jmpbrg)|
+|[William Lin](https://www.youtube.com/channel/UCKuDLsO0Wwef53qdHPjbU2Q)|
+|[William Fiset](https://www.youtube.com/user/purpongie)|
 |[Algorithms live](https://www.youtube.com/channel/UCBLr7ISa_YDy5qeATupf26w)|
 |[benritmicocode](https://www.youtube.com/channel/UCSQmpb_K_I37JN-QLArZbFw)|
+|[jonathan paulson](https://www.youtube.com/channel/UCuWLIm0l4sDpEe28t41WITA)|
+|[Second Thread](https://www.youtube.com/channel/UCXbCohpE9IoVQUD2Ifg1d1g)|
 
 
 # Other nice repos : 
