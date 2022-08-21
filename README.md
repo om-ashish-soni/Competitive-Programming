@@ -7,6 +7,7 @@
 ## Contest Tools : 
        1. https://csacademy.com/app/graph_editor/
        2. https://www.desmos.com/calculator
+       3. https://www.diffchecker.com/
 
 ## Codeforces tools : 
        1. https://chrome.google.com/webstore/detail/cf-predictor/ocfloejijfhhkkdmheodbaanephbnfhn
