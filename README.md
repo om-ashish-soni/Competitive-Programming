@@ -33,6 +33,7 @@
        
 ## Awesome Resources : 
        1. https://codeforces.com/blog/entry/23054
+       2. 
        
 ## tips:
 ### 1. stuck in contest :
@@ -170,6 +171,7 @@ Some basic constraints and the safe time complexity :
 |[Coding notes](https://github.com/ankitpriyarup/Coding_Notes)|
 |[Atcoder library](https://github.com/atcoder/ac-library)|
 |[Alexandru Valeanu](https://github.com/AlexandruValeanu/Competitive-Programming)|
+|[CSES](https://github.com/superj6/CPcode/tree/master/c%2B%2B%20sol/CSES)|
 
 ---
 
