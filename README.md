@@ -27,6 +27,10 @@
        2. https://codeforces.com/edu/courses
        3. https://github.com/kth-competitive-programming/kactl
        
+## Implementations : 
+       1. https://github.com/om-ashish-soni/Competitive-Programming
+       2. https://github.com/kth-competitive-programming/kactl
+       3. https://github.com/bqi343/USACO
        
 ## Common Advice : 
        1. Practise a lot problems on code forces of just above your rating range.
