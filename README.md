@@ -22,6 +22,9 @@
 ## JAVA Tricks : 
        1. https://darrenyao.com/usacobook/java.pdf
        
+## Courses : 
+       1. https://github.com/SuprDewd/T-414-AFLV
+       
 ## Common Advice : 
        1. Practise a lot problems on code forces of just above your rating range.
        2. Codeforces is only the site that will improve competitive programming , so give priority and spend a lot of times on it
