@@ -74,6 +74,9 @@
        2. https://codeforces.com/blog/entry/53341
        3. https://aryansh.gitbook.io/informatics-notes/usaco-specific/preparing-for-contests
        
+## Input Output Guides : 
+       1. https://codeforces.com/blog/entry/5217
+       
 ## Debug Guides :       
        1. https://github.com/kth-competitive-programming/kactl/blob/main/content/contest/troubleshoot.txt
        2. https://codeforces.com/blog/entry/64993
