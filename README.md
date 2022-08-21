@@ -1,7 +1,7 @@
-
 # Competitive-Programming
 ## GOLDEN MATERIAL : 
        1. https://ekzlib.netlify.app/view/graham_scan.cpp
+       2. https://codeforces.com/blog/entry/57282
        
        
 ## note to me : 
@@ -35,6 +35,10 @@
        1. https://github.com/om-ashish-soni/Competitive-Programming
        2. https://github.com/kth-competitive-programming/kactl
        3. https://github.com/bqi343/USACO
+       
+## Other Resources : 
+       1. https://visualgo.net/en
+       2. http://www.topcoder.com/community/data-science/data-science-tutorials/
        
 ## Common Advice : 
        1. Practise a lot problems on code forces of just above your rating range.
