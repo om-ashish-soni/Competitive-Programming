@@ -33,6 +33,7 @@
        3. https://codeforces.com/blog/entry/10124
        4. https://codeforces.com/blog/entry/15643
        5. https://en.cppreference.com/w/
+       6. https://www.learncpp.com/
        
       
 ## Python Tricks : 
