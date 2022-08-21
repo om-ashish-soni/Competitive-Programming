@@ -172,6 +172,7 @@ Some basic constraints and the safe time complexity :
 |[Luv](https://www.youtube.com/channel/UCDzhFuVYou1D8w1ABZo3b9A)|
 |[Apna college Placement course](https://www.youtube.com/playlist?list=PLfqMhTWNBTe0b2nM6JHVCnAkhQRGiZMSJ)|
 |[Errichto](https://www.youtube.com/channel/UCBr_Fu6q9iHYQCh13jmpbrg)|
+|[Algorithms live](https://www.youtube.com/channel/UCBLr7ISa_YDy5qeATupf26w)|
 
 
 # Other nice repos : 
