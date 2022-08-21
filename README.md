@@ -8,6 +8,7 @@
        1. https://csacademy.com/app/graph_editor/
        2. https://oeis.org/
 
+
 ## Codeforces tools : 
        1. https://chrome.google.com/webstore/detail/cf-predictor/ocfloejijfhhkkdmheodbaanephbnfhn
        2. https://codeforces.com/blog/entry/18850
@@ -35,7 +36,10 @@
        5. https://en.cppreference.com/w/
        6. https://www.learncpp.com/
        
-      
+## Advanced C++ guides : 
+       1. https://usaco.guide/general/generic-code?lang=cpp
+       2. https://usaco.guide/general/lambda-funcs?lang=cpp
+       
 ## Python Tricks : 
        1. https://www.geeksforgeeks.org/important-differences-between-python-2-x-and-python-3-x-with-examples/
        
