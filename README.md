@@ -5,10 +5,9 @@
        
        
 ## Contest Tools : 
-   ---
-   |--------|---------|
-   |1. |[Graph Visualizer](https://csacademy.com/app/graph_editor/)|
-   ---
+   
+   
+   |[Graph Visualizer](https://csacademy.com/app/graph_editor/)|
 
 ## Codeforces tools : 
        1. https://chrome.google.com/webstore/detail/cf-predictor/ocfloejijfhhkkdmheodbaanephbnfhn
