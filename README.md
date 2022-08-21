@@ -8,6 +8,11 @@
        5.https://usaco.guide/general/contests?lang=cpp
        6.https://recommender.codedrills.io/
        
+## TRICKS AND GUIDES
+
+       1.https://codeforces.com/blog/entry/16262 
+       2.https://codeforces.com/blog/entry/57729
+       
 ## Common Advice : 
        1. Practise a lot problems on code forces of just above your rating range.
        2. Codeforces is only the site that will improve competitive programming , so give priority and spend a lot of times on it
