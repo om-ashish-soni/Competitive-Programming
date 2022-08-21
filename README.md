@@ -1,17 +1,19 @@
 
 # Competitive-Programming
 ## note to me : 
-       1.https://kenkoooo.com/atcoder#/table//
-       2.https://not-522.appspot.com/list
-       3.https://vjudge.net/
-       4.https://cfviz.netlify.app/compare.html
-       5.https://usaco.guide/general/contests?lang=cpp
-       6.https://recommender.codedrills.io/
+       1. https://kenkoooo.com/atcoder#/table//
+       2. https://not-522.appspot.com/list
+       3. https://vjudge.net/
+       4. https://cfviz.netlify.app/compare.html
+       5. https://usaco.guide/general/contests?lang=cpp
+       6. https://recommender.codedrills.io/
        
 ## TRICKS AND GUIDES
-
-       1.https://codeforces.com/blog/entry/16262 
-       2.https://codeforces.com/blog/entry/57729
+       
+       1. https://codeforces.com/blog/entry/16262 
+       2. https://codeforces.com/blog/entry/57729
+       3. https://codeforces.com/blog/entry/10124
+       4. https://codeforces.com/blog/entry/15643
        
 ## Common Advice : 
        1. Practise a lot problems on code forces of just above your rating range.
