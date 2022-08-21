@@ -43,6 +43,16 @@
 ## Practise Websites : 
        1. http://codeforces.com/problemset
        2. https://atcoder.jp/contests/archive
+       3. https://saraswati-online-judge.vercel.app/
+       4. https://www.codechef.com/
+       5. https://www.hackerrank.com/dashboard
+       6. https://csacademy.com/contest/archive
+       7. https://tlx.toki.id/
+       8. https://open.kattis.com/     
+       
+## Tag wise practise : 
+       1. https://csacademy.com/contest/archive
+       2. https://saraswati-online-judge.vercel.app/
        
 ## Common Advice : 
        1. Practise a lot problems on code forces of just above your rating range.
