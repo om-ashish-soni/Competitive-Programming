@@ -84,6 +84,11 @@
        2. https://www.diffchecker.com/
        3. https://github.com/lukakalinovcic/geodeb
        
+## Important Books :     
+       1. https://usaco.guide/PAPS.pdf
+       2. https://usaco.guide/CPH.pdf
+       3. https://darrenyao.com/usacobook/cpp.pdf
+
 ## Common Advice : 
        1. Practise a lot problems on code forces of just above your rating range.
        2. Codeforces is only the site that will improve competitive programming , so give priority and spend a lot of times on it
