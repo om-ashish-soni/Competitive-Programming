@@ -4,8 +4,9 @@
        2. https://codeforces.com/blog/entry/57282
        
        
-## Contest Tools : 
+## Awesome Contest Tools : 
        1. https://csacademy.com/app/graph_editor/
+       2. https://oeis.org/
 
 ## Codeforces tools : 
        1. https://chrome.google.com/webstore/detail/cf-predictor/ocfloejijfhhkkdmheodbaanephbnfhn
