@@ -74,6 +74,11 @@
        2. https://codeforces.com/blog/entry/53341
        3. https://aryansh.gitbook.io/informatics-notes/usaco-specific/preparing-for-contests
        
+## Debug Guides :       
+       1. https://github.com/kth-competitive-programming/kactl/blob/main/content/contest/troubleshoot.txt
+       2. https://codeforces.com/blog/entry/64993
+       
+
 ## Other Tools : 
        1. https://www.desmos.com/calculator
        2. https://www.diffchecker.com/
