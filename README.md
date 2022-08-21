@@ -36,7 +36,8 @@
        
 ## Awesome Resources : 
        1. https://codeforces.com/blog/entry/23054
-       2. 
+       2. https://www.vplanetcoding.com/courses
+
        
 ## tips:
 ### 1. stuck in contest :
