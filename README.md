@@ -2,6 +2,7 @@
 # Competitive-Programming
 ## GOLDEN MATERIAL : 
        1. https://ekzlib.netlify.app/view/graham_scan.cpp
+       2. https://www.youtube.com/channel/UCSQmpb_K_I37JN-QLArZbFw
        
 ## note to me : 
        1. https://kenkoooo.com/atcoder#/table//
