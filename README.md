@@ -14,6 +14,7 @@
        2. https://codeforces.com/blog/entry/57729
        3. https://codeforces.com/blog/entry/10124
        4. https://codeforces.com/blog/entry/15643
+       5. https://en.cppreference.com/w/
        
 ## Python Tricks : 
        1. https://www.geeksforgeeks.org/important-differences-between-python-2-x-and-python-3-x-with-examples/
