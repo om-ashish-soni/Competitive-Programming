@@ -1,4 +1,8 @@
-# Competitive-Programming
+# Competitive-Programming-by-om-ashish-soni
+## Note : 
+### The codes are written for my convinient implementation.
+### Though public, this library is still being used by me for participating in contests. So make sure you take care of your code for plagiarism
+
 ## GOLDEN MATERIAL : 
        1. https://ekzlib.netlify.app/view/graham_scan.cpp
        2. https://codeforces.com/blog/entry/57282
