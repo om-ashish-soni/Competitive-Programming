@@ -112,4 +112,9 @@ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/c
 # Alternating subsequence
   Problem link : https://codeforces.com/problemset/problem/1343/C
   
-  Solution : 
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/alternating_subsequence.cpp
+
+# even odd problem : 
+  Problem link : https://codeforces.com/problemset/problem/1472/D
+  
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/even_odd_game.cpp
