@@ -18,12 +18,12 @@
 |------|
 |[Codeforces Randomizer](https://karimelghamry.github.io/Codeforces-Randomizer/)|
 |[Codeforces Predictor](https://chrome.google.com/webstore/detail/cf-predictor/ocfloejijfhhkkdmheodbaanephbnfhn)|
-|[Codeforces Randomizer](https://codeforces.com/blog/entry/18850)|
-
+|[Codeforces Enhancer](https://codeforces.com/blog/entry/18850)|
+|[Codeforces Enhancer](https://chrome.google.com/webstore/detail/carrot/gakohpplicjdhhfllilcjpfildodfnnn)|
 ---
        
        
-       2. https://codeforces.com/blog/entry/18850
+       
        3. https://chrome.google.com/webstore/detail/carrot/gakohpplicjdhhfllilcjpfildodfnnn
        4. https://www.stopstalk.com/
        5. https://recommender.codedrills.io/
