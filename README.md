@@ -253,6 +253,7 @@ Some basic constraints and the safe time complexity :
 |------|
 |[Tourist](https://github.com/the-tourist/algo)|
 |[dhiraj-01 CP](https://github.com/dhiraj-01/CP)|
+|[Coding library huzaifa]|(https://github.com/huzaifa242/Coding-Library-huzaifa242)|
 |[Ashish Gupta](https://github.com/Ashishgup1/Competitive-Coding)|
 |[Leetcode questions](https://github.com/fterh/leetcode-curation-topical)|
 |[Algo-lib](https://github.com/saketh-are/algo-lib)|
