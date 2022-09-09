@@ -1,7 +1,8 @@
 # Competitive-Programming-by-om-ashish-soni
-## Note : 
-### The codes are written for my convinient implementation.
-### Though public, this library is still being used by me for participating in contests. So make sure you take care of your code for plagiarism
+
+## Disclaimer : 
+       The codes are written for my suitable choice.
+       Eventhought public, this repository is still being used by me for participating in contests. So make sure you take care of your code for plagiarism.
 
 ## GOLDEN MATERIAL : 
        1. https://ekzlib.netlify.app/view/graham_scan.cpp
@@ -23,7 +24,8 @@
 |[stopstalk](https://www.stopstalk.com/)|
 |[Codeforces Recommander Codedrills](https://recommender.codedrills.io/)|
 |[Profile Comparator](http://cfviz.netlify.com/compare.html)|
-|[Profile Comparator](https://codeforces.com/blog/entry/66552)|
+|[Codeforces CLI](https://codeforces.com/blog/entry/66552)|
+|[Codeforces CLI](https://codeforces.com/blog/entry/72952)|
 
 ---
        
@@ -33,7 +35,7 @@
       
        
        
-       7. https://codeforces.com/blog/entry/66552
+       
        8. https://codeforces.com/blog/entry/72952
        
 ## note to me : 
