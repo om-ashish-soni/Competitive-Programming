@@ -1,5 +1,6 @@
 // problem link : https://codeforces.com/problemset/problem/1717/C
 // explaination : 
+/*
     This problem is about observation.
 
     given two arrays a and b , the observation are :
@@ -13,6 +14,7 @@
     If all these 3 cases does not rejects answer , means there is an answer YES.
 
     below is my implementation.
+ */
 // solution : below code
 
 void solve(int t){
