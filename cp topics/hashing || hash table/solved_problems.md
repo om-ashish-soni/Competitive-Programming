@@ -94,3 +94,7 @@
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/hashing%20%7C%7C%20hash%20table/submisstions/phoenix_and_distribution.cpp
   
+# 2 letters strings
+  Problem link : https://codeforces.com/problemset/problem/1669/E
+  
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/hashing%20%7C%7C%20hash%20table/submisstions/2_letter_strings.cpp
