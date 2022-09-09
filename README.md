@@ -20,14 +20,15 @@
 |[Codeforces Predictor](https://chrome.google.com/webstore/detail/cf-predictor/ocfloejijfhhkkdmheodbaanephbnfhn)|
 |[Codeforces Enhancer](https://codeforces.com/blog/entry/18850)|
 |[Carrot Rating Predictor](https://chrome.google.com/webstore/detail/carrot/gakohpplicjdhhfllilcjpfildodfnnn)|
-|[StopStalk](https://www.stopstalk.com/)|
+|[stopstalk](https://www.stopstalk.com/)|
+|[Codeforces Recommander Codedrills](https://recommender.codedrills.io/)|
 
 ---
        
        
        
        
-       4. https://www.stopstalk.com/
+      
        5. https://recommender.codedrills.io/
        6. http://cfviz.netlify.com/compare.html
        7. https://codeforces.com/blog/entry/66552
