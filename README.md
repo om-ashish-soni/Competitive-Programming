@@ -14,15 +14,15 @@
 
 
 ## Codeforces tools : 
-| repo |
+| cf tools |
 |------|
 |[Codeforces Randomizer](https://karimelghamry.github.io/Codeforces-Randomizer/)|
 |[Codeforces Predictor](https://chrome.google.com/webstore/detail/cf-predictor/ocfloejijfhhkkdmheodbaanephbnfhn)|
-|[Codeforces Randomizer](https://karimelghamry.github.io/Codeforces-Randomizer/)|
+|[Codeforces Randomizer](https://codeforces.com/blog/entry/18850)|
 
 ---
        
-       1. https://chrome.google.com/webstore/detail/cf-predictor/ocfloejijfhhkkdmheodbaanephbnfhn
+       
        2. https://codeforces.com/blog/entry/18850
        3. https://chrome.google.com/webstore/detail/carrot/gakohpplicjdhhfllilcjpfildodfnnn
        4. https://www.stopstalk.com/
