@@ -22,6 +22,7 @@
 |[Carrot Rating Predictor](https://chrome.google.com/webstore/detail/carrot/gakohpplicjdhhfllilcjpfildodfnnn)|
 |[stopstalk](https://www.stopstalk.com/)|
 |[Codeforces Recommander Codedrills](https://recommender.codedrills.io/)|
+|[Profile Comparator](http://cfviz.netlify.com/compare.html)|
 
 ---
        
@@ -29,7 +30,7 @@
        
        
       
-       5. https://recommender.codedrills.io/
+       
        6. http://cfviz.netlify.com/compare.html
        7. https://codeforces.com/blog/entry/66552
        8. https://codeforces.com/blog/entry/72952
