@@ -254,7 +254,7 @@ Some basic constraints and the safe time complexity :
 |[Tourist](https://github.com/the-tourist/algo)|
 |[dhiraj-01 CP](https://github.com/dhiraj-01/CP)|
 |[CP-Library dhruv gheewala](https://github.com/DhruvGheewala/CP-Library)|
-|[Coding library huzaifa]|(https://github.com/huzaifa242/Coding-Library-huzaifa242)|
+|[Coding library huzaifa](https://github.com/huzaifa242/Coding-Library-huzaifa242)|
 |[Ashish Gupta](https://github.com/Ashishgup1/Competitive-Coding)|
 |[Coding Notes](https://github.com/ankitpriyarup/Coding_Notes)|
 |[Leetcode questions](https://github.com/fterh/leetcode-curation-topical)|
