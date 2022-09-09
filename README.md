@@ -14,6 +14,14 @@
 
 
 ## Codeforces tools : 
+| repo |
+|------|
+|[Codeforces Randomizer](https://karimelghamry.github.io/Codeforces-Randomizer/)|
+|[Codeforces Predictor](https://chrome.google.com/webstore/detail/cf-predictor/ocfloejijfhhkkdmheodbaanephbnfhn)|
+|[Codeforces Randomizer](https://karimelghamry.github.io/Codeforces-Randomizer/)|
+
+---
+       
        1. https://chrome.google.com/webstore/detail/cf-predictor/ocfloejijfhhkkdmheodbaanephbnfhn
        2. https://codeforces.com/blog/entry/18850
        3. https://chrome.google.com/webstore/detail/carrot/gakohpplicjdhhfllilcjpfildodfnnn
