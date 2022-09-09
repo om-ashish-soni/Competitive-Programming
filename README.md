@@ -25,18 +25,9 @@
 |[Codeforces Recommander Codedrills](https://recommender.codedrills.io/)|
 |[Profile Comparator](http://cfviz.netlify.com/compare.html)|
 |[Codeforces CLI](https://codeforces.com/blog/entry/66552)|
-|[Codeforces CLI](https://codeforces.com/blog/entry/72952)|
+|[CP Editor](https://codeforces.com/blog/entry/72952)|
 
 ---
-       
-       
-       
-       
-      
-       
-       
-       
-       8. https://codeforces.com/blog/entry/72952
        
 ## note to me : 
        1. https://kenkoooo.com/atcoder#/table//
