@@ -71,6 +71,7 @@
 ## Other Resources : 
        1. https://visualgo.net/en
        2. http://www.topcoder.com/community/data-science/data-science-tutorials/
+       3. http://stanford.edu/class/cs97si/
  
 ## Practise Websites : 
        1. http://codeforces.com/problemset
