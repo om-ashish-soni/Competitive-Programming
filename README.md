@@ -12,8 +12,11 @@
 ---
 
 ## GOLDEN MATERIAL : 
-       1. https://ekzlib.netlify.app/view/graham_scan.cpp
-       2. https://codeforces.com/blog/entry/57282
+|Nice materials for learning|
+|------|
+|[good tutorials for cp](https://codeforces.com/blog/entry/57282)|
+|[ekzlib](https://ekzlib.netlify.app/home)|
+---
        
        
 ## Awesome Contest Tools : 
