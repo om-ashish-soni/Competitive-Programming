@@ -4,6 +4,12 @@
        The codes are written for my suitable choice.
        Eventhought public, this repository is still being used by me for participating in contests. So make sure you take care of your code for plagiarism.
 
+## Nice Website for interview preperation
+
+|-----|
+|[Binary Search](https://binarysearch.com/)|
+---
+
 ## GOLDEN MATERIAL : 
        1. https://ekzlib.netlify.app/view/graham_scan.cpp
        2. https://codeforces.com/blog/entry/57282
