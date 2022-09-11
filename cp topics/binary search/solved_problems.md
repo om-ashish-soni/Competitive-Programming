@@ -52,3 +52,8 @@
  Problem link : https://leetcode.com/problems/the-number-of-weak-characters-in-the-game/
  
  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/number-of-weak-chars-in-game.cpp
+
+# Divide intervals into minimum number of groups
+ Problem link : https://leetcode.com/contest/weekly-contest-310/problems/divide-intervals-into-minimum-number-of-groups/
+ 
+ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/divide_intervals_into_minimum_number_of_groups.cpp
