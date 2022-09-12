@@ -28,6 +28,11 @@
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/kth_not_divisible_by_n.py
   
+# Mark and his unfinished array
+ Problem link : https://codeforces.com/problemset/problem/1705/C
+ 
+ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/mark_and_his_unfinished_array.cpp
+  
 # books
  Problem link : https://codeforces.com/problemset/problem/279/B
  
