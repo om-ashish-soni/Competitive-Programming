@@ -1,4 +1,5 @@
 // problem link : https://codeforces.com/problemset/problem/1722/D
+// rating : 1100
 // solution : below code
 
 void solve(int t){
