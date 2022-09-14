@@ -20,8 +20,7 @@
        
        
 ## Awesome Contest Tools : 
-       1. https://csacademy.com/app/graph_editor/
-       2. https://oeis.org/
+
 |Nice contest tools|
 |------|
 |[graph editor csa academy](https://csacademy.com/app/graph_editor/)|
