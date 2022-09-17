@@ -108,3 +108,10 @@
   Problem link : https://leetcode.com/contest/weekly-contest-310/problems/optimal-partition-of-string/
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/hashing%20%7C%7C%20hash%20table/submisstions/optimal_partition_of_a_string.cpp
+
+# Weired Sum
+  Problem link : https://codeforces.com/problemset/problem/1648/A
+  
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/hashing%20%7C%7C%20hash%20table/submisstions/weird_sum.cpp
+  
+  
