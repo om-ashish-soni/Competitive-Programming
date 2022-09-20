@@ -119,3 +119,9 @@
   Problem link : https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/hashing%20%7C%7C%20hash%20table/submisstions/minimum_operations_to_reduce_x_to_zero.cpp
+
+# Subarray Sum
+  Problem link : https://leetcode.com/problems/subarray-sum-equals-k/
+  
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/hashing%20%7C%7C%20hash%20table/submisstions/subarray_sum.cpp
+  
