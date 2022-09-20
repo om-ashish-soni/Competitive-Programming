@@ -27,3 +27,8 @@
 # binary mismatch
   problem link : https://www.codechef.com/START34A/problems/BINMIS
   solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/sliding%20window/submissions/binary_mismatch.py
+  
+# Maximum Length Of Repeating Subarray
+  problem link : https://leetcode.com/problems/maximum-length-of-repeated-subarray/
+  
+  solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/sliding%20window/submissions/maximum_length_of_repeating_subarray.cpp
