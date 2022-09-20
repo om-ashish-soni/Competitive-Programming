@@ -62,3 +62,8 @@
  Problem link : https://leetcode.com/contest/weekly-contest-310/problems/divide-intervals-into-minimum-number-of-groups/
  
  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/divide_intervals_into_minimum_number_of_groups.cpp
+
+# Minimum size subarray sum
+ Problem link : https://leetcode.com/problems/minimum-size-subarray-sum/
+ 
+ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/minimum_size_subarray_sum.cpp
