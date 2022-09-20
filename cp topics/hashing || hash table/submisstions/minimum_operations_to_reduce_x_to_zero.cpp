@@ -1,4 +1,4 @@
-// problem link : https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/submissions/
+// problem link : https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/
 // solution : below code
 
 class Solution {
