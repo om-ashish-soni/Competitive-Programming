@@ -28,6 +28,11 @@
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/kth_not_divisible_by_n.py
   
+# Minimum number of operations to make array continuous
+ Problem link : https://leetcode.com/problems/minimum-number-of-operations-to-make-array-continuous/
+ 
+ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/binary%20search/submissions/minimum_number_of_operations_to_make_array_continuous.cpp
+  
 # Mark and his unfinished array
  Problem link : https://codeforces.com/problemset/problem/1705/C
  
