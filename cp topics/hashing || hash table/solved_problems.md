@@ -129,3 +129,8 @@
   Problem link : https://leetcode.com/problems/continuous-subarray-sum/
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/hashing%20%7C%7C%20hash%20table/submisstions/continuous_subarray_sum.cpp
+
+# Repeated DNA Sequences
+  Problem link : https://leetcode.com/problems/repeated-dna-sequences/
+  
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/hashing%20%7C%7C%20hash%20table/submisstions/repeated_dna_sequences.cpp
