@@ -134,3 +134,8 @@
   Problem link : https://leetcode.com/problems/repeated-dna-sequences/
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/hashing%20%7C%7C%20hash%20table/submisstions/repeated_dna_sequences.cpp
+
+# Berland Regionals
+  Problemm link : https://codeforces.com/problemset/problem/1519/C
+  
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/hashing%20%7C%7C%20hash%20table/submisstions/berland_regionals.cpp
