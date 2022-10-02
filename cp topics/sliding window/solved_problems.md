@@ -32,3 +32,8 @@
   problem link : https://leetcode.com/problems/maximum-length-of-repeated-subarray/
   
   solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/sliding%20window/submissions/maximum_length_of_repeating_subarray.cpp
+
+# Add to Neighbour and remove
+  Problem link : https://codeforces.com/problemset/problem/1462/D
+  
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/sliding%20window/submissions/add_to_neighbour_and_remove.cpp
