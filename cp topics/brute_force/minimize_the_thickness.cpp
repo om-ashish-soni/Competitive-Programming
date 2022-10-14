@@ -1,4 +1,6 @@
-// problem link : https://codeforces.com/contest/1741/problem/Cint sum_partition(vi & v,int key){
+// problem link : https://codeforces.com/contest/1741/problem/C
+// solution : below code
+int sum_partition(vi & v,int key){
 	int sm=0;
 	int last=-1;
 	int mx=0;
@@ -37,5 +39,5 @@ void solve(int t){
 		
 
 }
-// solution : below code
+
 
