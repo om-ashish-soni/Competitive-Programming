@@ -215,7 +215,11 @@
   4. First two questions are mostly greedy in div -2,3,4 contests. No prior knowledge except programming language is required.
   5. Below is example how upsolving looks like 
   ![cf upsolving](https://github.com/om-ashish-soni/Competitive-Programming/blob/main/upsolved_all/cf_790.PNG)
-  
+
+
+## Error on codeforces for java : Source should satisfy regex [^{}]*public\s+(final)?\s*class\s+(\w+).
+https://codeforces.com/blog/entry/98846
+
 ## python jump by 2
 ```python:
 for i in range(0,10,2):
