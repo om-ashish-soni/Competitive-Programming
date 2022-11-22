@@ -4,6 +4,12 @@
        The codes are written for my suitable choice.
        Eventhought public, this repository is still being used by me for participating in contests. So make sure you take care of your code for plagiarism.
 
+## Starter Contests for beginners
+|Contests for new commmers|
+|-----|
+|[Contest 1](https://codeforces.com/group/MWSDmqGsZm/contest/219158)|
+---
+      
 ## Nice Website for interview preperation
 
 |DSA and Interview Preperation|
