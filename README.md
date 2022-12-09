@@ -287,6 +287,7 @@ Some basic constraints and the safe time complexity :
 |------|
 |[code library](https://github.com/ShahjalalShohag/code-library)|
 |[Tourist](https://github.com/the-tourist/algo)|
+|[William Fiset Algo](https://github.com/williamfiset/Algorithms)|
 |[dhiraj-01 CP](https://github.com/dhiraj-01/CP)|
 |[CP-Library dhruv gheewala](https://github.com/DhruvGheewala/CP-Library)|
 |[Coding library huzaifa](https://github.com/huzaifa242/Coding-Library-huzaifa242)|
