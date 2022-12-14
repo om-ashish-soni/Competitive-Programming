@@ -77,7 +77,14 @@
        
 ## JAVA Tricks : 
        1. https://darrenyao.com/usacobook/java.pdf
-       
+
+## How to read problem?
+       1. Sometimes doing mistake in spelling of problem statement. i.e.
+              undirectional graph vs unidirectional graph.
+              (undirected vs directed)
+          So  it is very essential as well as necessary to read problem statement correctly.
+      2. Have a look at constraints , from that idea of which algorithm to apply , can be derived.
+      
 ## Courses : 
        1. https://github.com/SuprDewd/T-414-AFLV
        2. https://codeforces.com/edu/courses
