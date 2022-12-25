@@ -19,11 +19,11 @@ public:
         string s="+-*/%";
         return s.find(c) != string::npos;
     }
-    static vector<string> split(string s){
+    static vector<string> split(string s,char delim=' '){
         vector<string> v;
         v.push_back("");
         for(auto c:s){
-            if(c==' '){
+            if(c==delim){
                 v.push_back("");
             }else{
                 v.back().push_back(c);    
