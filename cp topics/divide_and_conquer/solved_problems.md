@@ -25,3 +25,9 @@ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/c
  Problem link : https://leetcode.com/problems/count-of-range-sum/description/
  
  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/divide_and_conquer/submissions/count_range_sum.cpp
+
+
+# Super Pow
+ Problem link : https://leetcode.com/problems/super-pow/description/
+ 
+ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/divide_and_conquer/submissions/super_pow.cpp
