@@ -122,4 +122,5 @@ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/c
 # table decorations : 
   Problem link : https://codeforces.com/problemset/problem/478/C
   
-  Solution : 
+  Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/table_decoration.cpp
+  
