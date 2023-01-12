@@ -118,3 +118,8 @@ Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/c
   Problem link : https://codeforces.com/problemset/problem/1472/D
   
   Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/greedy/submissions/even_odd_game.cpp
+
+# table decorations : 
+  Problem link : https://codeforces.com/problemset/problem/478/C
+  
+  Solution : 
