@@ -21,3 +21,7 @@ Problem link : https://www.codechef.com/submit/EURON
 
 Solution : https://github.com/om-ashish-soni/Competitive-Programming/blob/main/cp%20topics/divide_and_conquer/submissions/euron_problem.cpp
 
+# Count range sum 
+ Problem link : https://leetcode.com/problems/count-of-range-sum/description/
+ 
+ Solution : 
