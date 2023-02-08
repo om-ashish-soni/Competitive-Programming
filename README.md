@@ -360,7 +360,7 @@ https://clist.by/
 # Development
 | Channel | ref link |
 | ----- |----------|
-|[Coding train](https://www.youtube.com/@TheCodingTrain)|
+|[Coding train]|https://www.youtube.com/@TheCodingTrain|
 
 
 
