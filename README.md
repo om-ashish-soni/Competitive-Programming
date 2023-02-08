@@ -291,6 +291,7 @@ Some basic constraints and the safe time complexity :
 |[benritmicocode](https://www.youtube.com/channel/UCSQmpb_K_I37JN-QLArZbFw)|
 |[jonathan paulson](https://www.youtube.com/channel/UCuWLIm0l4sDpEe28t41WITA)|
 |[Second Thread](https://www.youtube.com/channel/UCXbCohpE9IoVQUD2Ifg1d1g)|
+|[Aditya Verma](https://www.youtube.com/@TheAdityaVerma)|
 
 
 # Other nice repos : 
@@ -356,8 +357,10 @@ https://clist.by/
 |prime number||
 
 ---
-| topic | ref link |
+# Development
+| Channel | ref link |
 | ----- |----------|
+|[Coding train](https://www.youtube.com/@TheCodingTrain)|
 
 
 
