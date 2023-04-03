@@ -81,6 +81,7 @@
        
 ## JAVA Tricks : 
        1. https://darrenyao.com/usacobook/java.pdf
+      
 
 ## How to read problem?
        1. Sometimes doing mistake in spelling of problem statement. i.e.
@@ -191,7 +192,18 @@
        
 ### 8. Which ide should i use ?
        Don't use ide in competitive programming , make a habit of using vim editor.
-       
+
+## Improving sorting ( Ruffle Sort inspired from second thread's code) : 
+```java
+       static void ruffleSort(int[] a) {
+              int n=a.length;//shuffle, then sort 
+              for (int i=0; i<n; i++) {
+                     int oi=random.nextInt(n), temp=a[oi];
+                     a[oi]=a[i]; a[i]=temp;
+              }
+              Arrays.sort(a);
+       }
+```
 ### vim-configuration
        set number
        set tabstop=4
