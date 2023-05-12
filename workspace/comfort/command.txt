@@ -1,0 +1,4 @@
+c++ : 
+    g++ clean.cpp -o winner && ./winner < input.txt > output.txt
+python : 
+    python winner.py < input.txt > output.txt

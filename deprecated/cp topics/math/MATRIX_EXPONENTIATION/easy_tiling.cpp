@@ -1,0 +1,137 @@
+// problem link : https://www.codechef.com/problems/TILE
+// solution : below code
+
+#include<bits/stdc++.h>
+#define int long long 
+#define endl "\n"
+using namespace std;
+const int mod1 = (1e9+7);
+void print(bool b){
+	cout<<((b)?("YES"):("NO"))<<endl;
+}
+int modAdd(int a,int b){
+	return (a%mod1 + b%mod1)%mod1;
+}
+class MatrixExp{
+	public : 
+	int n,row,col;
+	vector<vector<int>>& mat;
+	vector<vector<int>> resultMat;
+	// function to multiply matrices 
+	vector<vector<int>> matrixMultiply(vector<vector<int>>& mat1,vector<vector<int>>& mat2){
+		if(mat1[0].size() != mat2.size()){
+			cout<<"invalid matrix matrixMultiply"<<endl;
+			exit(0);
+		}
+		int myrow=(int)mat1.size(),mycol=(int)mat2[0].size(),comm=(int)mat1[0].size();
+		vector<vector<int>> mulMat((int)mat1.size(),vector<int>((int)mat2[0].size()));
+		for(int i=0;i<myrow;i++){
+			for(int j=0;j<mycol;j++){
+				mulMat[i][j]=0;
+				for(int k=0;k<comm;k++){
+					mulMat[i][j]=modAdd(mulMat[i][j],mat1[i][k]*mat2[k][j]);
+				}
+			}
+		}
+		// cout<<"mat1 : "<<endl;printMatrix(mat1);
+		// cout<<"mat2 : "<<endl;printMatrix(mat2);
+		// cout<<"res : "<<endl;printMatrix(mulMat);
+		return mulMat;
+	}
+	// function to make identitiy matrix 
+	void makeIdentityMatrix(vector<vector<int>> &identityMat){
+		identityMat.resize(row);
+		for(int i=0;i<row;i++){
+			identityMat[i]=*new vector<int>(row,0);
+			identityMat[i][i]=1;
+		}
+		return;
+	}
+	// function to exponentiate matrix 
+	vector<vector<int>> exponentiate(int power){
+		if(power==1){
+			return mat;
+		}
+		vector<vector<int>> mymat;
+		if(power==0){
+			this->makeIdentityMatrix(mymat);
+
+			return mymat;
+		}
+		mymat=this->exponentiate(power/2);
+		vector<vector<int>> ansmat=matrixMultiply(mymat,mymat);
+		if(power & 1){
+			ansmat=matrixMultiply(ansmat,mat);
+		}
+		// cout<<" power : "<<power<<endl;
+		// printMatrix(ansmat);
+		return ansmat;
+	}
+	// constructor
+	MatrixExp(int N,vector<vector<int>> &vmat):n(N),mat(vmat){
+		row=mat.size();
+		col=mat[0].size();
+		resultMat=this->exponentiate(n);
+	}
+	// overloaded constructor
+	MatrixExp(int N):n(N),mat(*new vector<vector<int>>{{1,1},{1,0}}){
+		row=mat.size();
+		col=mat[0].size();
+		resultMat=this->exponentiate(n);
+	}
+	// getter for resultmatrix
+	vector<vector<int>>& getResultMatrix(){
+		return this->resultMat;
+	}
+	// method to print result mat
+	void printMatrix(vector<vector<int>>& vmatrix){
+		for(auto &rowv:vmatrix){
+			for(auto elem:rowv) cout<<elem<<" ";cout<<endl;
+		}
+	}
+	void print(){
+		for(auto &rowv:resultMat){
+			for(auto elem:rowv) cout<<elem<<" ";cout<<endl;
+		}
+	}
+};
+class Fibonacci{
+	public :
+	int n;
+	vector<vector<int>> mymat{{1,1},{1,0}};
+	MatrixExp &me;
+	Fibonacci(int n):n(n),me(*new MatrixExp(n,mymat)){}
+	int get(){
+		if(n==0) return 0;
+		vector<vector<int>>& fibMatrix=me.getResultMatrix();
+		return fibMatrix[0][0];
+	}
+};
+
+void solve(){
+	int n;cin>>n;
+	if(n<3) cout<<n;
+	else if(n==3) cout<<n-1;
+	else{
+		Fibonacci *fb=new Fibonacci(n);
+		cout<<fb->get();
+		delete fb;
+	}
+	cout<<endl;
+}
+signed main(){
+
+	ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("error.txt", "w", stderr);
+    freopen("output.txt", "w", stdout);
+#endif
+	int t=1;
+	cin>>t;
+	while(t--){
+		solve();
+	}
+	cerr<<"time taken : "<<(float)clock()/CLOCKS_PER_SEC<<" secs"<<endl;
+}

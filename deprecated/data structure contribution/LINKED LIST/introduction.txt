@@ -1,0 +1,53 @@
+introduction of how to use program of linked list
+
+Enter : 
+
+enter the code and choose according operation
+
+	if(code == 0){
+            scanf("%d",&value);
+            insert_at_beginning(&head,value);
+        }else if(code ==1 ){
+            scanf("%d",&value);
+            insert_at_end(&head,value);
+        }else if(code==2){
+            delete_from_beginning(&head);
+        }else if(code==3){
+            delete_from_end(&head);
+        }else if(code==4){
+            print_list(&head);
+        }else if(code == 5){
+            scanf("%d",&index);
+            scanf("%d",&value);
+            insert_before_index(index,value);
+        }else if(code == 6){
+            scanf("%d",&index);
+            scanf("%d",&value);
+            insert_after_index(index,value);
+        }else if(code == 7){
+            scanf("%d",&index);
+            scanf("%d",&value);
+            update_at_index(index,value);
+        }else if(code == 8){
+            scanf("%d",&index);
+            scanf("%d",&value);
+            update_before_index(index,value);
+        }else if(code == 9){
+            scanf("%d",&index);
+            scanf("%d",&value);
+            update_after_index(index,value);
+        }else if(code == 10){
+            scanf("%d",&index);
+            pop_at_index(index);
+        }else if(code==11){
+            scanf("%d",&index);
+            pop_before_index(index);
+        }else if(code == 12){
+            scanf("%d",&index);
+            pop_after_index(index);
+        }
+        else{
+            printf("INVALID SEQUENCE OF COMMANDS\n");
+            scanf("%d",&value);
+        }
+        

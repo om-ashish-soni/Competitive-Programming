@@ -1,0 +1,67 @@
+{
+    "security.workspace.trust.untrustedFiles": "open",
+    "editor.fontSize": 16,
+    "code-runner.runInTerminal": true,
+    "terminal.integrated.fontSize": 16,
+    "[json]": {
+
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.suggest.insertMode": "replace"
+    },
+    "terminal.integrated.shellArgs.windows": [
+        "-ExecutionPolicy",
+        "Bypass"
+    ],
+    "diffEditor.renderSideBySide": false,
+    "window.zoomLevel": 2,
+    "workbench.iconTheme": "material-icon-theme",
+    "leetcode.workspaceFolder": "C:\\Users\\Om\\.leetcode",
+    "leetcode.defaultLanguage": "cpp",
+    "leetcode.showDescription": "Both",
+    "leetcode.hint.commandShortcut": false,
+    "leetcode.hint.configWebviewMarkdown": false,
+    "C_Cpp.updateChannel": "Insiders",
+    "tabnine.experimentalAutoImports": true,
+    "liveshare.connectionMode": "relay",
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "redhat.telemetry.enabled": true,
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "thunder-client.codeSnippetLanguage": "cs-httpclient",
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
+    "liveServer.settings.donotShowInfoMsg": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "[dart]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            80
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": false
+    },
+    "xml.server.binary.trustedHashes": [
+        "a1bf296a5263bc63cca97cb46692d0d523edfe9d2d4e79d5b4d245f57c6c623b"
+    ],
+    "dart.flutterRunAdditionalArgs": [
+        "--no-sound-null-safety"
+    ],
+    "files.autoSave": "afterDelay"
+
+}
