@@ -1232,14 +1232,6 @@ namespace Solution {
 
         judge->guess(guess);
 
-
-
-
-
-
-
-
-
         delete judge;
     }
 };
