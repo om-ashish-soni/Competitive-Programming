@@ -31,6 +31,7 @@ void kmp(string s,string pattern,vector<int>&match){
 		}
 		if(j==pattern.size()){
 			match.push_back(i-pz);
+			j=pf[j-1];
 		}
 	}
 }
