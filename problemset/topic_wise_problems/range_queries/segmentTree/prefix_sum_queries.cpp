@@ -1,4 +1,4 @@
-// problem link : 
+// problem link : https://cses.fi/problemset/task/2166
 
 // explaination 
 
