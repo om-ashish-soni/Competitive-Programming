@@ -16,6 +16,7 @@ private:
     priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> minHeap;
     int maxSize = 0;
     int minSize = 0;
+    int minSum=0,maxSum=0;
     
 
     void clean() {
@@ -38,28 +39,36 @@ private:
     }
 
     void pushMinHeap(pair<int,int> top){
+        minSum+=top.first;
         minHeap.push(top);
         minSize++;
         elementIndexMap[top.second] = 0;
     }
     void pushMaxHeap(pair<int,int> top){
+        maxSum+=top.first;
         maxHeap.push(top);
         maxSize++;
         elementIndexMap[top.second] = 1;
     }
-    bool popMaxHeap(int index){
+    bool popMaxHeap(){
         if(maxHeap.empty()) return false;
+        int value=maxHeap.top().first;
+        int index=maxHeap.top().second;
         maxHeap.pop();
         if (elementIndexMap.count(index) && elementIndexMap[index]==1) {
+            maxSum-=value;
             maxSize--;
             return true;
         }
         return false;
     }
-    bool popMinHeap(int index){
+    bool popMinHeap(){
         if(minHeap.empty()) return false;
+        int value=minHeap.top().first;
+        int index=minHeap.top().second;
         minHeap.pop();
         if (elementIndexMap.count(index) && elementIndexMap[index]==0) {
+            minSum-=value;
             minSize--;
             return true;
         }
@@ -73,7 +82,7 @@ private:
             pair<int, int> top = maxHeap.top();
             int index = top.second;
 
-            if (popMaxHeap(index)) {
+            if (popMaxHeap()) {
                 pushMinHeap(top);
                 if (LOG_DEBUG) cout << index << " on " << 0 << endl;
             }
@@ -85,7 +94,7 @@ private:
             pair<int, int> top = minHeap.top();
             int index = top.second;
 
-            if (popMinHeap(index)) {
+            if (popMinHeap()) {
                 pushMaxHeap(top);
                 if (LOG_DEBUG) cout << index << " on " << 1 << endl;
             }
@@ -111,11 +120,13 @@ public:
         if (LOG_DEBUG) cout << index << " inserted " << elementIndexMap[index] << endl;
     }
 
-    void remove(int index) {
+    void remove(int value,int index) {
         int indexOfHeap = elementIndexMap[index];
         if (indexOfHeap == 0) {
+            minSum-=value;
             minSize--;
         } else if (indexOfHeap == 1) {
+            maxSum-=value;
             maxSize--;
         }
         elementIndexMap.erase(index);
@@ -123,13 +134,22 @@ public:
         if (LOG_DEBUG) cout << index << " removed" << endl;
     }
 
-    int get() {
+    int getMedian() {
         balance();
         if (maxHeap.empty()) {
             cout << "EMPTY HEAP OCCUR" << endl;
             throw "EMPTY HEAP OCCUR";
         }
         return maxHeap.top().first;
+    }
+
+    int getCost(){
+        
+        int median=getMedian();
+        int minHeapCost=(maxSize*median)-maxSum;
+        int maxHeapCost=minSum-(minSize*median);    
+        // cout<<minHeapCost<<" vs "<<maxHeapCost<<endl;
+        return minHeapCost+maxHeapCost;
     }
 
     
