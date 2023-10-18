@@ -9,14 +9,11 @@ using namespace __gnu_pbds;
 #define LOG_DEBUG false
 using pii = pair<int, int>;
 using vpii = vector<pii>;
-
 class BalancedHeap {
-public:
-    
 private:
     map<int, int> elementIndexMap;
-    priority_queue<pii> maxHeap;
-    priority_queue<pii, vpii, greater<pii>> minHeap;
+    priority_queue<pair<int,int>> maxHeap;
+    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> minHeap;
     int maxSize = 0;
     int minSize = 0;
     
@@ -40,34 +37,60 @@ private:
         }
     }
 
+    void pushMinHeap(pair<int,int> top){
+        minHeap.push(top);
+        minSize++;
+        elementIndexMap[top.second] = 0;
+    }
+    void pushMaxHeap(pair<int,int> top){
+        maxHeap.push(top);
+        maxSize++;
+        elementIndexMap[top.second] = 1;
+    }
+    bool popMaxHeap(int index){
+        if(maxHeap.empty()) return false;
+        maxHeap.pop();
+        if (elementIndexMap.count(index) && elementIndexMap[index]==1) {
+            maxSize--;
+            return true;
+        }
+        return false;
+    }
+    bool popMinHeap(int index){
+        if(minHeap.empty()) return false;
+        minHeap.pop();
+        if (elementIndexMap.count(index) && elementIndexMap[index]==0) {
+            minSize--;
+            return true;
+        }
+        return false;
+    }
+
     void balance() {
         clean();
         if (LOG_DEBUG) cout << "before balance: " << minSize << " vs " << maxSize << endl;
         while (!maxHeap.empty() && minSize + 1 <= maxSize - 1) {
             pair<int, int> top = maxHeap.top();
-            maxHeap.pop();
             int index = top.second;
-            if (elementIndexMap.count(index)) {
-                maxSize--;
-                minHeap.push(top);
-                minSize++;
-                elementIndexMap[index] = 0;
+
+            if (popMaxHeap(index)) {
+                pushMinHeap(top);
                 if (LOG_DEBUG) cout << index << " on " << 0 << endl;
             }
         }
+
         if (LOG_DEBUG) cout << "done first: " << minSize << " vs " << maxSize << endl;
+
         while (!minHeap.empty() && minSize > maxSize) {
             pair<int, int> top = minHeap.top();
-            minHeap.pop();
             int index = top.second;
-            if (elementIndexMap.count(index)) {
-                minSize--;
-                maxHeap.push(top);
-                maxSize++;
-                elementIndexMap[index] = 1;
+
+            if (popMinHeap(index)) {
+                pushMaxHeap(top);
                 if (LOG_DEBUG) cout << index << " on " << 1 << endl;
             }
         }
+
         if (LOG_DEBUG) cout << "after balance: " << minSize << " vs " << maxSize << endl;
     }
 
@@ -80,13 +103,9 @@ public:
     void insert(int elem, int index) {
         clean();
         if (minHeap.empty() || elem < minHeap.top().first) {
-            maxHeap.push({elem, index});
-            maxSize++;
-            elementIndexMap[index] = 1;
+            pushMaxHeap({elem, index});
         } else {
-            minHeap.push({elem, index});
-            minSize++;
-            elementIndexMap[index] = 0;
+            pushMinHeap({elem, index});
         }
         balance();
         if (LOG_DEBUG) cout << index << " inserted " << elementIndexMap[index] << endl;
