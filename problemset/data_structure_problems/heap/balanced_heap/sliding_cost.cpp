@@ -1,3 +1,6 @@
+// problem link : https://cses.fi/problemset/task/1077/
+// solution : below code
+
 #include<bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 
@@ -6,8 +9,6 @@ using namespace __gnu_pbds;
 
 #define int long long
 
-using pii = pair<int, int>;
-using vpii = vector<pii>;
 class BalancedHeap {
 private:
     map<int, int> elementIndexMap;
@@ -16,8 +17,8 @@ private:
     int maxSize = 0;
     int minSize = 0;
     int minSum=0,maxSum=0;
+
     bool LOG_DEBUG=false;
-    
     
 
     void clean() {
@@ -155,3 +156,35 @@ public:
 
     
 };
+
+void solve(int testcase) {
+    int n, k;
+    cin >> n >> k;
+    vector<int> v(n);
+
+    for (int i = 0; i < n; i++) {
+        cin >> v[i];
+    }
+
+    BalancedHeap bh;
+
+    for (int i = 0; i < k - 1; i++) {
+        bh.insert(v[i], i);
+    }
+
+    for (int i = k - 1; i < n; i++) {
+        bh.insert(v[i], i);
+        cout << bh.getCost() << " ";
+        bh.remove(v[i - k + 1], i - k + 1);
+    }
+}
+
+signed main() {
+
+    solve(0);
+
+    return 0;
+}
+
+
+
