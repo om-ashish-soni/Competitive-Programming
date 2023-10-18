@@ -6,7 +6,6 @@ using namespace __gnu_pbds;
 
 #define int long long
 
-#define LOG_DEBUG false
 using pii = pair<int, int>;
 using vpii = vector<pii>;
 class BalancedHeap {
@@ -17,6 +16,7 @@ private:
     int maxSize = 0;
     int minSize = 0;
     int minSum=0,maxSum=0;
+    bool LOG_DEGUG=false;
     
 
     void clean() {
