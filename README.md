@@ -244,6 +244,11 @@ The codes provided in this repository are written based on my personal preferenc
 
 10. **Which Template Should I Use in CP?**: There are various templates available for competitive programming. You can refer to the following resource for templates that are useful in competitive coding: [Templates Useful for CP](https://iq.opengenus.org/cpp-template-for-competitive-coding/)
 
+11. **Tips to solve Constuctive** : 
+    1. Writing a brute force script rather than manual solving 
+    2. Finding a pattern
+    3. coding optimized solution corresponding to pattern
+    4. Taking care of edge cases.
 ---
 
 ## Improving Sorting (Ruffle Sort Inspired from Second Thread's Code)
