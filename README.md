@@ -550,14 +550,6 @@ How to Read a Problem?
 1.  **Pay Attention to Problem Statement:** Take extra care to read the problem statement correctly. Mistakes in understanding the problem can lead to wrong solutions. For example, distinguishing between “undirectional” and “unidirectional” graphs (undirected vs directed) can significantly impact the approach.
 2.  **Analyze the Constraints:** Understanding the problem constraints can provide valuable insights into choosing the appropriate algorithms and data structures to solve the problem effectively.
 
-Trie
-====
-
-Game Theory
-===========
-
-Game Theory
-===========
 
 Tips for contests and competitive programming
 =============================================
