@@ -73,6 +73,7 @@ struct Rolling_Median{
             sum_left+=num;
             return;
         }
+        sum_left+=num;
         left.insert(num);
         handle_change();
     }
