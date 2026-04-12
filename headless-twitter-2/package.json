@@ -1,0 +1,61 @@
+{
+  "name": "headless-twitter",
+  "version": "2.0.0",
+  "description": "Read Twitter/X from your terminal. Chrome CDP, GraphQL intercept. Zero API keys. Zero mutations. Read-only by design.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "headless-twitter": "./bin/headless-twitter.js"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc && node dist/index.js"
+  },
+  "keywords": [
+    "twitter",
+    "x",
+    "cdp",
+    "chrome-devtools-protocol",
+    "chrome",
+    "puppeteer-core",
+    "graphql",
+    "read-only",
+    "feed-reader",
+    "timeline",
+    "tweet",
+    "scraper",
+    "headless",
+    "cli",
+    "terminal",
+    "typescript",
+    "ai-agent",
+    "no-api-key"
+  ],
+  "author": "om-ashish-soni",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/om-ashish-soni/headless-twitter.git"
+  },
+  "homepage": "https://github.com/om-ashish-soni/headless-twitter#readme",
+  "bugs": {
+    "url": "https://github.com/om-ashish-soni/headless-twitter/issues"
+  },
+  "dependencies": {
+    "puppeteer-core": "^24.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "@types/node": "^22.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

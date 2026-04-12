@@ -1,0 +1,55 @@
+{
+  "name": "headless-twitter",
+  "logo": {
+    "light": "/logo/light.png",
+    "dark": "/logo/dark.png"
+  },
+  "favicon": "/favicon.png",
+  "colors": {
+    "primary": "#3178c6",
+    "light": "#4facfe",
+    "dark": "#00f2fe"
+  },
+  "topbarLinks": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/om-ashish-soni/headless-twitter"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Get Started",
+    "url": "quickstart"
+  },
+  "anchors": [
+    {
+      "name": "Community",
+      "icon": "discord",
+      "url": "https://discord.gg/your-link"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": [
+        "introduction",
+        "quickstart"
+      ]
+    },
+    {
+      "group": "Core Concepts",
+      "pages": [
+        "architecture"
+      ]
+    },
+    {
+      "group": "API Reference",
+      "pages": [
+        "api-reference/cli"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/om-ashish-soni/headless-twitter",
+    "twitter": "https://x.com/your-handle"
+  }
+}

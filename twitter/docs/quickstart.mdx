@@ -1,0 +1,55 @@
+---
+title: "Quickstart"
+description: "Get up and running with headless-twitter in 30 seconds."
+---
+
+## Installation
+
+Install the global CLI tool via NPM:
+
+```bash
+npm install -g headless-twitter
+```
+
+<Note>
+  Ensure you have **Google Chrome** installed and logged into Twitter/X.
+</Note>
+
+## Basic Usage
+
+### Your Home Timeline
+Fetch the latest 20 tweets from your own home feed.
+```bash
+headless-twitter twitter timeline '' 20
+```
+
+### Search Tweets
+Find tweets on any topic. Use quotes for multi-word queries.
+```bash
+headless-twitter twitter search "rust lang" 15
+```
+
+### Profile View
+Get tweets from a specific user.
+```bash
+headless-twitter twitter user "@karpathy" 10
+```
+
+## Language Filtering
+
+Filter results by language for cleaner data.
+```bash
+# Only English tweets about AI
+headless-twitter twitter search "AI" 20 --lang en
+```
+
+## JSON Output for Agents
+
+Need to pipe data to an AI agent or a script? Use the `--json` flag.
+```bash
+headless-twitter twitter timeline '' 20 --json | jq '.tweets[0].text'
+```
+
+<Card title="Learn More" icon="book-open" href="/architecture">
+  Understand the 3-layer security model and CDP architecture.
+</Card>

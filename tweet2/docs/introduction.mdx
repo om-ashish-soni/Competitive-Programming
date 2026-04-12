@@ -1,0 +1,66 @@
+---
+title: "Introduction"
+description: "Read Twitter/X from your terminal. Zero API keys. Zero mutations. Pure signal."
+---
+
+<p align="center">
+  <img
+    className="block dark:hidden"
+    src="/logo/light.png"
+    alt="Hero Light"
+  />
+  <img
+    className="hidden dark:block"
+    src="/logo/dark.png"
+    alt="Hero Dark"
+  />
+</p>
+
+## Why headless-twitter?
+
+In an era where Twitter API costs are skyrocketing ($100+/mo for basic access), `headless-twitter` provides a lightweight, secure, and **free** way to read your feed, search tweets, and monitor accounts directly from your terminal.
+
+It connects to your **logged-in Chrome** via CDP (Chrome DevTools Protocol). Intercepts Twitter's internal GraphQL responses directly. No API keys. No DOM scraping. No Selenium. No Playwright download. Just your Chrome + one command.
+
+### Key Benefits
+
+<CardGroup cols={2}>
+  <Card title="Zero API Keys" icon="key">
+    No registration, no OAuth dance, no credit card required.
+  </Card>
+  <Card title="Pure Signal" icon="bolt">
+    Intercepts GraphQL JSON directly for stable, high-quality data.
+  </Card>
+  <Card title="30s Setup" icon="clock">
+    No heavy browser downloads. Uses your existing Chrome installation.
+  </Card>
+  <Card title="Read-Only Enforced" icon="shield-check">
+    Architecturally incapable of likes, retweets, or posts.
+  </Card>
+</CardGroup>
+
+## The "Hacker" Experience
+
+```bash
+# Search tweets about 'rust lang'
+headless-twitter twitter search "rust lang" 15 --lang en
+```
+
+```text
+════════════════════════════════════════════════════════════════════════════════
+  🔍 Search: "rust lang"
+════════════════════════════════════════════════════════════════════════════════
+
+[1] @kepano
+
+  I can't go back to the regular YouTube UI after this.
+  Obsidian Reader now makes the transcript interactive...
+
+  📍 https://x.com/i/web/status/2042683393247449148
+  ❤️  10,771 | 🔄 723 | 💬 184
+  📅 Fri Apr 10 19:17:26 +0000 2026
+```
+
+## Ready to Rock?
+
+Jump into the [Quickstart](/quickstart) to get up and running in seconds.

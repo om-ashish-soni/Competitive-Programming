@@ -1,0 +1,51 @@
+---
+title: "CLI Reference"
+description: "A complete list of commands and flags for headless-twitter."
+---
+
+## Commands
+
+All commands follow this structure:
+`headless-twitter twitter [COMMAND] [QUERY] [LIMIT]`
+
+### `timeline`
+Fetch the latest tweets from your home timeline.
+- **Example**: `headless-twitter twitter timeline '' 20`
+
+### `search`
+Search for tweets matching a specific keyword or phrase.
+- **Example**: `headless-twitter twitter search "Open Source AI" 10`
+
+### `user`
+Fetch the latest tweets from a specific user's profile.
+- **Example**: `headless-twitter twitter user "@sama" 15`
+
+### `following`
+Fetch the latest tweets from the accounts you follow.
+- **Example**: `headless-twitter twitter following '' 20`
+
+---
+
+## Global Flags
+
+### `--lang [LANG_CODE]`
+Filters results by a specific language. Use two-letter ISO codes.
+- **Supported Examples**: `en`, `es`, `ja`, `hi`, `zh`, `ko`, `fr`, `de`, `pt`, `ar`
+- **Example**: `headless-twitter twitter search "crypto" 20 --lang hi`
+
+### `--json`
+Outputs the data in a machine-readable JSON format. Ideal for piping to other tools or LLMs.
+- **Example**: `headless-twitter twitter user "@karpathy" 10 --json`
+
+### `--cdp-url [URL]`
+Specify a custom CDP endpoint if your Chrome isn't running on the default port.
+- **Default**: `http://localhost:9222`
+- **Example**: `headless-twitter twitter search "rust" 5 --cdp-url http://localhost:9333`
+
+### `--debug`
+Shows detailed XHR endpoints and extraction steps. Useful for troubleshooting.
+- **Example**: `headless-twitter twitter timeline '' 10 --debug`
+
+### `--help`
+Displays the built-in help documentation.
+- **Example**: `headless-twitter --help`
