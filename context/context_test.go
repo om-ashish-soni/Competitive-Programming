@@ -1,6 +1,7 @@
 package context
 
 import (
+	"fmt"
 	"strings"
 	"testing"
 
@@ -138,7 +139,7 @@ func TestManagerNoSystemPrompt(t *testing.T) {
 }
 
 func TestBuildSystemPrompt(t *testing.T) {
-	prompt := BuildSystemPrompt("/home/user/project", []string{"file_read", "shell_exec"})
+	prompt := BuildSystemPrompt("/home/user/project", []string{"file_read", "shell_exec"}, "copilot")
 
 	if !strings.Contains(prompt, "/home/user/project") {
 		t.Fatalf("expected working dir in prompt, got: %s", prompt)
@@ -148,5 +149,146 @@ func TestBuildSystemPrompt(t *testing.T) {
 	}
 	if !strings.Contains(prompt, "shell_exec") {
 		t.Fatalf("expected shell_exec in prompt, got: %s", prompt)
+	}
+}
+
+func TestBuildSystemPromptPerProvider(t *testing.T) {
+	// Each provider should get a different prompt.
+	copilotPrompt := BuildSystemPrompt("/tmp", []string{"grep"}, "copilot")
+	claudePrompt := BuildSystemPrompt("/tmp", []string{"grep"}, "claude")
+	geminiPrompt := BuildSystemPrompt("/tmp", []string{"grep"}, "gemini")
+
+	// All should contain env block.
+	for _, p := range []string{copilotPrompt, claudePrompt, geminiPrompt} {
+		if !strings.Contains(p, "<env>") {
+			t.Fatal("expected <env> block in prompt")
+		}
+		if !strings.Contains(p, "</env>") {
+			t.Fatal("expected </env> closing tag in prompt")
+		}
+	}
+
+	// Claude prompt should differ from Gemini.
+	if claudePrompt == geminiPrompt {
+		t.Fatal("claude and gemini prompts should differ")
+	}
+}
+
+func TestDiscoverInstructions(t *testing.T) {
+	// With a non-existent directory, should return empty.
+	result := DiscoverInstructions("/nonexistent/path/that/does/not/exist")
+	if result != "" {
+		t.Fatalf("expected empty instructions for non-existent path, got: %s", result)
+	}
+}
+
+// ---------------------------------------------------------------------------
+// H1: Summary compression budget tests
+// ---------------------------------------------------------------------------
+
+func TestSummaryBudgetApplyDedup(t *testing.T) {
+	budget := DefaultSummaryBudget()
+	input := "line one\nline one\nline two\nline two\nline two\nline three"
+	result := budget.Apply(input)
+
+	if strings.Count(result, "line one") != 1 {
+		t.Fatalf("expected dedup of consecutive 'line one', got: %s", result)
+	}
+	if strings.Count(result, "line two") != 1 {
+		t.Fatalf("expected dedup of consecutive 'line two', got: %s", result)
+	}
+}
+
+func TestSummaryBudgetApplyLineTruncation(t *testing.T) {
+	budget := SummaryBudget{MaxChars: 10000, MaxLines: 100, MaxLineChars: 20}
+	input := "short\n" + strings.Repeat("x", 50) + "\nend"
+	result := budget.Apply(input)
+
+	lines := strings.Split(result, "\n")
+	if len(lines) != 3 {
+		t.Fatalf("expected 3 lines, got %d", len(lines))
+	}
+	// The long line should be truncated to 20 + "..."
+	if len(lines[1]) != 23 { // 20 chars + "..."
+		t.Fatalf("expected truncated line length 23, got %d: %q", len(lines[1]), lines[1])
+	}
+}
+
+func TestSummaryBudgetApplyMaxLines(t *testing.T) {
+	budget := SummaryBudget{MaxChars: 100000, MaxLines: 5, MaxLineChars: 1000}
+	lines := make([]string, 20)
+	for i := range lines {
+		lines[i] = "line"
+	}
+	result := budget.Apply(strings.Join(lines, "\n"))
+
+	// After dedup (all same), should be 1 line.
+	if strings.Count(result, "\n") > 0 {
+		t.Fatalf("expected 1 line after dedup, got: %q", result)
+	}
+}
+
+func TestSummaryBudgetApplyMaxChars(t *testing.T) {
+	budget := SummaryBudget{MaxChars: 50, MaxLines: 1000, MaxLineChars: 1000}
+	// Build unique lines so dedup doesn't collapse them.
+	var lines []string
+	for i := 0; i < 100; i++ {
+		lines = append(lines, fmt.Sprintf("line %d here", i))
+	}
+	input := strings.Join(lines, "\n")
+	result := budget.Apply(input)
+
+	if len(result) > 100 { // Allow slack for truncation message
+		t.Fatalf("expected result under 100 chars, got %d", len(result))
+	}
+	if !strings.Contains(result, "summary truncated") {
+		t.Fatalf("expected truncation notice, got: %s", result)
+	}
+}
+
+func TestDefaultSummaryBudget(t *testing.T) {
+	b := DefaultSummaryBudget()
+	if b.MaxChars != 4800 || b.MaxLines != 48 || b.MaxLineChars != 160 {
+		t.Fatalf("unexpected defaults: %+v", b)
+	}
+}
+
+// ---------------------------------------------------------------------------
+// H3: Git context in system prompt tests
+// ---------------------------------------------------------------------------
+
+func TestBuildSystemPromptIncludesGitContext(t *testing.T) {
+	// Use the actual mo-code repo root (we know it's a git repo).
+	repoRoot := ".."
+	prompt := BuildSystemPrompt(repoRoot, []string{"grep"}, "claude")
+
+	if !strings.Contains(prompt, "Current branch:") {
+		t.Fatal("expected 'Current branch:' in prompt for git repo")
+	}
+	// Should still have env block.
+	if !strings.Contains(prompt, "<env>") {
+		t.Fatal("expected <env> block")
+	}
+}
+
+// ---------------------------------------------------------------------------
+// H4: Continuation preamble tests
+// ---------------------------------------------------------------------------
+
+func TestFormatContinuationPreamble(t *testing.T) {
+	summary := "We refactored the auth module."
+	result := FormatContinuationPreamble(summary)
+
+	if !strings.Contains(result, "<compacted-conversation>") {
+		t.Fatal("expected <compacted-conversation> tag")
+	}
+	if !strings.Contains(result, "</compacted-conversation>") {
+		t.Fatal("expected closing tag")
+	}
+	if !strings.Contains(result, summary) {
+		t.Fatal("expected summary content in preamble")
+	}
+	if !strings.Contains(result, "Do NOT acknowledge this summary") {
+		t.Fatal("expected instruction not to acknowledge summary")
 	}
 }

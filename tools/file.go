@@ -23,8 +23,9 @@ func NewFileRead(workDir string) *FileRead {
 func (f *FileRead) Name() string { return "file_read" }
 
 func (f *FileRead) Description() string {
-	return "Read the contents of a file. Returns the file contents as a string. " +
-		"Use this to examine source code, config files, or any text file."
+	return "Read the contents of a file with line numbers. " +
+		"You MUST read a file before editing it with file_edit. " +
+		"Supports offset and limit for reading specific sections of large files."
 }
 
 func (f *FileRead) Parameters() string {
@@ -48,14 +49,14 @@ func (f *FileRead) Parameters() string {
 	}`
 }
 
-func (f *FileRead) Execute(ctx context.Context, argsJSON string) (string, error) {
+func (f *FileRead) Execute(ctx context.Context, argsJSON string) Result {
 	var args struct {
 		Path   string `json:"path"`
 		Offset int    `json:"offset"`
 		Limit  int    `json:"limit"`
 	}
 	if err := json.Unmarshal([]byte(argsJSON), &args); err != nil {
-		return "", fmt.Errorf("invalid arguments: %w", err)
+		return Result{Error: fmt.Sprintf("invalid arguments: %v", err), Output: fmt.Sprintf("Error: invalid arguments: %v", err)}
 	}
 
 	if args.Limit == 0 {
@@ -64,19 +65,23 @@ func (f *FileRead) Execute(ctx context.Context, argsJSON string) (string, error)
 
 	absPath, err := f.resolve(args.Path)
 	if err != nil {
-		return "", err
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: %v", err)}
 	}
 
 	data, err := os.ReadFile(absPath)
 	if err != nil {
-		return "", fmt.Errorf("read file: %w", err)
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: read file: %v", err)}
 	}
 
 	lines := strings.Split(string(data), "\n")
 
 	// Apply offset and limit.
 	if args.Offset >= len(lines) {
-		return fmt.Sprintf("(file has %d lines, offset %d is past end)", len(lines), args.Offset), nil
+		return Result{
+			Title:  fmt.Sprintf("Read %s (empty range)", args.Path),
+			Output: fmt.Sprintf("(file has %d lines, offset %d is past end)", len(lines), args.Offset),
+			Metadata: map[string]any{"path": args.Path, "total_lines": len(lines)},
+		}
 	}
 	end := args.Offset + args.Limit
 	if end > len(lines) {
@@ -94,7 +99,16 @@ func (f *FileRead) Execute(ctx context.Context, argsJSON string) (string, error)
 		fmt.Fprintf(&sb, "\n... (%d more lines, total %d)", len(lines)-end, len(lines))
 	}
 
-	return sb.String(), nil
+	return Result{
+		Title:  fmt.Sprintf("Read %s (%d lines)", args.Path, len(selected)),
+		Output: sb.String(),
+		Metadata: map[string]any{
+			"path":        args.Path,
+			"lines_read":  len(selected),
+			"total_lines": len(lines),
+			"offset":      args.Offset,
+		},
+	}
 }
 
 func (f *FileRead) resolve(relPath string) (string, error) {
@@ -125,8 +139,9 @@ func NewFileWrite(workDir string) *FileWrite {
 func (f *FileWrite) Name() string { return "file_write" }
 
 func (f *FileWrite) Description() string {
-	return "Write content to a file. Creates the file if it doesn't exist, " +
-		"or overwrites if it does. Creates parent directories as needed."
+	return "Create a new file or completely overwrite an existing file. " +
+		"Creates parent directories as needed. " +
+		"Prefer file_edit for modifying existing files — it only changes the targeted section."
 }
 
 func (f *FileWrite) Parameters() string {
@@ -146,18 +161,18 @@ func (f *FileWrite) Parameters() string {
 	}`
 }
 
-func (f *FileWrite) Execute(ctx context.Context, argsJSON string) (string, error) {
+func (f *FileWrite) Execute(ctx context.Context, argsJSON string) Result {
 	var args struct {
 		Path    string `json:"path"`
 		Content string `json:"content"`
 	}
 	if err := json.Unmarshal([]byte(argsJSON), &args); err != nil {
-		return "", fmt.Errorf("invalid arguments: %w", err)
+		return Result{Error: fmt.Sprintf("invalid arguments: %v", err), Output: fmt.Sprintf("Error: invalid arguments: %v", err)}
 	}
 
 	absPath, err := f.resolve(args.Path)
 	if err != nil {
-		return "", err
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: %v", err)}
 	}
 
 	// Check if file exists to determine create vs modify.
@@ -167,25 +182,32 @@ func (f *FileWrite) Execute(ctx context.Context, argsJSON string) (string, error
 	// Create parent directories.
 	dir := filepath.Dir(absPath)
 	if err := os.MkdirAll(dir, 0755); err != nil {
-		return "", fmt.Errorf("create directories: %w", err)
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: create directories: %v", err)}
 	}
 
 	if err := os.WriteFile(absPath, []byte(args.Content), 0644); err != nil {
-		return "", fmt.Errorf("write file: %w", err)
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: write file: %v", err)}
 	}
 
-	action := "modified"
-	metaKey := "files_modified"
+	action := "Modified"
 	if isCreate {
-		action = "created"
-		metaKey = "files_created"
+		action = "Created"
 	}
 
-	result, _ := json.Marshal(map[string]any{
-		"output": fmt.Sprintf("File %s: %s (%d bytes)", action, args.Path, len(args.Content)),
-		metaKey:  []string{args.Path},
-	})
-	return string(result), nil
+	r := Result{
+		Title:  fmt.Sprintf("%s %s", action, args.Path),
+		Output: fmt.Sprintf("File %s: %s (%d bytes)", strings.ToLower(action), args.Path, len(args.Content)),
+		Metadata: map[string]any{
+			"path":  args.Path,
+			"bytes": len(args.Content),
+		},
+	}
+	if isCreate {
+		r.FilesCreated = []string{args.Path}
+	} else {
+		r.FilesModified = []string{args.Path}
+	}
+	return r
 }
 
 func (f *FileWrite) resolve(relPath string) (string, error) {
@@ -238,14 +260,14 @@ func (f *FileList) Parameters() string {
 	}`
 }
 
-func (f *FileList) Execute(ctx context.Context, argsJSON string) (string, error) {
+func (f *FileList) Execute(ctx context.Context, argsJSON string) Result {
 	var args struct {
 		Path      string `json:"path"`
 		Recursive bool   `json:"recursive"`
 		MaxDepth  int    `json:"max_depth"`
 	}
 	if err := json.Unmarshal([]byte(argsJSON), &args); err != nil {
-		return "", fmt.Errorf("invalid arguments: %w", err)
+		return Result{Error: fmt.Sprintf("invalid arguments: %v", err), Output: fmt.Sprintf("Error: invalid arguments: %v", err)}
 	}
 
 	if args.Path == "" {
@@ -257,7 +279,7 @@ func (f *FileList) Execute(ctx context.Context, argsJSON string) (string, error)
 
 	absPath, err := f.resolve(args.Path)
 	if err != nil {
-		return "", err
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: %v", err)}
 	}
 
 	var sb strings.Builder
@@ -267,10 +289,17 @@ func (f *FileList) Execute(ctx context.Context, argsJSON string) (string, error)
 		err = f.listDir(absPath, &sb)
 	}
 	if err != nil {
-		return "", err
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: %v", err)}
 	}
 
-	return sb.String(), nil
+	return Result{
+		Title:  fmt.Sprintf("List %s", args.Path),
+		Output: sb.String(),
+		Metadata: map[string]any{
+			"path":      args.Path,
+			"recursive": args.Recursive,
+		},
+	}
 }
 
 func (f *FileList) listDir(dir string, sb *strings.Builder) error {

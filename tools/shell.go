@@ -6,13 +6,16 @@ import (
 	"encoding/json"
 	"fmt"
 	"os/exec"
+	"path/filepath"
 	"strings"
 	"time"
 )
 
 const (
-	// shellTimeout is the maximum duration for a shell command.
-	shellTimeout = 30 * time.Second
+	// shellTimeout is the default maximum duration for a shell command.
+	shellTimeout = 120 * time.Second
+	// shellMaxTimeout is the hard upper limit.
+	shellMaxTimeout = 600 * time.Second
 	// shellMaxOutput is the maximum output size in bytes.
 	shellMaxOutput = 100 * 1024 // 100KB
 )
@@ -29,9 +32,10 @@ func NewShellExec(workDir string) *ShellExec {
 func (s *ShellExec) Name() string { return "shell_exec" }
 
 func (s *ShellExec) Description() string {
-	return "Execute a shell command in the working directory. " +
-		"Returns stdout and stderr. Commands time out after 30 seconds. " +
-		"Use for running builds, tests, linters, or inspecting the system."
+	return "Execute a shell command. Returns stdout and stderr. " +
+		"Default timeout: 120 seconds (max: 600). " +
+		"Use for running builds, tests, linters, git commands, or inspecting the system. " +
+		"Prefer grep/glob tools for file search instead of shell grep/find."
 }
 
 func (s *ShellExec) Parameters() string {
@@ -42,37 +46,48 @@ func (s *ShellExec) Parameters() string {
 				"type": "string",
 				"description": "The shell command to execute"
 			},
+			"description": {
+				"type": "string",
+				"description": "Brief description of what this command does (5-10 words)"
+			},
 			"timeout_seconds": {
 				"type": "integer",
-				"description": "Custom timeout in seconds. Default: 30, max: 120"
+				"description": "Custom timeout in seconds. Default: 120, max: 600"
+			},
+			"working_dir": {
+				"type": "string",
+				"description": "Directory to run the command in (relative to project root). Default: project root"
 			}
 		},
 		"required": ["command"]
 	}`
 }
 
-func (s *ShellExec) Execute(ctx context.Context, argsJSON string) (string, error) {
+func (s *ShellExec) Execute(ctx context.Context, argsJSON string) Result {
 	var args struct {
 		Command        string `json:"command"`
+		Description    string `json:"description"`
 		TimeoutSeconds int    `json:"timeout_seconds"`
+		WorkingDir     string `json:"working_dir"`
 	}
 	if err := json.Unmarshal([]byte(argsJSON), &args); err != nil {
-		return "", fmt.Errorf("invalid arguments: %w", err)
+		return Result{Error: fmt.Sprintf("invalid arguments: %v", err), Output: fmt.Sprintf("Error: invalid arguments: %v", err)}
 	}
 
 	if args.Command == "" {
-		return "", fmt.Errorf("command is required")
+		return Result{Error: "command is required", Output: "Error: command is required"}
 	}
 
 	// Block obviously dangerous commands.
 	if isDangerous(args.Command) {
-		return "", fmt.Errorf("command blocked for safety: %q", args.Command)
+		return Result{Error: fmt.Sprintf("command blocked for safety: %q", args.Command), Output: fmt.Sprintf("Error: command blocked for safety: %q", args.Command)}
 	}
 
 	timeout := shellTimeout
 	if args.TimeoutSeconds > 0 {
-		if args.TimeoutSeconds > 120 {
-			args.TimeoutSeconds = 120
+		maxSec := int(shellMaxTimeout / time.Second)
+		if args.TimeoutSeconds > maxSec {
+			args.TimeoutSeconds = maxSec
 		}
 		timeout = time.Duration(args.TimeoutSeconds) * time.Second
 	}
@@ -81,7 +96,19 @@ func (s *ShellExec) Execute(ctx context.Context, argsJSON string) (string, error
 	defer cancel()
 
 	cmd := exec.CommandContext(cmdCtx, "sh", "-c", args.Command)
-	cmd.Dir = s.workDir
+
+	// Resolve working directory — support relative paths.
+	workDir := s.workDir
+	if args.WorkingDir != "" {
+		candidate := filepath.Join(s.workDir, args.WorkingDir)
+		if abs, err := filepath.Abs(candidate); err == nil {
+			workAbs, _ := filepath.Abs(s.workDir)
+			if strings.HasPrefix(abs, workAbs) {
+				workDir = abs
+			}
+		}
+	}
+	cmd.Dir = workDir
 
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
@@ -90,6 +117,7 @@ func (s *ShellExec) Execute(ctx context.Context, argsJSON string) (string, error
 	err := cmd.Run()
 
 	var sb strings.Builder
+	exitCode := 0
 
 	if stdout.Len() > 0 {
 		out := stdout.String()
@@ -110,22 +138,45 @@ func (s *ShellExec) Execute(ctx context.Context, argsJSON string) (string, error
 		sb.WriteString(errOut)
 	}
 
+	var errMsg string
 	if err != nil {
 		if cmdCtx.Err() == context.DeadlineExceeded {
 			sb.WriteString(fmt.Sprintf("\n(command timed out after %s)", timeout))
+			errMsg = "timeout"
 		}
-		exitCode := -1
+		exitCode = -1
 		if exitErr, ok := err.(*exec.ExitError); ok {
 			exitCode = exitErr.ExitCode()
 		}
 		sb.WriteString(fmt.Sprintf("\n(exit code: %d)", exitCode))
+		if errMsg == "" {
+			errMsg = fmt.Sprintf("exit code %d", exitCode)
+		}
 	}
 
-	if sb.Len() == 0 {
-		return "(no output)", nil
+	output := sb.String()
+	if output == "" {
+		output = "(no output)"
 	}
 
-	return sb.String(), nil
+	title := args.Description
+	if title == "" {
+		// Use first 60 chars of command as title.
+		title = args.Command
+		if len(title) > 60 {
+			title = title[:60] + "..."
+		}
+	}
+
+	return Result{
+		Title:  title,
+		Output: output,
+		Error:  errMsg,
+		Metadata: map[string]any{
+			"command":   args.Command,
+			"exit_code": exitCode,
+		},
+	}
 }
 
 // isDangerous returns true for commands that should never be run by an agent.

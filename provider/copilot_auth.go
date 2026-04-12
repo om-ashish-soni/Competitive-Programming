@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"os"
+	"path/filepath"
 	"strings"
 	"sync"
 	"time"
@@ -149,10 +151,11 @@ func (a *CopilotAuth) PollForToken(ctx context.Context, deviceCode string) (*Pol
 	}
 
 	if tokenResp.AccessToken != "" {
-		// Store the OAuth token.
+		// Store the OAuth token and persist to disk.
 		a.mu.Lock()
 		a.oauthToken = tokenResp.AccessToken
 		a.mu.Unlock()
+		_ = a.SaveToken()
 
 		return &PollResult{Status: PollSuccess, AccessToken: tokenResp.AccessToken}, nil
 	}
@@ -277,6 +280,48 @@ func (a *CopilotAuth) OAuthToken() string {
 	a.mu.RLock()
 	defer a.mu.RUnlock()
 	return a.oauthToken
+}
+
+// tokenCacheFile returns the path to the cached OAuth token file.
+func tokenCacheFile() string {
+	home, _ := os.UserHomeDir()
+	return filepath.Join(home, ".mocode", "copilot_token.json")
+}
+
+// SaveToken persists the OAuth token to disk so the user doesn't need to re-auth.
+func (a *CopilotAuth) SaveToken() error {
+	a.mu.RLock()
+	token := a.oauthToken
+	a.mu.RUnlock()
+	if token == "" {
+		return nil
+	}
+
+	path := tokenCacheFile()
+	if err := os.MkdirAll(filepath.Dir(path), 0o700); err != nil {
+		return err
+	}
+	data, _ := json.Marshal(map[string]string{"oauth_token": token})
+	return os.WriteFile(path, data, 0o600)
+}
+
+// LoadToken loads a previously cached OAuth token from disk.
+// Returns true if a token was loaded successfully.
+func (a *CopilotAuth) LoadToken() bool {
+	data, err := os.ReadFile(tokenCacheFile())
+	if err != nil {
+		return false
+	}
+	var cached struct {
+		OAuthToken string `json:"oauth_token"`
+	}
+	if err := json.Unmarshal(data, &cached); err != nil || cached.OAuthToken == "" {
+		return false
+	}
+	a.mu.Lock()
+	a.oauthToken = cached.OAuthToken
+	a.mu.Unlock()
+	return true
 }
 
 // WaitForAuthorization runs the full poll loop until the user authorizes or the context is canceled.

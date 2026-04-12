@@ -43,29 +43,35 @@ func (g *GitStatus) Parameters() string {
 	}`
 }
 
-func (g *GitStatus) Execute(ctx context.Context, argsJSON string) (string, error) {
+func (g *GitStatus) Execute(ctx context.Context, argsJSON string) Result {
 	r, err := git.PlainOpen(g.workDir)
 	if err != nil {
-		return "", fmt.Errorf("failed to open git repository: %w", err)
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: failed to open git repository: %v", err)}
 	}
 	w, err := r.Worktree()
 	if err != nil {
-		return "", fmt.Errorf("failed to get worktree: %w", err)
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: failed to get worktree: %v", err)}
 	}
 	status, err := w.Status()
 	if err != nil {
-		return "", fmt.Errorf("failed to get status: %w", err)
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: failed to get status: %v", err)}
 	}
 
 	if status.IsClean() {
-		return "(clean working tree)", nil
+		return Result{Title: "Git status (clean)", Output: "(clean working tree)"}
 	}
 
 	var output strings.Builder
+	fileCount := 0
 	for path, fileStatus := range status {
 		output.WriteString(fmt.Sprintf("%c%c %s\n", fileStatus.Staging, fileStatus.Worktree, path))
+		fileCount++
 	}
-	return output.String(), nil
+	return Result{
+		Title:    fmt.Sprintf("Git status (%d files)", fileCount),
+		Output:   output.String(),
+		Metadata: map[string]any{"changed_files": fileCount},
+	}
 }
 
 // --- GitDiff tool ---
@@ -101,14 +107,14 @@ func (g *GitDiff) Parameters() string {
 	}`
 }
 
-func (g *GitDiff) Execute(ctx context.Context, argsJSON string) (string, error) {
+func (g *GitDiff) Execute(ctx context.Context, argsJSON string) Result {
 	var args struct {
 		Staged bool   `json:"staged"`
 		Path   string `json:"path"`
 	}
 	if argsJSON != "" && argsJSON != "{}" {
 		if err := json.Unmarshal([]byte(argsJSON), &args); err != nil {
-			return "", fmt.Errorf("invalid arguments: %w", err)
+			return Result{Error: fmt.Sprintf("invalid arguments: %v", err), Output: fmt.Sprintf("Error: invalid arguments: %v", err)}
 		}
 	}
 
@@ -120,7 +126,24 @@ func (g *GitDiff) Execute(ctx context.Context, argsJSON string) (string, error) 
 		gitArgs = append(gitArgs, "--", args.Path)
 	}
 
-	return g.runGit(ctx, gitArgs...)
+	output, err := g.runGit(ctx, gitArgs...)
+	if err != nil {
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: %v", err)}
+	}
+
+	title := "Git diff"
+	if args.Staged {
+		title = "Git diff (staged)"
+	}
+	if args.Path != "" {
+		title += " " + args.Path
+	}
+
+	return Result{
+		Title:    title,
+		Output:   output,
+		Metadata: map[string]any{"staged": args.Staged},
+	}
 }
 
 func (g *GitDiff) runGit(ctx context.Context, args ...string) (string, error) {
@@ -179,14 +202,14 @@ func (g *GitLog) Parameters() string {
 	}`
 }
 
-func (g *GitLog) Execute(ctx context.Context, argsJSON string) (string, error) {
+func (g *GitLog) Execute(ctx context.Context, argsJSON string) Result {
 	var args struct {
 		Count   int  `json:"count"`
 		Oneline bool `json:"oneline"`
 	}
 	if argsJSON != "" && argsJSON != "{}" {
 		if err := json.Unmarshal([]byte(argsJSON), &args); err != nil {
-			return "", fmt.Errorf("invalid arguments: %w", err)
+			return Result{Error: fmt.Sprintf("invalid arguments: %v", err), Output: fmt.Sprintf("Error: invalid arguments: %v", err)}
 		}
 	}
 
@@ -199,7 +222,7 @@ func (g *GitLog) Execute(ctx context.Context, argsJSON string) (string, error) {
 
 	r, err := git.PlainOpen(g.workDir)
 	if err != nil {
-		return "", fmt.Errorf("failed to open git repository: %w", err)
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: failed to open git repository: %v", err)}
 	}
 
 	commits, err := r.Log(&git.LogOptions{
@@ -207,7 +230,7 @@ func (g *GitLog) Execute(ctx context.Context, argsJSON string) (string, error) {
 		All:   false,
 	})
 	if err != nil {
-		return "", fmt.Errorf("failed to get log: %w", err)
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: failed to get log: %v", err)}
 	}
 
 	var output strings.Builder
@@ -228,13 +251,17 @@ func (g *GitLog) Execute(ctx context.Context, argsJSON string) (string, error) {
 		return nil
 	})
 	if err != nil && err.Error() != "stop" {
-		return "", fmt.Errorf("failed to iterate commits: %w", err)
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: failed to iterate commits: %v", err)}
 	}
 
 	if output.Len() == 0 {
-		return "(no commits)", nil
+		return Result{Title: "Git log (empty)", Output: "(no commits)"}
 	}
-	return output.String(), nil
+	return Result{
+		Title:    fmt.Sprintf("Git log (%d commits)", count),
+		Output:   output.String(),
+		Metadata: map[string]any{"commits": count},
+	}
 }
 
 // --- GitAdd tool ---
@@ -267,13 +294,13 @@ func (g *GitAdd) Parameters() string {
 	}`
 }
 
-func (g *GitAdd) Execute(ctx context.Context, argsJSON string) (string, error) {
+func (g *GitAdd) Execute(ctx context.Context, argsJSON string) Result {
 	var args struct {
 		Paths []string `json:"paths"`
 	}
 	if argsJSON != "" && argsJSON != "{}" {
 		if err := json.Unmarshal([]byte(argsJSON), &args); err != nil {
-			return "", fmt.Errorf("invalid arguments: %w", err)
+			return Result{Error: fmt.Sprintf("invalid arguments: %v", err), Output: fmt.Sprintf("Error: invalid arguments: %v", err)}
 		}
 	}
 	if len(args.Paths) == 0 {
@@ -282,20 +309,24 @@ func (g *GitAdd) Execute(ctx context.Context, argsJSON string) (string, error) {
 
 	r, err := git.PlainOpen(g.workDir)
 	if err != nil {
-		return "", fmt.Errorf("failed to open git repository: %w", err)
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: failed to open git repository: %v", err)}
 	}
 	w, err := r.Worktree()
 	if err != nil {
-		return "", fmt.Errorf("failed to get worktree: %w", err)
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: failed to get worktree: %v", err)}
 	}
 
 	for _, path := range args.Paths {
 		_, err = w.Add(path)
 		if err != nil {
-			return "", fmt.Errorf("failed to add %s: %w", path, err)
+			return Result{Error: err.Error(), Output: fmt.Sprintf("Error: failed to add %s: %v", path, err)}
 		}
 	}
-	return "Files staged successfully", nil
+	return Result{
+		Title:    fmt.Sprintf("Git add (%d paths)", len(args.Paths)),
+		Output:   "Files staged successfully",
+		Metadata: map[string]any{"paths": args.Paths},
+	}
 }
 
 // --- GitCommit tool ---
@@ -330,33 +361,32 @@ func (g *GitCommit) Parameters() string {
 	}`
 }
 
-func (g *GitCommit) Execute(ctx context.Context, argsJSON string) (string, error) {
+func (g *GitCommit) Execute(ctx context.Context, argsJSON string) Result {
 	var args struct {
 		Message string `json:"message"`
 		Author  string `json:"author"`
 	}
 	if err := json.Unmarshal([]byte(argsJSON), &args); err != nil {
-		return "", fmt.Errorf("invalid arguments: %w", err)
+		return Result{Error: fmt.Sprintf("invalid arguments: %v", err), Output: fmt.Sprintf("Error: invalid arguments: %v", err)}
 	}
 	if args.Message == "" {
-		return "", fmt.Errorf("commit message is required")
+		return Result{Error: "commit message is required", Output: "Error: commit message is required"}
 	}
 
 	r, err := git.PlainOpen(g.workDir)
 	if err != nil {
-		return "", fmt.Errorf("failed to open git repository: %w", err)
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: failed to open git repository: %v", err)}
 	}
 	w, err := r.Worktree()
 	if err != nil {
-		return "", fmt.Errorf("failed to get worktree: %w", err)
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: failed to get worktree: %v", err)}
 	}
 
 	opts := &git.CommitOptions{}
 	if args.Author != "" {
-		// Parse author
 		parts := strings.SplitN(args.Author, " <", 2)
 		if len(parts) != 2 || !strings.HasSuffix(parts[1], ">") {
-			return "", fmt.Errorf("invalid author format, use 'Name <email>'")
+			return Result{Error: "invalid author format", Output: "Error: invalid author format, use 'Name <email>'"}
 		}
 		name := parts[0]
 		email := strings.TrimSuffix(parts[1], ">")
@@ -365,9 +395,17 @@ func (g *GitCommit) Execute(ctx context.Context, argsJSON string) (string, error
 
 	hash, err := w.Commit(args.Message, opts)
 	if err != nil {
-		return "", fmt.Errorf("failed to commit: %w", err)
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: failed to commit: %v", err)}
 	}
-	return fmt.Sprintf("Committed %s", hash.String()[:7]), nil
+	shortHash := hash.String()[:7]
+	return Result{
+		Title:  fmt.Sprintf("Committed %s", shortHash),
+		Output: fmt.Sprintf("Committed %s", shortHash),
+		Metadata: map[string]any{
+			"hash":    shortHash,
+			"message": args.Message,
+		},
+	}
 }
 
 // --- GitPush tool ---
@@ -407,7 +445,7 @@ func (g *GitPush) Parameters() string {
 	}`
 }
 
-func (g *GitPush) Execute(ctx context.Context, argsJSON string) (string, error) {
+func (g *GitPush) Execute(ctx context.Context, argsJSON string) Result {
 	var args struct {
 		Remote     string `json:"remote"`
 		Branch     string `json:"branch"`
@@ -415,7 +453,7 @@ func (g *GitPush) Execute(ctx context.Context, argsJSON string) (string, error) 
 	}
 	if argsJSON != "" && argsJSON != "{}" {
 		if err := json.Unmarshal([]byte(argsJSON), &args); err != nil {
-			return "", fmt.Errorf("invalid arguments: %w", err)
+			return Result{Error: fmt.Sprintf("invalid arguments: %v", err), Output: fmt.Sprintf("Error: invalid arguments: %v", err)}
 		}
 	}
 	if args.Remote == "" {
@@ -424,7 +462,7 @@ func (g *GitPush) Execute(ctx context.Context, argsJSON string) (string, error) 
 
 	r, err := git.PlainOpen(g.workDir)
 	if err != nil {
-		return "", fmt.Errorf("failed to open git repository: %w", err)
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: failed to open git repository: %v", err)}
 	}
 
 	opts := &git.PushOptions{RemoteName: args.Remote}
@@ -434,14 +472,21 @@ func (g *GitPush) Execute(ctx context.Context, argsJSON string) (string, error) 
 	if args.SSHKeyPath != "" {
 		auth, err := ssh.NewPublicKeysFromFile("git", args.SSHKeyPath, "")
 		if err != nil {
-			return "", fmt.Errorf("failed to load SSH key: %w", err)
+			return Result{Error: err.Error(), Output: fmt.Sprintf("Error: failed to load SSH key: %v", err)}
 		}
 		opts.Auth = auth
 	}
 
 	err = r.Push(opts)
 	if err != nil {
-		return "", fmt.Errorf("failed to push: %w", err)
+		return Result{Error: err.Error(), Output: fmt.Sprintf("Error: failed to push: %v", err)}
 	}
-	return "Push successful", nil
+	return Result{
+		Title:  fmt.Sprintf("Git push %s", args.Remote),
+		Output: "Push successful",
+		Metadata: map[string]any{
+			"remote": args.Remote,
+			"branch": args.Branch,
+		},
+	}
 }

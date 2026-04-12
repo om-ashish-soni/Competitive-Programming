@@ -33,8 +33,13 @@ const (
 	TypeTaskStart      = "task.start"
 	TypeTaskCancel     = "task.cancel"
 	TypeTaskRetry      = "task.retry"
+	TypePlanStart      = "plan.start"
 	TypeProviderSwitch = "provider.switch"
 	TypeConfigSet      = "config.set"
+	TypeSessionList    = "session.list"
+	TypeSessionGet     = "session.get"
+	TypeSessionResume  = "session.resume"
+	TypeSessionDelete  = "session.delete"
 	TypeFSList         = "fs.list"
 	TypeFSRead         = "fs.read"
 	TypeGitStatus      = "git.status"
@@ -46,17 +51,19 @@ const (
 
 // Server → Client
 const (
-	TypeAgentStream       = "agent.stream"
-	TypeTaskComplete      = "task.complete"
-	TypeTaskFailed        = "task.failed"
-	TypeTaskQueued        = "task.queued"
-	TypeFSTree            = "fs.tree"
-	TypeFSContent         = "fs.content"
-	TypeGitDiffResult     = "git.diff_result"
+	TypeAgentStream        = "agent.stream"
+	TypeTaskComplete       = "task.complete"
+	TypeTaskFailed         = "task.failed"
+	TypeTaskQueued         = "task.queued"
+	TypeSessionListResult  = "session.list_result"
+	TypeSessionGetResult   = "session.get_result"
+	TypeFSTree             = "fs.tree"
+	TypeFSContent          = "fs.content"
+	TypeGitDiffResult      = "git.diff_result"
 	TypeGitOperationResult = "git.operation_result"
-	TypeConfigCurrent     = "config.current"
-	TypeServerStatus      = "server.status"
-	TypeError             = "error"
+	TypeConfigCurrent      = "config.current"
+	TypeServerStatus       = "server.status"
+	TypeError              = "error"
 )
 
 // ---------------------------------------------------------------------------
@@ -68,6 +75,7 @@ type TaskStartPayload struct {
 	Provider     string   `json:"provider"`
 	WorkingDir   string   `json:"working_dir"`
 	ContextFiles []string `json:"context_files,omitempty"`
+	Mode         string   `json:"mode,omitempty"` // "plan" for read-only plan mode, empty for normal
 }
 
 type TaskCancelPayload struct{} // task_id is in the envelope
@@ -81,6 +89,19 @@ type ProviderSwitchPayload struct {
 type ConfigSetPayload struct {
 	Key   string `json:"key"`
 	Value string `json:"value"`
+}
+
+type SessionGetPayload struct {
+	ID string `json:"id"`
+}
+
+type SessionResumePayload struct {
+	ID     string `json:"id"`
+	Prompt string `json:"prompt"`
+}
+
+type SessionDeletePayload struct {
+	ID string `json:"id"`
 }
 
 type FSListPayload struct {
@@ -125,9 +146,10 @@ type GitClonePayload struct {
 // ---------------------------------------------------------------------------
 
 type AgentStreamPayload struct {
-	Kind      string `json:"kind"`
-	Content   string `json:"content"`
-	Timestamp string `json:"timestamp,omitempty"`
+	Kind      string         `json:"kind"`
+	Content   string         `json:"content"`
+	Metadata  map[string]any `json:"metadata,omitempty"`
+	Timestamp string         `json:"timestamp,omitempty"`
 }
 
 type TaskCompletePayload struct {

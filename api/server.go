@@ -15,6 +15,7 @@ import (
 	"time"
 
 	"mo-code/backend/agent"
+	agentctx "mo-code/backend/context"
 	"mo-code/backend/provider"
 
 	"github.com/gorilla/websocket"
@@ -33,8 +34,10 @@ type Server struct {
 	portFile   string
 	startedAt  time.Time
 
-	Tasks  *TaskManager
-	Config *ConfigManager
+	Tasks     *TaskManager
+	PlanTasks *TaskManager // plan mode uses a separate runner (read-only)
+	Config    *ConfigManager
+	Sessions  *agentctx.SessionStore
 	// Registry holds the provider registry for wiring config changes to providers.
 	Registry *provider.Registry
 }
@@ -61,8 +64,11 @@ type HealthResponse struct {
 	Timestamp string `json:"timestamp"`
 }
 
-// Start creates and starts the daemon server with the given agent runner and provider registry.
-func Start(portFile string, runner agent.Runner, registry *provider.Registry) (*Server, error) {
+// Start creates and starts the daemon server with the given agent runner, provider registry,
+// and optional session store (may be nil).
+// Start creates and starts the HTTP/WebSocket server.
+// planRunner is optional — if provided, plan mode (plan.start) is enabled.
+func Start(portFile string, runner agent.Runner, registry *provider.Registry, sessions *agentctx.SessionStore, planRunner ...agent.Runner) (*Server, error) {
 	listener, port, err := listenLocalhost(DefaultPort, MaxPortScan)
 	if err != nil {
 		return nil, err
@@ -74,7 +80,11 @@ func Start(portFile string, runner agent.Runner, registry *provider.Registry) (*
 		startedAt: time.Now(),
 		Tasks:     NewTaskManager(runner),
 		Config:    NewConfigManager(registry),
+		Sessions:  sessions,
 		Registry:  registry,
+	}
+	if len(planRunner) > 0 && planRunner[0] != nil {
+		s.PlanTasks = NewTaskManager(planRunner[0])
 	}
 
 	s.httpServer = &http.Server{
@@ -123,6 +133,7 @@ func (s *Server) Close() error {
 func (s *Server) newMux() *http.ServeMux {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/api/health", handleHealth)
+	mux.HandleFunc("/health", handleHealth) // alias for convenience
 	mux.HandleFunc("/api/config", s.Config.HandleHTTP)
 	mux.HandleFunc("/api/provider/switch", s.Config.HandleProviderSwitch)
 	mux.HandleFunc("/api/status", s.handleStatus)
@@ -276,6 +287,8 @@ func (c *wsClient) dispatch(raw RawMessage) {
 	// ----- Task lifecycle -----
 	case TypeTaskStart:
 		c.handleTaskStart(raw)
+	case TypePlanStart:
+		c.handlePlanStart(raw)
 	case TypeTaskCancel:
 		c.handleTaskCancel(raw)
 	case TypeTaskRetry:
@@ -286,6 +299,16 @@ func (c *wsClient) dispatch(raw RawMessage) {
 		c.handleProviderSwitch(raw)
 	case TypeConfigSet:
 		c.handleConfigSet(raw)
+
+	// ----- Sessions -----
+	case TypeSessionList:
+		c.handleSessionList(raw)
+	case TypeSessionGet:
+		c.handleSessionGet(raw)
+	case TypeSessionResume:
+		c.handleSessionResume(raw)
+	case TypeSessionDelete:
+		c.handleSessionDelete(raw)
 
 	// ----- Filesystem (stub for now — OpenCode will implement) -----
 	case TypeFSList, TypeFSRead:
@@ -356,6 +379,7 @@ func (c *wsClient) handleTaskStart(raw RawMessage) {
 					Payload: AgentStreamPayload{
 						Kind:      string(evt.Kind),
 						Content:   evt.Content,
+						Metadata:  evt.Metadata,
 						Timestamp: time.Now().UTC().Format(time.RFC3339),
 					},
 				}) {
@@ -368,6 +392,84 @@ func (c *wsClient) handleTaskStart(raw RawMessage) {
 						Type:    TypeTaskComplete,
 						TaskID:  evt.TaskID,
 						Payload: info,
+					})
+					return
+				}
+			}
+		}
+	}()
+}
+
+func (c *wsClient) handlePlanStart(raw RawMessage) {
+	var payload TaskStartPayload
+	if err := json.Unmarshal(raw.Payload, &payload); err != nil {
+		c.sendError(raw.ID, ErrInvalidPayload, "invalid plan.start payload")
+		return
+	}
+
+	if payload.Prompt == "" {
+		c.sendError(raw.ID, ErrInvalidPayload, "prompt is required")
+		return
+	}
+
+	if c.server.PlanTasks == nil {
+		c.sendError(raw.ID, ErrInternalError, "plan mode not available")
+		return
+	}
+
+	taskID := raw.TaskID
+	if taskID == "" {
+		taskID = "plan-" + raw.ID
+	}
+
+	req := agent.TaskRequest{
+		ID:           taskID,
+		Prompt:       payload.Prompt,
+		Provider:     payload.Provider,
+		WorkingDir:   payload.WorkingDir,
+		ContextFiles: payload.ContextFiles,
+	}
+
+	if req.Provider == "" {
+		req.Provider = c.server.Config.ActiveProvider()
+	}
+
+	events, err := c.server.PlanTasks.StartTask(req)
+	if err != nil {
+		c.sendError(raw.ID, ErrInternalError, err.Error())
+		return
+	}
+
+	// Stream plan events to client.
+	go func() {
+		for {
+			select {
+			case <-c.closed:
+				return
+			case evt, ok := <-events:
+				if !ok {
+					return
+				}
+				if !c.send(OutMessage{
+					Type:   TypeAgentStream,
+					TaskID: evt.TaskID,
+					Payload: AgentStreamPayload{
+						Kind:      string(evt.Kind),
+						Content:   evt.Content,
+						Metadata:  evt.Metadata,
+						Timestamp: time.Now().UTC().Format(time.RFC3339),
+					},
+				}) {
+					return
+				}
+
+				if evt.Kind == agent.EventDone {
+					c.send(OutMessage{
+						Type:   TypeTaskComplete,
+						TaskID: evt.TaskID,
+						Payload: TaskCompletePayload{
+							Summary: "Plan complete",
+						},
 					})
 					return
 				}
@@ -444,6 +546,7 @@ func (c *wsClient) handleTaskRetry(raw RawMessage) {
 					Payload: AgentStreamPayload{
 						Kind:      string(evt.Kind),
 						Content:   evt.Content,
+						Metadata:  evt.Metadata,
 						Timestamp: time.Now().UTC().Format(time.RFC3339),
 					},
 				}) {
@@ -498,6 +601,134 @@ func (c *wsClient) handleConfigSet(raw RawMessage) {
 		Type:    TypeConfigCurrent,
 		ID:      raw.ID,
 		Payload: c.server.Config.Snapshot(),
+	})
+}
+
+// ---------------------------------------------------------------------------
+// Session handlers
+// ---------------------------------------------------------------------------
+
+func (c *wsClient) handleSessionList(raw RawMessage) {
+	if c.server.Sessions == nil {
+		c.sendError(raw.ID, ErrInternalError, "session persistence not enabled")
+		return
+	}
+	c.send(OutMessage{
+		Type:    TypeSessionListResult,
+		ID:      raw.ID,
+		Payload: c.server.Sessions.List(),
+	})
+}
+
+func (c *wsClient) handleSessionGet(raw RawMessage) {
+	if c.server.Sessions == nil {
+		c.sendError(raw.ID, ErrInternalError, "session persistence not enabled")
+		return
+	}
+	var payload SessionGetPayload
+	if err := json.Unmarshal(raw.Payload, &payload); err != nil {
+		c.sendError(raw.ID, ErrInvalidPayload, "invalid session.get payload")
+		return
+	}
+	sess := c.server.Sessions.Get(payload.ID)
+	if sess == nil {
+		c.sendError(raw.ID, ErrInternalError, fmt.Sprintf("session %s not found", payload.ID))
+		return
+	}
+	c.send(OutMessage{
+		Type:    TypeSessionGetResult,
+		ID:      raw.ID,
+		Payload: sess,
+	})
+}
+
+func (c *wsClient) handleSessionResume(raw RawMessage) {
+	if c.server.Sessions == nil {
+		c.sendError(raw.ID, ErrInternalError, "session persistence not enabled")
+		return
+	}
+	var payload SessionResumePayload
+	if err := json.Unmarshal(raw.Payload, &payload); err != nil {
+		c.sendError(raw.ID, ErrInvalidPayload, "invalid session.resume payload")
+		return
+	}
+	sess := c.server.Sessions.Get(payload.ID)
+	if sess == nil {
+		c.sendError(raw.ID, ErrInternalError, fmt.Sprintf("session %s not found", payload.ID))
+		return
+	}
+
+	// Resume by starting a task with the session ID so the engine
+	// can restore context from the persisted session.
+	req := agent.TaskRequest{
+		ID:       payload.ID,
+		Prompt:   payload.Prompt,
+		Provider: sess.Provider,
+	}
+	if req.Provider == "" {
+		req.Provider = c.server.Config.ActiveProvider()
+	}
+
+	events, err := c.server.Tasks.StartTask(req)
+	if err != nil {
+		c.sendError(raw.ID, ErrInternalError, err.Error())
+		return
+	}
+
+	go func() {
+		for {
+			select {
+			case <-c.closed:
+				return
+			case evt, ok := <-events:
+				if !ok {
+					return
+				}
+				if !c.send(OutMessage{
+					Type:   TypeAgentStream,
+					TaskID: evt.TaskID,
+					Payload: AgentStreamPayload{
+						Kind:      string(evt.Kind),
+						Content:   evt.Content,
+						Metadata:  evt.Metadata,
+						Timestamp: time.Now().UTC().Format(time.RFC3339),
+					},
+				}) {
+					return
+				}
+				if evt.Kind == agent.EventDone {
+					complInfo, _ := c.server.Tasks.CompletionInfo(evt.TaskID)
+					c.send(OutMessage{
+						Type:    TypeTaskComplete,
+						TaskID:  evt.TaskID,
+						Payload: complInfo,
+					})
+					return
+				}
+			}
+		}
+	}()
+}
+
+func (c *wsClient) handleSessionDelete(raw RawMessage) {
+	if c.server.Sessions == nil {
+		c.sendError(raw.ID, ErrInternalError, "session persistence not enabled")
+		return
+	}
+	var payload SessionDeletePayload
+	if err := json.Unmarshal(raw.Payload, &payload); err != nil {
+		c.sendError(raw.ID, ErrInvalidPayload, "invalid session.delete payload")
+		return
+	}
+	if err := c.server.Sessions.Delete(payload.ID); err != nil {
+		c.sendError(raw.ID, ErrInternalError, err.Error())
+		return
+	}
+	// Respond with updated list.
+	c.send(OutMessage{
+		Type:    TypeSessionListResult,
+		ID:      raw.ID,
+		Payload: c.server.Sessions.List(),
 	})
 }
 

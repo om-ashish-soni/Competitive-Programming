@@ -8,13 +8,13 @@ import (
 func TestNewRegistryDefaults(t *testing.T) {
 	r := NewRegistry()
 
-	// Should have 3 providers.
+	// Should have 6 providers.
 	names := r.Names()
 	sort.Strings(names)
-	if len(names) != 3 {
-		t.Fatalf("Names() = %v, want 3 providers", names)
+	if len(names) != 6 {
+		t.Fatalf("Names() = %v, want 6 providers", names)
 	}
-	expected := []string{"claude", "copilot", "gemini"}
+	expected := []string{"azure", "claude", "copilot", "gemini", "ollama", "openrouter"}
 	for i, name := range expected {
 		if names[i] != name {
 			t.Errorf("Names()[%d] = %q, want %q", i, names[i], name)
@@ -30,7 +30,7 @@ func TestNewRegistryDefaults(t *testing.T) {
 func TestRegistryGet(t *testing.T) {
 	r := NewRegistry()
 
-	for _, name := range []string{"claude", "gemini", "copilot"} {
+	for _, name := range []string{"claude", "gemini", "copilot", "openrouter", "ollama", "azure"} {
 		p, err := r.Get(name)
 		if err != nil {
 			t.Errorf("Get(%q): %v", name, err)
@@ -151,9 +151,16 @@ func TestRegistryCopilotAuth(t *testing.T) {
 func TestRegistryNotConfiguredByDefault(t *testing.T) {
 	r := NewRegistry()
 
-	// All providers should be unconfigured by default (no API keys).
+	// All providers except Ollama should be unconfigured by default (no API keys).
+	// Ollama is always configured (local, no key needed).
 	for _, name := range r.Names() {
 		p, _ := r.Get(name)
+		if name == "ollama" {
+			if !p.Configured() {
+				t.Errorf("provider %q should be Configured() by default (no key needed)", name)
+			}
+			continue
+		}
 		if p.Configured() {
 			t.Errorf("provider %q should not be Configured() by default", name)
 		}
@@ -168,6 +175,9 @@ func TestProviderNames(t *testing.T) {
 		{NewClaude(), "claude"},
 		{NewGemini(), "gemini"},
 		{NewCopilot(), "copilot"},
+		{NewOpenRouter(), "openrouter"},
+		{NewOllama(), "ollama"},
+		{NewAzure(), "azure"},
 	}
 
 	for _, tt := range tests {
@@ -284,8 +294,8 @@ func TestCopilotConfigureDefaults(t *testing.T) {
 }
 
 func TestStreamNotConfigured(t *testing.T) {
-	// Claude and Gemini should fail without API key.
-	providers := []Provider{NewClaude(), NewGemini()}
+	// Providers that require API keys should fail without one.
+	providers := []Provider{NewClaude(), NewGemini(), NewOpenRouter(), NewAzure()}
 	for _, p := range providers {
 		_, err := p.Stream(nil, nil, nil)
 		if err == nil {

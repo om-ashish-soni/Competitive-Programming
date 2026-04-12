@@ -40,7 +40,7 @@ func TestHealthEndpoint(t *testing.T) {
 func TestWebSocketAcknowledgesSupportedMessages(t *testing.T) {
 	runner := agent.NewStubRunner()
 	registry := provider.NewRegistry()
-	s, err := Start("/tmp/test_mocode_port.txt", runner, registry)
+	s, err := Start("/tmp/test_mocode_port.txt", runner, registry, nil)
 	if err != nil {
 		t.Fatalf("start server: %v", err)
 	}

@@ -16,9 +16,12 @@ type Registry struct {
 func NewRegistry() *Registry {
 	return &Registry{
 		providers: map[string]Provider{
-			"claude":  NewClaude(),
-			"gemini":  NewGemini(),
-			"copilot": NewCopilot(),
+			"claude":     NewClaude(),
+			"gemini":     NewGemini(),
+			"copilot":    NewCopilot(),
+			"openrouter": NewOpenRouter(),
+			"ollama":     NewOllama(),
+			"azure":      NewAzure(),
 		},
 		active: "copilot",
 	}

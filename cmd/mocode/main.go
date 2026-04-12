@@ -9,7 +9,9 @@ import (
 
 	"mo-code/backend/agent"
 	"mo-code/backend/api"
+	agentctx "mo-code/backend/context"
 	"mo-code/backend/provider"
+	"mo-code/backend/storage"
 )
 
 func main() {
@@ -33,12 +35,53 @@ func main() {
 	if copilotKey := os.Getenv("COPILOT_API_KEY"); copilotKey != "" {
 		registry.Configure("copilot", provider.Config{APIKey: copilotKey})
 	}
+	if openrouterKey := os.Getenv("OPENROUTER_API_KEY"); openrouterKey != "" {
+		registry.Configure("openrouter", provider.Config{APIKey: openrouterKey})
+	}
+	if ollamaURL := os.Getenv("OLLAMA_URL"); ollamaURL != "" {
+		registry.Configure("ollama", provider.Config{APIKey: ollamaURL})
+	} else {
+		// Ollama is always configured (local, no key needed).
+		registry.Configure("ollama", provider.Config{})
+	}
+	if azureKey := os.Getenv("AZURE_OPENAI_API_KEY"); azureKey != "" {
+		model := os.Getenv("AZURE_OPENAI_DEPLOYMENT")
+		registry.Configure("azure", provider.Config{APIKey: azureKey, Model: model})
+	}
+
+	// Load cached Copilot OAuth token from disk (persists across restarts).
+	if auth := registry.CopilotAuth(); auth != nil {
+		if auth.LoadToken() {
+			log.Println("Copilot: loaded cached OAuth token from ~/.mocode/copilot_token.json")
+		}
+	}
 
 	// Create the real agent engine.
+	// Use MOCODE_WORKDIR env or default to current directory.
 	workingDir, _ := os.Getwd()
-	engine := agent.NewEngine(registry, workingDir)
+	if envDir := os.Getenv("MOCODE_WORKDIR"); envDir != "" {
+		workingDir = envDir
+	}
 
-	server, err := api.Start(portFile, engine, registry)
+	// Initialize session persistence under ~/.mocode/sessions.
+	var sessions *agentctx.SessionStore
+	storeDir, err := storage.DefaultDir()
+	if err != nil {
+		log.Printf("warning: could not init storage dir: %v (sessions disabled)", err)
+	} else {
+		sessions, err = agentctx.NewSessionStore(storeDir.Path(storage.DirSessions))
+		if err != nil {
+			log.Printf("warning: could not init session store: %v (sessions disabled)", err)
+			sessions = nil
+		} else {
+			log.Printf("session store: %s (%d existing sessions)", storeDir.Path(storage.DirSessions), len(sessions.List()))
+		}
+	}
+
+	engine := agent.NewEngine(registry, workingDir, sessions)
+	planEngine := agent.NewPlanEngine(registry, workingDir)
+
+	server, err := api.Start(portFile, engine, registry, sessions, planEngine)
 	if err != nil {
 		log.Fatalf("start daemon: %v", err)
 	}

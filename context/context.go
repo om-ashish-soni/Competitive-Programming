@@ -5,8 +5,13 @@ package context
 
 import (
 	"fmt"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"runtime"
 	"strings"
 	"sync"
+	"time"
 
 	"mo-code/backend/provider"
 )
@@ -176,30 +181,137 @@ func (m *Manager) trimIfNeeded() {
 	}
 }
 
-// BuildSystemPrompt constructs a system prompt for the agent with
-// working directory context and tool information.
-func BuildSystemPrompt(workingDir string, toolNames []string) string {
+// BuildEnvironmentBlock returns the XML-structured environment info
+// for inclusion in system prompts. Reusable by both normal and plan mode.
+func BuildEnvironmentBlock(workingDir string) string {
 	var sb strings.Builder
 
-	sb.WriteString("You are a coding agent running inside mo-code, a mobile AI coding assistant. ")
-	sb.WriteString("You help users with software engineering tasks: writing code, debugging, ")
-	sb.WriteString("running commands, and managing files.\n\n")
+	sb.WriteString("<env>\n")
+	sb.WriteString(fmt.Sprintf("  Working directory: %s\n", workingDir))
+	sb.WriteString(fmt.Sprintf("  Platform: %s/%s\n", runtime.GOOS, runtime.GOARCH))
+	sb.WriteString(fmt.Sprintf("  Today's date: %s\n", time.Now().Format("2006-01-02")))
 
-	sb.WriteString(fmt.Sprintf("Working directory: %s\n\n", workingDir))
+	// Detect git repo and inject full git context.
+	if _, err := os.Stat(filepath.Join(workingDir, ".git")); err == nil {
+		sb.WriteString("  Is directory a git repo: yes\n")
+		if branch := gitCurrentBranch(workingDir); branch != "" {
+			sb.WriteString(fmt.Sprintf("  Current branch: %s\n", branch))
+		}
+		if status := gitShortStatus(workingDir); status != "" {
+			sb.WriteString(fmt.Sprintf("  Git status:\n%s\n", indentLines(status, "    ")))
+		}
+		if diff := gitDiffShort(workingDir); diff != "" {
+			sb.WriteString(fmt.Sprintf("  Uncommitted changes:\n%s\n", indentLines(diff, "    ")))
+		}
+		if log := gitRecentCommits(workingDir, 5); log != "" {
+			sb.WriteString(fmt.Sprintf("  Recent commits:\n%s\n", indentLines(log, "    ")))
+		}
+	} else {
+		sb.WriteString("  Is directory a git repo: no\n")
+	}
+	sb.WriteString("</env>\n")
 
-	sb.WriteString("You have access to these tools:\n")
+	return sb.String()
+}
+
+// BuildSystemPrompt constructs a system prompt for the agent with
+// per-provider tuning, XML-structured environment data, git context,
+// instruction file discovery, and tool information.
+func BuildSystemPrompt(workingDir string, toolNames []string, providerName string) string {
+	var sb strings.Builder
+
+	// 1. Per-provider core prompt (tone, conventions, workflow).
+	sb.WriteString(ProviderPrompt(providerName))
+
+	// 2. Environment block (XML structured for better LLM parsing).
+	sb.WriteString("\n")
+	sb.WriteString(BuildEnvironmentBlock(workingDir))
+
+	// 3. Tool listing.
+	sb.WriteString("\nYou have access to these tools:\n")
 	for _, name := range toolNames {
 		sb.WriteString(fmt.Sprintf("- %s\n", name))
 	}
-	sb.WriteString("\n")
 
-	sb.WriteString("Guidelines:\n")
-	sb.WriteString("- Read files before modifying them to understand context.\n")
-	sb.WriteString("- Use file_list to explore the project structure.\n")
-	sb.WriteString("- Run builds and tests after making changes.\n")
-	sb.WriteString("- Explain your reasoning before taking action.\n")
-	sb.WriteString("- Keep responses concise and focused.\n")
-	sb.WriteString("- If a task is ambiguous, ask for clarification.\n")
+	// 4. Project instructions (CLAUDE.md, AGENTS.md, CONTEXT.md).
+	if instructions := DiscoverInstructions(workingDir); instructions != "" {
+		sb.WriteString("\n")
+		sb.WriteString(instructions)
+	}
 
 	return sb.String()
+}
+
+// gitCurrentBranch returns the current branch name, or empty string.
+func gitCurrentBranch(dir string) string {
+	cmd := exec.Command("git", "rev-parse", "--abbrev-ref", "HEAD")
+	cmd.Dir = dir
+	out, err := cmd.Output()
+	if err != nil {
+		return ""
+	}
+	return strings.TrimSpace(string(out))
+}
+
+// gitDiffShort returns a compact diff of uncommitted changes (staged + unstaged).
+// Output is truncated to avoid bloating the system prompt.
+const maxDiffChars = 3000
+
+func gitDiffShort(dir string) string {
+	// Combined staged + unstaged diff.
+	cmd := exec.Command("git", "--no-optional-locks", "diff", "HEAD", "--stat")
+	cmd.Dir = dir
+	out, err := cmd.Output()
+	if err != nil {
+		return ""
+	}
+	diff := strings.TrimSpace(string(out))
+	if diff == "" {
+		return ""
+	}
+	// If --stat is short enough, include a compact patch for small diffs.
+	if len(diff) < 500 {
+		patchCmd := exec.Command("git", "--no-optional-locks", "diff", "HEAD", "--no-color", "-U2")
+		patchCmd.Dir = dir
+		patchOut, err := patchCmd.Output()
+		if err == nil && len(patchOut) > 0 && len(patchOut) <= maxDiffChars {
+			return strings.TrimSpace(string(patchOut))
+		}
+	}
+	// Fall back to --stat summary if patch is too large.
+	if len(diff) > maxDiffChars {
+		diff = diff[:maxDiffChars] + "\n... (diff truncated)"
+	}
+	return diff
+}
+
+// gitShortStatus returns `git status --short --branch` output, or empty string.
+func gitShortStatus(dir string) string {
+	cmd := exec.Command("git", "--no-optional-locks", "status", "--short", "--branch")
+	cmd.Dir = dir
+	out, err := cmd.Output()
+	if err != nil {
+		return ""
+	}
+	return strings.TrimSpace(string(out))
+}
+
+// gitRecentCommits returns the last N commit one-liners, or empty string.
+func gitRecentCommits(dir string, n int) string {
+	cmd := exec.Command("git", "log", "--oneline", fmt.Sprintf("-%d", n))
+	cmd.Dir = dir
+	out, err := cmd.Output()
+	if err != nil {
+		return ""
+	}
+	return strings.TrimSpace(string(out))
+}
+
+// indentLines prepends a prefix to each line of text.
+func indentLines(text, prefix string) string {
+	lines := strings.Split(text, "\n")
+	for i, line := range lines {
+		lines[i] = prefix + line
+	}
+	return strings.Join(lines, "\n")
 }
